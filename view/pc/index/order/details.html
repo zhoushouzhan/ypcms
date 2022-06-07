@@ -1,0 +1,95 @@
+{extend name="layout"}
+{block name="css"}
+<style>
+	
+	.alipay{background: #00AAEF;color: white;}
+	.weixinpay{background:#03C03E;color: white; }
+</style>
+
+{/block}
+
+
+{block name="main"}
+<div class="download layui-main clearfix">
+	<div class="mainbox">
+		<blockquote class="layui-elem-quote">订单详情</blockquote>
+		<table class="layui-table">
+		  <thead>
+		    <tr>
+		      <th>商品名称</th>
+		     
+		      <th>订单号</th>
+		      <th>下单时间</th>
+		       <th>总价</th>
+		    </tr> 
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>{$r.info->title}</td>
+		      
+		      <td>{$r.ordersn}</td>
+		      <td>{$r.create_time}</td>
+		      <td>{$r.money}</td>
+		    </tr>
+		</table>
+
+<fieldset class="layui-elem-field">
+  <legend>付款方式</legend>
+  <div class="layui-field-box">
+		  	{volist name="paylist" id="vo"}
+		    <button type="button" class="layui-btn topay" data-paytype="{$vo.name}">{$vo.title}</button>
+			{/volist}
+
+  </div>
+  <div id="qrimg" class="layui-hide" align="center">
+  	<img src="{:url('index/api/ypqr')}?str=ypcms" width="200">
+  	<div id="pay_title" class="layui-bg-blue" style="height: 40px;line-height: 40px;">支付宝扫码付款</div>
+  </div>
+</fieldset>
+ 
+	</div>
+	<div class="slide">
+		<div class="stit">
+			最新发布
+		</div>
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script>
+	$(".topay").click(function(event) {
+		/* Act on the event */
+		var paytype=$(this).data('paytype');
+		$.get('{:url("index/pay/index")}',{'paytype':paytype,'ordersn':'{$r.ordersn}'}, function(data) {
+			/*optional stuff to do after success */
+			console.log(data)
+			if(data.code){
+				$("#qrimg").removeClass('layui-hide');
+				$("#qrimg>img").attr('src',"{:url('index/api/ypqr')}?str="+data.data);
+				$('#pay_title').removeClass().addClass(paytype);
+				$('#pay_title').text(data.msg);
+			}else{
+				layer.msg(data.msg,{icon:2});
+			}
+		},'json');
+	});
+
+
+//监听支付情况
+var paystatus=setInterval("issuccess()",1000);
+function issuccess(){
+    $.get('{:url("index/pay/paystatus")}',{'ordersn':'{$r.ordersn}'}, function(data) {
+        if(data.code==1){
+        	window.clearInterval(paystatus);
+            layer.msg('支付成功', {
+              icon: 1,
+              time: data.wait //2秒关闭（如果不配置，默认是3秒）
+            }, function(){
+            //支付成功后跳转的页面
+              window.location.href=data.url;
+            });
+        }
+    },'json');
+}
+</script>
+{/block}

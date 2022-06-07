@@ -1,0 +1,77 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index')}">角色</a></li>
+        <li class=""><a href="{:url('add')}">添加角色</a></li>
+        <li class="layui-this">编辑角色</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div id="test12" class="demo-tree-more"></div>
+        </div>
+    </div>
+    <input type="hidden" id="group_id" name="id" value="{$id}">
+    <button class="layui-btn" id="auth-btn">授权</button>
+</div>
+{/block}
+{block name="script"}
+<script>
+var data = {$dataList|raw}
+
+    tree=layui.tree;
+    tree.render({
+        elem: '#test12',
+        data: data,
+        showCheckbox: true,  //是否显示复选框
+        onlyIconControl:true,
+        id: 'demoId',
+        isJump: true, //是否允许点击节点时弹出新窗口跳转
+        click: function(obj){
+          var data = obj.data;  //获取当前点击的节点数据
+          layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+        }
+    });
+
+    /**
+     * 授权提交
+     */
+    $("#auth-btn").on("click", function () {
+        var checked_ids;
+        checked_ids = tree.getChecked('demoId'); // 获取当前选中的checkbox
+        checked_ids=getid(checked_ids);
+        if(checked_ids){
+            checked_ids=checked_ids.substr(0,checked_ids.length-1);
+        }
+        $.ajax({
+            url: "{:url('updateAuth')}",
+            type: "post",
+            cache: false,
+            data: {
+                id: {$id},
+                rules: checked_ids
+            },
+            success: function (data) {
+                if(data.code === 1){
+                    setTimeout(function () {
+                        location.href = data.url;
+                    }, 1000);
+                }
+                layer.msg(data.msg);
+            }
+        });
+    });
+    //遍历数组
+    function getid(obj,id){
+        id=id?id:'';
+        $.each(obj, function(i, e) {
+            id+=e.id+',';
+            if(e.children){
+                id+=getid(e.children);
+            }
+        });
+        return id;
+    }
+
+</script>
+{/block}

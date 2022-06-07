@@ -1,0 +1,80 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">分类管理</li>
+        <li class=""><a href="{:url('add')}">添加分类</a></li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <button type="button" class="layui-btn layui-btn-sm layui-bg-red ajax-action" data-action="{:url('delete')}">批量删除</button>
+                    <button type="button" class="layui-btn layui-btn-sm ajax-action" data-action="{:url('update')}">批量提交</button>
+                </div>
+                <div class="layui-col-md6" align="right" style="padding-top: 6px;">
+                    当前位置：
+                    <span class="layui-breadcrumb">
+                        <a href="{:url('index')}">分类列表</a>
+                        {volist name="pathArr" id="vo"}
+                        <a href="{:url('index',['pid'=>$vo.id])}">{$vo.title}</a>
+                        {/volist}
+                        {if $pid}
+                        <a><cite>{$r.title}</cite></a>
+                        {/if}
+                    </span>
+                </div>
+            </div>
+            <form action="" class="layui-form ajax-form">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="30">
+                        <col width="60">
+                        <col width="90">
+                        <col>
+                        <col>
+                        <col width="180">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" lay-skin="primary" lay-filter="check_all"></th>
+                            <th>ID</th>
+                            <th>排序</th>
+                            <th>名称</th>
+                            <th>子类管理</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach name="dataList" item="vo"}
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{$vo.id}" class="check_s" lay-skin="primary"></td>
+                            <td>{$vo.id}<input type="hidden" name="id[]" value="{$vo.id}"></td>
+                            <td><input type="number" name="sort[]" class="layui-input" value="{$vo.sort}"></td>
+                            <td><input type="text" name="title[]" value="{$vo.title}" class="layui-input"></td>
+                            {if $vo.havesid}
+                            <td><a href="{:url('index',['pid'=>$vo.id])}" style="color: blue">查看子类</a></td>
+                            {else}
+                            <td>没有子类</td>
+                            {/if}
+                            <td>
+                                <a href="{:url('delete',['ids'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete"><i class="layui-icon">&#xe640;</i></a>
+                                <a href="{:url('add',['pid'=>$vo['id']])}" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe654;</i></a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>
+<fieldset class="layui-elem-field">
+  <legend>说明</legend>
+  <div class="layui-field-box">
+  无限分类主要为第三级之外的分类提供帮助<br>
+  如：地区联动
+  </div>
+</fieldset>
+{/block}

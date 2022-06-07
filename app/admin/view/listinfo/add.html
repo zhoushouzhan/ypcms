@@ -1,0 +1,30 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index',['category_id'=>$category_id])}">{$category.title}列表</a></li>
+        <li class="layui-this">添加信息</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            {$form|raw}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+{if $editor}
+<script>
+    $(function() {
+        CKEDITOR.replace('content',{
+            customConfig : '__STATIC__/src/ckeditor/ypconfig.js?v={:time()}'
+        });
+    });
+    function CKupdate() {
+       for (instance in CKEDITOR.instances)
+        CKEDITOR.instances[instance].updateElement();
+    }
+    hljs.initHighlightingOnLoad();
+</script>
+{/if}
+{/block}

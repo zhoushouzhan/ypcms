@@ -1,0 +1,64 @@
+{extend name="layout"}
+{block name="pagetitle"}我的订单{/block}
+{block name="main"}
+<div class="ad layui-main mt10"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+        {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-md12">
+                <div class="layui-tab layui-tab-brief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">我的订单</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <table class="layui-table" lay-even lay-skin="nob">
+                            <thead>
+                                <th>ID</th>
+                                <th>单号</th>
+                                <th>下单时间</th>
+                                <th>状态</th>
+                            </thead>
+                            <tbody>
+                                {volist name="dataList" id="vo"}
+                                <tr>
+                                    <td>{$vo.id}</td>
+                                    <td>{$vo.ordersn}</td>
+                                    <td>{$vo.create_time}</td>
+                                    <td>{$vo.status[0]|raw}</td>
+                                </tr>
+                                {/volist}
+                            </tbody>
+                        </table>
+                         {$dataList->render()|raw}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+    <script>
+        $(".delfav").click(function(event) {
+            var id=$(this).data('id');
+            var type=$(this).data('type');
+            $.ajax({
+                url: '{:url("index/user/addFavorites")}',
+                type: 'POST',
+                dataType: 'json',
+                data: {id: id,type:type},
+            })
+            .done(function(res) {
+                layer.msg(res.msg,{icon:1},function(){
+                    window.location.reload();
+                });
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        });
+    </script>
+{/block}

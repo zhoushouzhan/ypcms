@@ -1,0 +1,4 @@
+[2022-05-23T15:37:55+08:00][error] [2]Invalid argument supplied for foreach()
+[2022-05-23T15:38:54+08:00][error] [2]Invalid argument supplied for foreach()
+[2022-05-23T16:53:50+08:00][error] [8]未定义数组索引: truename
+[2022-05-23T16:54:42+08:00][error] [8]未定义数组索引: sex

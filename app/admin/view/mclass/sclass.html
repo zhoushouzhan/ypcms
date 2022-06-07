@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无限分类-选择器</title>
+    <link rel="stylesheet" href="__STATIC__/src/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/admin/css/admin.css?v={:time()}">
+</head>
+<body>
+<div class="layui-tab layui-tab-brief">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <a class="layui-btn layui-btn-sm layui-bg-red" href="{:url('sclass',['pid'=>$r.pid])}">返回上级</a>
+                </div>
+            </div>
+            <form action="" class="layui-form ajax-form">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="60">
+                        <col>
+                        <col>
+                        <col width="300">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>子类管理</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach name="dataList" item="vo"}
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.title}</td>
+                            {if $vo.havesid}
+                            <td><a href="{:url('sclass',['pid'=>$vo.id,'inputname'=>$Request.get.inputname])}" style="color: blue">查看子类</a></td>
+                            {else}
+                            <td>没有子类</td>
+                            {/if}
+                            <td>
+                                <a href="javascript:;" class="layui-btn layui-btn-sm sel" id="{$vo.id}">选择</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="__STATIC__/src/jquery/jquery.min.js"></script>
+<script src="__STATIC__/src/layui/layui.js?v={:time()}"></script>
+<script>
+var layer= layui.layer;
+    $(".sel").click(function(event) {
+        /* Act on the event */
+        var index = parent.layer.getFrameIndex(window.name)
+        parent.$("input[name='{$Request.get.inputname}']").val($(this).attr('id'));
+        parent.layer.close(index);
+    });
+</script>
+</body>
+</html>

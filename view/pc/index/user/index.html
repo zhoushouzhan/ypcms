@@ -1,0 +1,65 @@
+{extend name="layout"}
+{block name="title"}笨鸟先飞-用户中心{/block}
+{block name="main"}
+<div class="ad layui-main mt10"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+      {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+      <div class="fly-msg" style="margin-bottom: 20px;"> Hi，{if $user.username}{$user.username}{elseif $user.email}{$user.email}{elseif $user.mobile}{$user.mobile}{/if}，你已是我们的正式社员。 </div>
+     <div class="layui-row layui-col-space20">
+       <div class="layui-col-md12">
+        <div class="fly-panel fly-panel-border">
+            <div class="fly-panel-title"> 我的会员信息 </div>
+            <div class="fly-panel-main">
+              会员级别：{$user.group.title}{if $user.group_id>1} 还有 <span class="layui-badge">{$user.group_date}</span> 天{/if}
+              <hr>
+                最近登录：{$user.update_time}，IP：{$user.ip}
+            </div>
+        </div>
+       </div>
+       <div class="layui-col-md12">
+        <div class="fly-panel fly-panel-border">
+            <div class="fly-panel-title"> 快捷方式 </div>
+            <div class="fly-panel-main">
+              <ul class="layui-row layui-col-space10 fly-shortcut">
+                <li class="layui-col-sm3 layui-col-xs4">
+                  <a href="{:url('index/user/edit')}">
+                    <i class="layui-icon">&#xe642;</i>
+                    <cite>修改资料</cite>
+                  </a>
+                </li>
+                <li class="layui-col-sm3 layui-col-xs4">
+                  <a href="{:url('index/user/changepass')}">
+                    <i class="layui-icon">&#xe683;</i>
+                    <cite>修改密码</cite>
+                  </a>
+                </li>
+                <li class="layui-col-sm3 layui-col-xs4">
+                  <a href="{:url('index/user/favorites')}">
+                    <i class="layui-icon">&#xe658;</i>
+                    <cite>我的收藏</cite>
+                  </a>
+                </li>
+
+                <li class="layui-col-sm3 layui-col-xs4">
+                  <a href="{:url('index/user/setEmail')}">
+                    <i class="layui-icon">&#xe618;</i>
+                    <cite>邮箱认证</cite>
+                  </a>
+                </li>
+                <li class="layui-col-sm3 layui-col-xs4">
+                  <a href="{:url('index/user/setMobile')}">
+                    <i class="layui-icon">&#xe678;</i>
+                    <cite>手机认证</cite>
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </div>
+       </div>
+     </div>
+    </div>
+</div>
+{/block}

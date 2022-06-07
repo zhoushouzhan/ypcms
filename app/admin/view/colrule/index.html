@@ -1,0 +1,53 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">验证规则管理</li>
+    </ul>
+    <div class="layui-tab-content">
+        <form action="{:url('save')}" method="post" class="ajax-form">
+            <input type="hidden" name="id" value="">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <input type="text" name="name" required lay-verify="required" placeholder="规则名" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="rule" required lay-verify="required" placeholder="规则" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="msg" required lay-verify="required" placeholder="提示" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                </div>
+            </div>
+        </form>
+        <div class="layui-tab-item layui-show">
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        <th>规则名</th>
+                        <th>规则</th>
+                        <th>提示</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach name="dataList" item="vo"}
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.name}</td>
+                        <td>{$vo.rule}</td>
+                        <td>{$vo.msg}</td>
+                        <td>
+                            <a href="{:url('delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{/block}

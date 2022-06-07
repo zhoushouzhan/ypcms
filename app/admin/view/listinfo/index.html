@@ -1,0 +1,164 @@
+{extend name="base" /} {block name="style"}
+<style>
+  .layui-form-checked[lay-skin="primary"] i {
+    border: none;
+    background: #0984bf;
+  }
+  .layui-form-checked[lay-skin="primary"] i:hover {
+    border: none;
+  }
+</style>
+{/block} {block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+    <li class="layui-this">{$category.title}列表</li>
+    <li class="">
+      <a href="{:url('add',['category_id'=>$category.id])}">添加信息</a>
+    </li>
+  </ul>
+  <div class="layui-tab-content">
+    {if $searchCol}
+    <form action="{:url('index')}" action="get" class="layui-form">
+      <input type="hidden" name="category_id" value="{$category.id}" />
+      {if $enabled}
+      <input type="hidden" name="enabled" value="{$Request.param.enabled}" />
+      {/if}
+      <div class="demoTable">
+        关键词：
+        <div class="layui-inline">
+          <input
+            class="layui-input"
+            name="keyboard"
+            id="keyboard"
+            autocomplete="off"
+          />
+        </div>
+        <div class="layui-inline">
+          <select name="colName" id="colName">
+            {volist name="searchCol" id="v"}
+            <option value="{$v.name}">{$v.comment}</option>
+            {/volist}
+            <option value="0">搜索全部</option>
+          </select>
+        </div>
+        <button class="layui-btn">搜索</button>
+        <div class="fr">
+          {if $enabled} {volist name="enabled" id="v" length="2"}
+          <a
+            href="{:url('index',['enabled'=>$v.id,'category_id'=>$category_id])}"
+            class="layui-btn {if $Request.param.enabled==$v.id}layui-btn-danger{else}layui-btn-primary{/if}"
+            >{$v.title}</a
+          >
+          {/volist} {/if}
+        </div>
+      </div>
+    </form>
+    {/if}
+    <form action="{:url('index')}" class="layui-form" action="get">
+      <input type="hidden" name="category_id" value="{$category.id}" />
+      <table class="layui-table">
+        <colgroup>
+          <col width="40" />
+          <col width="40" />
+          {foreach name="listv" item="v"}
+          <col width="{$v.colw}" />
+          {/foreach}
+          <col width="140" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>选择</th>
+            <th>ID</th>
+            {foreach name="listv" item="v"}
+            <th>{$v.comment}</th>
+            {/foreach}
+            <th><div align="center">操作</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          {foreach name="dataList" item="vo"}
+          <tr>
+            <td class="selectId">
+              <input
+                type="checkbox"
+                name="id[]"
+                lay-skin="primary"
+                value="{$vo.id}"
+              />
+              <input type="hidden" name="enabled[]" value="{$vo.enabled.id}" />
+            </td>
+            <td>{$vo.id}</td>
+            {foreach name="listv" item="v"} {switch $v.name} {case category}
+            <td>{$vo[$v.name]->title}</td>
+            {/case} {case admin}
+            <td>{$vo[$v.name]->username}</td>
+            {/case} {case title}
+            <td>
+              <a href="{$vo.url}" target="_blank"
+                >{$vo[$v.name]} {if $vo['thumb']}<i class="layui-icon"
+                  >&#xe64a;</i
+                >{/if}</a
+              >
+            </td>
+            {/case} {case enabled}
+            <td>{$vo[$v.name]['title']}</td>
+            {/case} {case recommend}
+            <td>{$vo[$v.name]['title']}</td>
+            {/case} {default} {if $v.formItem=='select'}
+            <td>{$vo[$v.name]->pathInfo}</td>
+            {else}
+            <td>{$vo[$v.name]}</td>
+            {/if} {/switch} {/foreach}
+            <td>
+              <a
+                href="{:url('edit',['id'=>$vo['id'],'category_id'=>$vo['category_id']])}"
+                class="layui-btn layui-btn-normal layui-btn-sm"
+                >编辑</a
+              >
+              <a
+                href="{:url('delete',['id'=>$vo['id'],'category_id'=>$vo['category_id']])}"
+                class="layui-btn layui-btn-danger layui-btn-sm ajax-delete"
+                >删除</a
+              >
+            </td>
+          </tr>
+          {/foreach}
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td>
+              <input
+                type="checkbox"
+                lay-skin="primary"
+                lay-filter="chooseAll"
+              />
+            </td>
+            <td colspan="90">
+              <button
+                type="submit"
+                class="layui-btn layui-btn-danger layui-btn-sm"
+                lay-submit
+                lay-filter="deleteAll"
+              >
+                删除
+              </button>
+              {if $enabled}
+              <button
+                type="submit"
+                class="layui-btn layui-btn-sm"
+                lay-submit
+                lay-filter="checkAll"
+              >
+                审核/取消审核
+              </button>
+              {/if}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
+    {$dataList->render()|raw}
+  </div>
+</div>
+{/block}

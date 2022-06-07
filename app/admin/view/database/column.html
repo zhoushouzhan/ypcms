@@ -1,0 +1,37 @@
+{extend name="base" /}
+{block name="style"}
+<style>
+    .biglabel .layui-form-label{width: 120px;}
+</style>
+{/block}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title sideHref">
+        <li><a href="{:url('index',['type'=>'export'])}">备份数据库</a></li>
+        <li><a href="{:url('index',['type'=>'import'])}">还原数据库</a></li>
+        <li><a href="{:url('dosql')}">执行SQL</a></li>
+        <li class="layui-this"><a href="###">管理字段</a></li>
+    </ul>
+    <div class="layui-tab-content">
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th style="width: 130px;">字段名</th>
+                <th style="width: 190px;">类型</th>
+                <th>注释</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="colList" item="vo"}
+            <tr>
+                <td>{$vo.column_name}</td>
+                <td>{$vo.column_type}</td>
+                <td>{$vo.column_comment}</td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+        <a href="{:url('index',['type'=>'export'])}" class="layui-btn layui-btn-primary layui-btn-sm">返回</a>
+    </div>
+</div>
+{/block}

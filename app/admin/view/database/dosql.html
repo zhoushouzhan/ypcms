@@ -1,0 +1,35 @@
+{extend name="base" /}
+{block name="style"}
+<style>
+.biglabel .layui-form-label {
+    width: 120px;
+}
+</style>
+{/block}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title sideHref">
+        <li><a href="{:url('index',['type'=>'export'])}">备份数据库</a></li>
+        <li><a href="{:url('index',['type'=>'import'])}">还原数据库</a></li>
+        <li class="layui-this">执行SQL</li>
+    </ul>
+    <div class="layui-tab-content">
+        <form action="{:url('dosql')}" method="post" class="ajax-form">
+            <div class="layui-form-item layui-form-text">
+                <textarea name="query" id="query" placeholder="请输入SQL语句，关系重大，请谨慎操作。" class="layui-textarea" rows="8"></textarea>
+            </div>
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-danger" lay-submit lay-filter="*">执行</button>
+            </div>
+        </form>
+        <fieldset class="layui-elem-field">
+            <legend>辅助说明</legend>
+            <div class="layui-field-box">
+                1、多条语句请用&quot;回车&quot;格开,每条语句以&quot;;&quot;结束，数据表前缀可用：&quot; [!pre!] &quot;表示
+                <hr>
+                2、执行SQL语句关系重大，请做好备份。
+            </div>
+        </fieldset>
+    </div>
+</div>
+{/block}

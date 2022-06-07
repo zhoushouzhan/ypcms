@@ -1,0 +1,37 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index')}">分类管理</a></li>
+        <li class="layui-this">添加分类</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" action="{:url('save')}" method="post">
+                <input type="hidden" name="pid" value="{$pid}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-block">
+                        <textarea name="titles" id="titles" cols="30" rows="10" required  lay-verify="required" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                        <button type="button" onclick="javascript:history.go(-1);" class="layui-btn layui-btn-warm">返回</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>
+<fieldset class="layui-elem-field">
+  <legend>说明</legend>
+  <div class="layui-field-box">
+	分类为批量添加式，一行一个<br>
+	如同时添加序号，用竖线隔开，如：语文|99
+  </div>
+</fieldset>
+ {/block}

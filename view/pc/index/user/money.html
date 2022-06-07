@@ -1,0 +1,52 @@
+{extend name="layout"}
+{block name="pagetitle"}我的钱包{/block}
+{block name="main"}
+<div class="ad layui-main mt10"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+        {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">我的钱包</li>
+            </ul>
+            <div class="layui-tab-content">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <td>余额</td>
+                            <td color="red">￥{$user.money|intval}</td>
+                            <td><a href="{:url('index/User/recharge')}" class="layui-btn layui-btn-sm layui-bg-red">充值</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <blockquote class="layui-elem-quote">资金流水</blockquote>
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="60">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>流水号</th>
+                            <th>时间</th>
+                            <th>金额</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

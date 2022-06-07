@@ -1,0 +1,170 @@
+{extend name="base" /}
+
+{block name="style"}
+<style>
+    .rolesBox{height: 40px;line-height: 40px;}
+</style>
+{/block}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">用户列表</li>
+
+        {if in_array(31,$admin.ruleId)}
+
+        <li class=""><a href="{:url('add')}">添加用户</a></li>
+{/if}
+
+
+
+    </ul>
+    <div class="layui-tab-content">
+
+
+        <div class="layui-tab-item layui-show">
+
+
+
+
+
+      
+<div class="rolesBox">
+{volist name="roles" id="vo"}
+{if $roles_id==$vo.id}
+<a href="{:url('index',['roles_id'=>$vo.id])}" class="layui-badge layui-bg-red">{$vo.title}</a>
+{else}
+<a href="{:url('index',['roles_id'=>$vo.id])}" class="layui-badge layui-bg-gray">{$vo.title}</a>
+{/if}
+
+{/volist}
+
+</div>
+
+             <form action="" class="layui-form">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="35">
+
+                </colgroup>
+
+                <thead>
+                <tr>
+                     {if in_array(53,$admin.ruleId)}
+                    <th></th>
+ {/if}
+                    <th style="width: 30px;">ID</th>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                    <th>用户组</th>
+                    <th>学科</th>
+                    <th>状态</th>
+                    <th>性别</th>
+                    <th>级组</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach name="dataList" item="vo"}
+                <tr>
+                    {if in_array(53,$admin.ruleId)}
+                    <td class="selectId"><input type="checkbox" name="id[]" value="{$vo.id}" lay-skin="primary"{if $vo.id==1} disabled{/if}></td>
+ {/if}
+                    <td>{$vo.id}</td>
+                    <td>{$vo.username}</td>
+                    <td>{$vo.truename|default="/"|raw}</td>
+                    <td>{$vo.mobile}</td>
+                    <td>
+                        {volist name="vo.roles" id="v"}
+                        <span class="layui-badge layui-bg-blue">{$v.title}</span>
+                        {/volist}
+                    </td>
+                    <td>{$vo.subject.title|default="无"}</td>
+                    <td>{php}echo $vo['status']==1 ? '启用' : '关闭';{/php}</td>
+                    <td>{$vo.sex}</td>
+                    <td>
+                        {volist name="vo.bgroup" id="v"}
+                        <span class="layui-badge layui-bg-blue">{$v.title}</span>
+                        {/volist}
+
+                    </td>
+                    <td>{$vo.update_time}</td>
+                    <td>
+
+
+{if in_array(1975,$admin.ruleId)}
+<a href="{:url('score/add',['teacher_id'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-xs">评分</a>
+{/if}
+
+                        {if in_array(1589,$admin.ruleId)}
+                        <a href="{:url('view',['id'=>$vo['id']])}" class="layui-btn layui-btn-sm">查看</a>
+                        {/if}
+                        {if in_array(51,$admin.ruleId)}
+                        <a href="{:url('edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-sm">编辑</a>
+                        {/if}
+                        {if in_array(53,$admin.ruleId)}
+                        <a href="{:url('delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete">删除</a>
+                        {/if}
+                    </td>
+                </tr>
+                {/foreach}
+                </tbody>
+{if in_array(53,$admin.ruleId)}
+                <tfoot>
+                    <tr>
+                        <td><input type="checkbox" lay-skin="primary" lay-filter="chooseAll"></td>
+                        <td colspan="11">
+                            <button type="submit" class="layui-btn layui-btn-danger layui-btn-sm" lay-submit lay-filter="deleteAll">批量删除</button>
+                        </td>
+                    </tr>
+                </tfoot>
+ {/if}
+            </table>
+        </form>
+
+
+
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+ dropdown.render({
+    elem: '#importTeacher' //可绑定在任意元素中，此处以上述按钮为例
+    ,trigger:'hover'
+    ,data: [{
+      title: '下载模板'
+      ,id: 100
+      ,href: '/xlsx/importTeacher.xlsx'
+    }]
+});
+
+
+  var uploadInst = upload.render({
+    elem: '#importTeacher' //绑定元素
+    ,url: 'import' //上传接口
+    ,accept:'file'
+    ,acceptMime:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ,exts:'xlsx'
+    ,before:function(res){
+        var index = layer.load(1,{shade: [0.8, '#393D49']});
+    }
+    ,done: function(res){
+        if(res.code==1){
+            layer.msg(res.msg,{'icon':1,shade: [0.8, '#393D49']},function(){
+                window.location.href=res.url;
+            });
+            
+        }else{
+            layer.msg(res.msg,{'icon':2,shade: [0.8, '#393D49']});
+        }
+      
+    }
+    ,error: function(res){
+      layer.msg(res);
+    }
+  });
+</script>
+{/block}

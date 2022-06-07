@@ -1,0 +1,231 @@
+{extend name="base" /}
+{block name="pageBody"}
+
+<blockquote class="layui-elem-quote">
+基本信息
+</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>姓名</td>
+      <td>{$admin.truename}</td>
+     </tr>
+     <tr>
+      <td>性别</td>
+      <td>{$admin.sex}</td>
+     </tr>
+     <tr>
+      <td>生日</td>
+      <td>{$admin.birthday}</td>
+     </tr>
+     <tr>
+      <td>政治面貌</td>
+      <td>{$admin.mianmao.title}</td>
+    </tr>
+     <tr>
+      <td>手机号</td>
+      <td>{$admin.mobile}</td>
+    </tr>
+     <tr>
+      <td>集团短号</td>
+      <td>{$admin.duanhao}</td>
+    </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">个人信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>籍贯</td>
+      <td>{$admin.place.titles}</td>
+     </tr>
+     <tr>
+      <td>身份证</td>
+      <td>{$admin.sfz}</td>
+     </tr>
+     <tr>
+      <td>家庭住址</td>
+      <td>{$admin.address}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">学习信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>学历</td>
+      <td>{$admin.education.title}</td>
+     </tr>
+     <tr>
+      <td>毕业院校</td>
+      <td>{$admin.from}</td>
+     </tr>
+     <tr>
+      <td>毕业时间</td>
+      <td>{$admin.biyetime}</td>
+     </tr>
+     <tr>
+      <td>所学专业</td>
+      <td>{$admin.zhuanye}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">工作信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="130">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>当前职务</td>
+      <td>{$admin.zhiwu}</td>
+     </tr>
+     <tr>
+      <td>当前职称</td>
+      <td>{$admin.zhicheng}</td>
+     </tr>
+     <tr>
+      <td>参加工作时间</td>
+      <td>{$admin.worktime}</td>
+     </tr>
+     <tr>
+      <td>入职时间</td>
+      <td>{$admin.jobtime}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">工作经历</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="70">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>工作日期</th>
+      <th>单位</th>
+      <th>职务</th>
+      <th>工作内容</th>
+      <th>操作</th>
+    </tr> 
+  </thead>
+  <tbody>
+  	{volist name="admin.teacher" id="vo" empty="<tr><td colspan='6' align=center><a href='javascript:void(0);' class='layui-btn layui-btn-sm addWorks'>增加工作经历</a></td><tr>"}
+    <tr>
+      <td>{$i}</td>
+      <td>{$vo.stime}~{$vo.etime}</td>
+      <td>{$vo.danwei}</td>
+      <td>{$vo.zhiwu}</td>
+      <td>{$vo.content}</td>
+      <td>
+      	<a href="{:url('admin/teacher/delete',['id'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-sm">删除</a>
+      	<a href="{:url('admin/teacher/edit',['id'=>$vo.id])}" class="layui-btn layui-btn-sm editworks">编辑</a>
+      	<a href="javascript:void(0);" class="layui-btn layui-btn-sm addWorks">增加</a>
+      </td>
+     </tr>
+    {/volist}
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">评价信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>项目</th>
+      <th>申请人</th>
+      <th>审批人</th>
+      <th>描述</th>
+      <th>申请加分</th>
+      <th>状态</th>
+      <th>操作</th>
+    </tr> 
+  </thead>
+{volist name="score" id="vo" empty="<tr><td colspan='5' align=center><a href='javascript:void(0);' class='layui-btn layui-btn-sm addScore'>申请一个评分项目</a></td><tr>"}
+    <tr>
+      <td>{$i}</td>
+      <td>{$vo.program.title}</td>
+      <td>{$vo.admin.truename}</td>
+      <td>{$vo.enabled.truename}</td>
+      <td>{$vo.intro}</td>
+      <td>{$vo.fen}</td>
+      <td>
+
+        {$vo.status.tips|raw}
+        {if $vo.status.value==2}
+        <br>
+        {$vo.msg}
+        {/if}
+      </td>
+      <td>
+        {if $vo.status.value!=1}
+        <a href="{:url('admin/score/delete',['id'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-sm">删除</a>
+        <a href="{:url('admin/score/edit',['id'=>$vo.id])}" class="layui-btn layui-btn-sm editworks">编辑</a>
+        {/if}
+        <a href="javascript:void(0);" class="layui-btn layui-btn-sm addScore">增加</a>
+      </td>
+    </tr>
+{/volist}
+
+  </tbody>
+</table>
+{/block}
+{block name="script"}
+<script>
+	$(".addWorks").click(function(){
+		var index=layer.open({
+			type:2,
+			maxmin:true,
+			area: ['100%','100%'],
+			content:'{:url('admin/teacher/add')}',
+			cancel: function(index, layero){ 
+			 window.location.reload();
+			  return false; 
+			} 
+		});
+	});
+	$(".editworks").click(function(){
+		var url=$(this).attr('href');
+		layer.open({
+			type:2,
+			maxmin:true,
+			area: ['100%','100%'],
+			content:url,
+		});
+    return false;
+	});
+  $(".addScore").click(function(){
+    var index=layer.open({
+      type:2,
+      maxmin:true,
+      area: ['100%','100%'],
+      content:'{:url('admin/score/add',['teacher_id'=>$admin.id])}',
+      cancel: function(index, layero){ 
+       window.location.reload();
+        return false; 
+      } 
+    });
+  });
+
+ 
+
+</script>
+{/block}

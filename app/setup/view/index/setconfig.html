@@ -1,0 +1,60 @@
+{extend name="base" /}
+{block name="content"}
+<div class="huanjing">
+<blockquote class="layui-elem-quote">配置数据库</blockquote>
+<form class="layui-form" action="/setup.php/index/esql.html" method="post" target="_blank">
+<input type="hidden" name="mysql[type]" value="mysql">
+<table class="layui-table">
+  <tbody>
+    <tr>
+      <td width="180">数据库类型</td>
+      <td>MySql</td>
+    </tr>
+    <tr>
+      <td width="180">数据库服务器</td>
+      <td><input type="text" value="127.0.0.1" name="mysql[hostname]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">数据库名</td>
+      <td><input type="text" value="" name="mysql[database]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">数据库用户名</td>
+      <td><input type="text" value="" name="mysql[username]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">数据库密码</td>
+      <td><input type="password" value="" name="mysql[password]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">数据库端口</td>
+      <td><input type="text" value="3306" name="mysql[hostport]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">数据表前缀</td>
+      <td><input type="text" value="yp_" name="mysql[prefix]" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">安全密钥</td>
+      <td><input type="text" value="{:makeStr(16)}" name="admin_salt" class="layui-input" lay-verify="required"></td>
+    </tr>
+
+    <tr>
+      <td width="180">管理员账号</td>
+      <td><input type="text" value="" name="admin_user" class="layui-input" lay-verify="required"></td>
+    </tr>
+    <tr>
+      <td width="180">管理员密码</td>
+      <td><input type="text" value="" name="admin_pass" class="layui-input" lay-verify="required"></td>
+    </tr>
+
+
+  </tbody>
+</table>
+</form>
+</div>
+<div class="nextBtn">
+  <a href="/setup.php/index/esql.html" class="layui-btn layui-ajax">开始安装</a>
+  <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary">返回上一步</a>
+</div>
+{/block}

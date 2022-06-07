@@ -1,0 +1,52 @@
+{extend name="base" /}
+{block name="style"}
+<style>
+    .biglabel .layui-form-label{width: 120px;}
+</style>
+{/block}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title sideHref">
+        <li class="layui-this"><a href="{:url('index',['type'=>'export'])}">备份数据库</a></li>
+        <li><a href="{:url('index',['type'=>'import'])}">还原数据库</a></li>
+        <li><a href="{:url('dosql')}">执行SQL</a></li>
+    </ul>
+    <div class="layui-tab-content">
+        <form action="" method="post" class="ajax-form">
+        <button type="button" class="layui-btn layui-btn-sm ajax-action" data-action="{:url('export')}">备份</button>
+        <button type="button" class="layui-btn layui-btn-warm layui-btn-sm ajax-action" data-action="{:url('optimize')}">优化</button>
+        <button type="button" class="layui-btn layui-btn-danger layui-btn-sm ajax-action" data-action="{:url('repair')}">修复</button>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th style="width: 15px;"><input type="checkbox" class="check-all"></th>
+                <th style="width: 30px;">表名</th>
+                <th style="width: 30px;">行数</th>
+                <th>大小</th>
+                <th>冗余</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="tableList" item="vo"}
+            <tr>
+                <td><input type="checkbox" name="tables[]" value="{$vo.name}"></td>
+                <td>{$vo.name}</td>
+                <td>{$vo.rows}</td>
+                <td>{$vo.data_length|formatSize}</td>
+                <td>{$vo.data_free}</td>
+                <td>{$vo.comment}</td>
+                <td>
+                    <a href="{:url('optimize',['tables'=>$vo['name']])}" class="layui-btn layui-btn-warm layui-btn-sm ajax-url">优化</a>
+                    <a href="{:url('repair',['tables'=>$vo['name']])}" class="layui-btn layui-bg-blue layui-btn-sm ajax-url">修复</a>
+                    <a href="{:url('column',['tables'=>$vo['name']])}" class="layui-btn layui-btn-primary layui-btn-sm">字段查看</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+{/block}

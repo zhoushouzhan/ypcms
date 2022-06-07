@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+    <title>{block name="pagetitle"}首页{/block} - {$site.sitename}</title>
+    <meta name="keywords" content="{block name="keywords"}{$site.keyword}{/block}" />
+    <meta name="description" content="{block name="description"}{$site.description}{/block}" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <link rel="stylesheet" href="__STATIC__/src/layui/css/layui.css">
+    <link rel="stylesheet" href="__STATIC__/src/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__STATIC__/src/ckeditor/plugins/codesnippet/lib/highlight/styles/foundation.css">
+    <link rel="stylesheet" href="__STATIC__/default/css/style.css?v={:time()}">
+    {block name="css"}{/block}
+</head>
+<body>
+<div class="top-bar">
+    <div class="layui-main">
+        <div class="toplogin fl">
+           
+        {if $Request.session.userid}
+        <span>您好，{if $user.username}{$user.username}{elseif $user.email}{$user.email}{elseif $user.mobile}{$user.mobile}{/if}，<a href="{:url('index/user/index')}">会员中心</a>，<a href="{:url('index/login/loginout')}" class="ajax_url">退出</a></span>
+        {else}
+           <ul>
+                <li class="h">
+                    <a href="{:url('index/login/index')}">登录</a>
+                </li>
+                <li><a href="{:url('index/register/index')}">注册</a></li>
+           </ul>
+
+        {/if}
+        </div>
+        <div class="olink fr">
+            <a href="">站内公告 <span class="layui-badge">61728</span></a>
+            <span class="yline">|</span>
+            <a href="">关于我们</a>
+            <span class="yline">|</span>
+            <a href="">帮助中心</a>
+            <span class="yline">|</span>
+            <a href="">联系我们</a>
+        </div>
+    </div>
+</div>
+<div class="head layui-main">
+    <div class="logo">
+        <a href="{:url('index/index/index')}">一品内容管理系统</a>
+    </div>
+    <div class="search">
+        <form class="layui-form" action="{:url('index/search/index')}" method="get" style="width: 511px;float: right;margin-top: 10px;">
+          <div class="layui-form-item">
+            <div class="layui-input-inline" style="width: 300px;">
+              <input type="text" name="keywords" required  lay-verify="required" placeholder="请输入关键词" autocomplete="off" class="layui-input">
+            </div>
+
+            
+            <div class="layui-input-inline" style="width: 66px;">
+                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="search">搜索</button>
+            </div>
+          </div>
+        </form>
+    </div>
+</div>
+<nav class="menu layui-main">
+    <ul class="nav">
+        <li{if !$category_id} class="current"{/if}><a href="{:url('index/index/index')}">首页</a></li>
+        {volist name="nav" id="vo"}
+        <li{if $vo.current==1} class="current"{/if}>
+            <a href="{:url('index/category/index',['categoryId'=>$vo.id])}">{$vo.title}</a>
+            {if $vo.children}
+            <ul>
+                {volist name="$vo.children" id="vs"}
+                {:getChildMenu($vs,0)}
+                {/volist}
+            </ul>
+            {/if}
+        </li>
+        {/volist}
+    </ul>   
+</nav>
+{block name="main"}{/block}
+<div class="footer">
+    <div class="layui-main">
+    <div class="link">
+        {volist name=":model('article')" id="vo"}
+        <a href="{:url('index/article/read',['category_id'=>$vo.category_id,'id'=>$vo.id])}">{$vo.title}</a>
+        {/volist}
+    </div>
+    <div class="copyright">
+        <p>&copy;&nbsp;2020&nbsp;bnxf.net&nbsp;&nbsp;<a href="http://beian.miit.gov.cn/" target="_blank">{$site.icpnumber}</a></p>
+    </div>
+
+    <div class="weibox">
+        <div class="l" id="qq">
+            <div class="qqqr"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=fd461985e36ab9428dd899dcba5f9bc52505d8632b045bf974968f5db6518465"><img src="__STATIC__/default/images/qqqqr.png" alt=""></a></div>
+            <div class="wlo">
+                <i class="fa fa-qq"></i>
+            </div>
+            <p>QQ群</p>
+        </div>
+        <div class="l" id="wx">
+            <div class="wxqr"><img src="__STATIC__/default/images/wxqqr.jpg" alt=""></div>
+            <div class="wlo">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <p>微信群</p>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="__STATIC__/src/layui/layui.js"></script>
+<script src="__STATIC__/src/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js?v={:time()}"></script>
+<script src="__STATIC__/src/ckeditor/plugins/codesnippet/lib/highlight/highlightjs-line-numbers.js"></script>
+<script src="__STATIC__/default/js/base.js"></script>
+{block name="js"}{/block}
+{block name="script"}{/block}
+</body>
+</html>    

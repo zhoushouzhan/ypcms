@@ -1,0 +1,32 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index',['category_id'=>\$category_id])}">{$category.title}列表</a></li>
+        <li class="layui-this">添加信息</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show"><form class="layui-form form-container" action="{:url('save')}" method="post"><div class="layui-form-item">
+				    <label class="layui-form-label">名称</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="title" onkeyup="" class="layui-input" value="{$r.title}">
+				    </div>
+				  </div><div class="layui-form-item">
+				    <label class="layui-form-label">网址</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="url" onkeyup="" class="layui-input" value="{$r.url}">
+				    </div>
+				  </div><div class="layui-form-item">
+				    <label class="layui-form-label">排序</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="sort" onkeyup="" class="layui-input" value="{$r.sort}">
+				    </div>
+				  </div><div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div></form></div>
+    </div>
+</div>
+{/block}

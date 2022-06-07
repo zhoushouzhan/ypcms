@@ -1,0 +1,53 @@
+{extend name="layout"}
+{block name="pagetitle"}用户登录{/block}
+{block name="main"}
+<div class="register">
+	<div class="layui-main">
+		<div class="login-ad"></div>
+		<div class="login-form">
+			<div class="layui-tab layui-tab-brief regtab">
+			  <ul class="layui-tab-title">
+			    <li><a href="{:url('index/register/index')}">注册</a></li>
+			    <li class="layui-this">登录</li>
+			  </ul>
+			  <div class="layui-tab-content">
+			    <div class="layui-tab-item layui-show">
+			        <form action="{:url('index/login/index')}" method="post" class="layui-form">
+			            <div class="reg">
+			                <div class="mobile">
+			                    <input type="text" name="sender" maxlength="60" placeholder="账号/手机号/邮箱/ID" lay-verify="required" readonly="readonly">
+			                </div>
+			                <div class="pass">
+			                    <input type="password" name="password"  maxlength="16" placeholder="密码" lay-verify="required" readonly="readonly">
+			                </div>
+			                <div class="checkcode">
+			                    <input type="text" maxlength="6" name="verify" lay-verify="required" placeholder="验证码">
+			                    <img src="/captcha.html" alt="点击更换" title="点击更换" onclick="this.src='/captcha.html?time='+Math.random()">
+			                </div>
+			                <div class="loginbtn">
+			                    <button type="button" lay-submit lay-filter="login" class="layui-btn layui-bg-red layui-btn-fluid layui-btn-radius">登陆</button>
+			                </div>
+			                <div class="otherLogin">
+			                    <div class="ltxt">第三方平台登录</div>
+			                    <div class="lobj">
+			                        <a href="###" title="QQ登录"><i class="fa fa-qq"></i></a>
+			                        <a href="###" title="微信登录"><i class="fa fa-weixin"></i></a>
+			                        <a href="###" title="新浪微博登录"><i class="fa fa-weibo"></i></a>
+			                    </div>
+			                </div>
+			            </div>
+			        </form>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    setTimeout(function removeReadonly(){
+        $("input[name=sender],input[name=password]").removeAttr('readonly');
+    },1000);
+</script>
+{/block}

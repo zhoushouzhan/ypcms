@@ -1,0 +1,37 @@
+{extend name="base" /}
+{block name="content"}
+<div class="huanjing">
+	<blockquote class="layui-elem-quote">正在安装，请耐心等待~</blockquote>
+	<div class="installing">
+		<div class="layui-progress layui-progress-big" lay-filter="installprogress">
+		  <div class="layui-progress-bar layui-progress-big layui-bg-red"></div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="js"}
+dosql();
+
+function dosql(i){
+    $.ajax({
+        url: '/setup.php/index/dosql.html',
+        type: 'GET',
+        dataType: 'json',
+        data: {"i":i},
+    })
+    .done(function(res) {
+        if(res.code){
+            element.progress('installprogress', res.bili+'%');
+            dosql(res.i);
+        }else{
+        element.progress('installprogress', res.bili+'%');
+            layer.alert(res.msg, {icon: 1},function(){
+                window.location.href='/setup.php/index/oversql.html';
+            }); 
+        }
+    })
+    .fail(function() {
+        console.log("error");
+    });
+}
+{/block}

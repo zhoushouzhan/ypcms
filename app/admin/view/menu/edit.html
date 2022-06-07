@@ -1,0 +1,77 @@
+{extend name="base" /}
+{block name="pageBody"}
+<!--tab标签-->
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('admin/menu/index')}">后台节点</a></li>
+        <li class=""><a href="{:url('admin/menu/add')}">添加节点</a></li>
+        <li class="layui-this">编辑节点</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" action="{:url('admin/menu/update')}" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上级节点</label>
+                    <div class="layui-input-block">
+                        <select name="pid" lay-verify="required">
+                            <option value="0">一级节点</option>
+                            {foreach name="dataList" item="vo"}
+                            <option value="{$vo.id}" {if condition="$admin_menu.id==$vo.id" } disabled="disabled" {/if} {if condition="$admin_menu.pid==$vo.id" } selected="selected" {/if}>{neq name="vo.level" value="1" }|{php}for($i=1;$i<$vo['level'];$i++){echo ' ----' ;}{/php}{/neq} {$vo.title}</option> {/foreach} </select> </div> </div> <div class="layui-form-item">
+                            <label class="layui-form-label">节点名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="{$admin_menu.title}" required lay-verify="required" placeholder="请输入菜单名称" class="layui-input">
+                            </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">控制器方法</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" value="{$admin_menu.name}" required lay-verify="required" placeholder="请输入控制器方法 如：admin/Index/index" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">图标</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="icon" id="icon" value="{$admin_menu.icon}" placeholder="（选填）如：fa fa-home" class="layui-input">
+                        </div>
+                        <div class="layui-input-inline">
+                            <button type="button" class="layui-btn layui-btn-primary" id="selectIcon"><i class="layui-icon">&#xe66b;</i></button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">状态</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="status" value="1" title="显示" {if condition="$admin_menu.status==1" } checked="checked" {/if}> <input type="radio" name="status" value="0" title="隐藏" {if condition="$admin_menu.status==0" } checked="checked" {/if}> </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="sort" value="{$admin_menu.sort}" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="id" value="{$admin_menu.id}">
+                            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+jQuery(document).ready(function($) {
+    $("#selectIcon").click(function(event) {
+        /* Act on the event */
+        var index = layer.open({
+            title: '选择图标',
+            type: 2,
+            content: ['/icon.php'],
+            area: ['100%', '100%']
+        })
+    });
+});
+</script>
+{/block}

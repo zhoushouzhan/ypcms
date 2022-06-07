@@ -1,0 +1,311 @@
+{extend name="base" /}
+<!--tab标签-->
+{block name="style"}
+<style>
+    .layui-form-pane{margin-bottom: 10px;}
+    .layui-form-pane .layui-form-label{width: 131px;}
+    .layui-input-inline{position: relative;}
+    .layui-input-inline .rmbtn{position: absolute;top: 8px;right: 8px;}
+    .add_item{padding: 10px 10px;}
+</style>
+{/block}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li><a href="{:url('index')}">模型管理</a></li>
+        <li><a href="{:url('add')}">添加模型</a></li>
+        <li class="layui-this">编辑模型</li>
+    </ul>
+    <div class="layui-tab-content layui-form">
+        <form action="{:url('update')}" method="post" id="f1">
+            <input type="hidden" name="id" value="{$r.id}">
+            <input type="hidden" name="category" value="{$r.category}">
+            <div class="layui-form-pane">
+                <div class="layui-inline">
+                    <label class="layui-form-label">模型名称：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" value="{$r.name}" class="layui-input" readonly="">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <select name="mt" id="mt" lay-filter="mt">
+                            <option value="1"{if $r.mt==1} selected="selected"{/if}>A类模型</option>
+                            <option value="2"{if $r.mt==2} selected="selected"{/if}>B类模型</option>
+                            <option value="3"{if $r.mt==3} selected="selected"{/if}>C类模型</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-pane">
+                <div class="layui-inline">
+                    <label class="layui-form-label">模型别名：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="alias" value="{$r.alias}" class="layui-input" required lay-verify="required" placeholder="如：用户">
+                    </div>
+                </div>
+                <div class="layui-inline" id="nodeId">
+                    <div class="layui-input-inline">
+                        <select name="node_id" lay-filter="nodeId">
+                            <option value="-1">选择挂载点</option>
+                            <option value="0" {if 0==$r.node_id} selected{/if}>一级节点</option>
+                            {foreach name="menu" item="vo"}
+                            <option value="{$vo.id}"{if $vo.id==$r.node_id} selected{/if}>{$vo.title}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline {if !$r.node_id}layui-hide{/if}" id="nodeSort">
+                    <div class="layui-input-inline">
+                        <input type="number" name="nodesort" value="{$r.nodesort}" class="layui-input" placeholder="节点序号">
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-form-pane">
+                <div class="layui-inline" id="col_groups">
+                    <label class="layui-form-label">字段分组：</label>
+                    {volist name="$r.col_groups" id="vo"}
+                    <div class="layui-input-inline">
+                        <input type="text" name="col_groups[]" value="{$vo}" class="layui-input" placeholder="请输入">
+                        <button type="button" class="layui-btn layui-btn-xs layui-btn-danger rmbtn"><i class="layui-icon layui-icon-close"></i></button>
+                    </div>
+                    {/volist}
+                    <div class="layui-input-inline add_group_item">
+                        <button type="button" class="layui-btn">
+                          增加
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="layui-table" lay-size="sm">
+                <colgroup>
+                    <col width="100">
+                    <col width="160">
+                    <col width="170">
+                    <col width="130">
+                    <col width="100">
+                    <col width="100">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col width="100">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>字段名</th>
+                        <th>表单类型</th>
+                        <th>字段类型</th>
+                        <th>长度值</th>
+                        <th>列宽</th>
+                        <th>默认值</th>
+                        <th>注释</th>
+                        <th>索引</th>
+                        <th>分组</th>
+                        <th>列表显示</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="listCol">
+                    {volist name="$r.cols" id="vo"}
+<?php
+if(!isset($vo['colw'])){
+$vo['colw']='';
+}
+
+?>
+
+                    <tr>
+                        <td>
+                            <input type="hidden" name="oldcols[{$i-1}][name]" value="{$vo.name}">
+                            <input type="hidden" name="oldcols[{$i-1}][formItem]" value="{$vo.formItem}">
+                            <input type="hidden" name="oldcols[{$i-1}][type]" value="{$vo.type}">
+                            <input type="hidden" name="oldcols[{$i-1}][size]" value="{$vo.size}">
+                            <input type="hidden" name="oldcols[{$i-1}][colw]" value="{$vo.colw}">
+                            <input type="hidden" name="oldcols[{$i-1}][sval]" value="{$vo.sval}">
+                            <input type="hidden" name="oldcols[{$i-1}][comment]" value="{$vo.comment}">
+                            <input type="hidden" name="oldcols[{$i-1}][index]" value="{$vo.index}">
+                            <input type="text" class="layui-input" name="cols[{$i-1}][name]" value="{$vo.name}">
+                        </td>
+                        <td>
+                            <select class="column_type" name="cols[{$i-1}][formItem]" lay-filter="select_type">
+                                <option value="0">请选择</option>
+                                <option value="input" {$vo.formItem=='input' ?" selected":""}>单行文本框</option>
+                                <option value="hidden" {$vo.formItem=='hidden' ?" selected":""}>隐藏元素</option>
+                                <option value="none" {$vo.formItem=='none' ?" selected":""}>非表单元素</option>
+                                <option value="password" {$vo.formItem=='password' ?" selected":""}>密码框</option>
+                                <option value="datetime" {$vo.formItem=='datetime' ?" selected":""}>日期时间</option>
+                                <option value="date" {$vo.formItem=='date' ?" selected":""}>日期</option>
+                                <option value="select" {$vo.formItem=='select' ?" selected":""}>下拉菜单</option>
+                                <option value="textarea" {$vo.formItem=='textarea' ?" selected":""}>多行文本框</option>
+                                <option value="editor" {$vo.formItem=='editor' ?" selected":""}>富文本编辑器</option>
+                                <option value="radio" {$vo.formItem=='radio' ?" selected":""}>单选框</option>
+                                <option value="checkbox" {$vo.formItem=='checkbox' ?" selected":""}>复选框</option>
+                                <option value="thumb" {$vo.formItem=='thumb' ?" selected":""}>单图片</option>
+                                <option value="photo" {$vo.formItem=='photo' ?" selected":""}>相册</option>
+                                <option value="files" {$vo.formItem=='files' ?" selected":""}>附件</option>
+                                <option value="ypmod" {$vo.formItem=='ypmod' ?" selected":""}>模型单选</option>
+                                <option value="ypmod_checkbox" {$vo.formItem=='ypmod_checkbox' ?" selected":""}>模型多选</option>
+                                <option value="ypmodb" {$vo.formItem=='ypmodb' ?" selected":""}>模型可操作</option>
+                                <option value="switch" {$vo.formItem=='switch' ?" selected":""}>开关</option>
+                                <option value="icon" {$vo.formItem=='icon' ?" selected":""}>图标</option>
+                                <option value="yesno" {$vo.formItem=='yesno' ?" selected":""}>是|否</option>
+                                <option value="sex" {$vo.formItem=='sex' ?" selected":""}>性别</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="column_type" name="cols[{$i-1}][type]">
+                                <option value="0">请选择</option>
+                                <option value="INT" {$vo.type=='INT' ?" selected":""}>INT</option>
+                                <option value="FLOAT" {$vo.type=='FLOAT' ?" selected":""}>FLOAT</option>
+                                <option value="VARCHAR" {$vo.type=='VARCHAR' ?" selected":""}>VARCHAR</option>
+                                <option value="TEXT" {$vo.type=='TEXT' ?" selected":""}>TEXT</option>
+                                <option value="MEDIUMTEXT" {$vo.type=='MEDIUMTEXT' ?" selected":""}>MEDIUMTEXT</option>
+                                <option value="JSON" {$vo.type=='JSON' ?" selected":""}>JSON</option>
+                            </select>
+                        </td>
+                        <td><input type="text" class="layui-input" name="cols[{$i-1}][size]" value="{$vo.size}" required lay-verify="required"></td>
+                        <td><input type="text" class="layui-input" name="cols[{$i-1}][colw]" value="{$vo.colw}"></td>
+                        <td><input type="text" class="layui-input sval" name="cols[{$i-1}][sval]" value="{$vo.sval|default=''}"></td>
+                        <td><input type="text" class="layui-input" name="cols[{$i-1}][comment]" value="{$vo.comment}" required lay-verify="required"></td>
+                        <td>
+                            <select class="index" name="cols[{$i-1}][index]">
+                                <option value="0">无索引</option>
+                                <option value="index" {$vo.index=='index' ?" selected":""}>普通索引</option>
+                                <option value="unique" {$vo.index=='unique' ?" selected":""}>唯一索引</option>
+                                <option value="fulltext" {$vo.index=='fulltext' ?" selected":""}>全文索引</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="col_group" name="cols[{$i-1}][group]" data-val="{$vo.group?$vo.group:'0'}">
+                                <option value="0">基础属性</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="cols[{$i-1}][listv]" value="1" lay-skin="primary"{if isset($vo.listv)} checked{/if}>
+                        </td>
+                        <td>
+                            <button type="button" class="layui-btn layui-btn-xs layui-bg-red delTr"><i class="layui-icon">&#xe640;</i></button>
+                            <button type="button" class="layui-btn layui-btn-xs layui-bg-black addTr"><i class="layui-icon">&#xe654;</i></button>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+            <div>
+                <button type="button" class="layui-btn layui-bg-red" lay-submit lay-filter="*"><i class="layui-icon">&#xe652;</i>执行</button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+<fieldset class="layui-elem-field">
+    <legend>说明</legend>
+    <div class="layui-field-box">
+        <p>功能字段：</p>
+        <p>1、enabled审核字段</p>
+        <p>2、下划线为关联字段，时间除外</p>
+    </div>
+</fieldset>
+{/block}
+{block name="script"}
+<script src="__STATIC__/admin/js/jquery.tablednd.js"></script>
+<script>
+//表格排序
+$("#listCol").tableDnD({
+    //滚动的速度
+    scrollAmount: 10,
+    onDragClass: 'highlight',
+    //当拖动排序完成后
+    onDrop: function(table, row) {
+        //获取id为table的元素
+        var table = document.getElementById("listCol");
+        //获取table元素所包含的tr元素集合
+        var tr = table.getElementsByTagName("tr");
+        //遍历所有的tr
+        for (var i = 0; i < tr.length; i++) {
+            //获取拖动排序结束后新表格中，row id的结果
+            var rowid = tr[i].getAttribute("id");
+            //console.log("排序完成后表格的第 " + (i+1) + " 行id为 : " + rowid);
+        }
+    },
+    onDragStart: function(table, row) {
+        //console.log(row.id);
+    },
+});
+//监听选择表单类型
+form.on('select(select_type)', function(data){
+  var name= $(data.elem).parents('tr').find('.sval').attr('name');
+  if(data.value=='select'||data.value=='radio'||data.value=='checkbox'){
+    var mclass=layer.open({
+      title:'选择分类',
+      type:2,
+      area:['100%','100%'],
+      content:['{:url("mclass/sclass",["pid"=>0])}&inputname='+name]
+    })
+    return false;
+  }
+});
+//监听节点
+form.on('select(nodeId)',function(data){
+    var nodeid=data.value;
+
+    if(nodeid>0){
+        $("#nodeSort").removeClass('layui-hide');
+    }else{
+        $("#nodeSort").addClass('layui-hide');
+    }
+});
+form.on('checkbox(category)', function(data){
+  if(data.elem.checked){
+    $("[name='category']").val(1);
+  }else{
+    $("[name='category']").val(0);
+  }
+});
+//字段分组
+updataColGroup();
+$(".add_group_item").click(function(){
+    var item='<div class="add_item"><input type="text" value="" class="layui-input" placeholder="请输入"></div>';
+    var ww=layer.open({
+        type:1,
+        closeBtn:0,
+        title:'增加字段组',
+        btn:['提交','取消'],
+        yes:function(index,layero){
+            var item_name=$(".add_item>input").val();
+            var html='<div class="layui-input-inline"><input type="text" name="col_groups[]" value="'+item_name+'" class="layui-input" placeholder="请输入"><button type="button" class="layui-btn layui-btn-xs layui-btn-danger rmbtn"><i class="layui-icon layui-icon-close"></i></button></div>';
+            $(".add_group_item").before(html);
+            updataColGroup();
+            layer.close(ww);
+        },
+        content:item
+    });
+});
+$("#col_groups").on('click', '.rmbtn', function(event) {
+    event.preventDefault();
+    var index=$("#col_groups").find('.layui-input-inline').index($(this).parent());
+    if(index==0){
+        layer.msg('不能删除第一个',{icon:'5',shade: [0.8, '#393D49']});
+        return false;
+    }
+    $(this).parent().remove();
+    updataColGroup();
+});
+//更新字段分组
+function updataColGroup(){
+    var option='';
+    $("input[name='col_groups[]']").each(function(index, el) {
+        option+='<option value="'+index+'">'+$(el).val()+'</option>';
+    });
+    $(".col_group").html(option);
+    $(".col_group").each(function(index, el) {
+        var val=$(el).data('val');
+        $(this).val(val);
+    });
+    form.render('select');
+}
+</script>
+{/block}

@@ -1,0 +1,27 @@
+{extend name="base" /}
+{block name="pageBody"}
+{$form|raw}
+{/block}
+{block name="script"}
+<script>
+    form.on('select(selectMod)', function(data){
+        var modname=$(data.elem).find('option:selected').data('mod');
+        $("input[name=modname]").val(modname);
+    });
+    //栏目图标选择
+    $("#selectIcon").click(function(event) {
+        /* Act on the event */
+        var index = layer.open({
+            title: '选择图标',
+            type: 2,
+            content: ['/icon.php'],
+            area: ['100%', '100%']
+        })
+    });
+    $(function() {
+        CKEDITOR.replace('content',{
+            customConfig : '__STATIC__/src/ckeditor/ypconfig.js?v={:time()}'
+        });
+    });
+</script>
+{/block}

@@ -1,0 +1,65 @@
+{extend name="layout"}
+{block name="title"}笨鸟先飞-修改资料{/block}
+{block name="main"}
+<div class="ad layui-main"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+        {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">设置新手机号码</li>
+            </ul>
+            <div class="layui-tab-content">
+                <form class="layui-form layui-form-pane" action="{:url('index/user/changemobile')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新手机号码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="newMobile" class="layui-input" lay-verify="phone" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">验证码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="checkCode" class="layui-input" lay-verify="number" maxlength="6">
+                        </div>
+                        <div class="layui-input-inline">
+                            <button type="button" class="layui-btn layui-bg-black changeCode" data-url="{:url('index/user/changeCode')}">手机验证码</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn layui-btn-danger" lay-submit lay-filter="*">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+//发送验证码
+$("body").on('click','.changeCode',function(event) {
+	/* Act on the event */
+	var that=$(this);
+	var url=$(this).data('url');
+	var mobile=$("input[name='newMobile']").val();
+	if(!isMobile(mobile)){
+		layer.msg('手机号码错误',{icon:2});
+		return false;
+	}
+	$.post(url, {mobile:mobile}, function(data, textStatus, xhr) {
+		if(data.code==1){
+			layer.msg(data.msg,{icon:1});
+			daojishi(that);
+		}else{
+			layer.msg(data.msg,{icon:2});
+		}
+
+	},'json');
+});
+</script>
+{/block}

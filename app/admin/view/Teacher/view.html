@@ -1,0 +1,214 @@
+{extend name="base" /}
+{block name="pageBody"}
+<blockquote class="layui-elem-quote">
+  <a href="" class="layui-btn layui-bg-gray layui-btn-sm fr"><i class="layui-icon layui-icon-refresh-1"></i></a>
+  <a href="javascript:window.history.go(-1);" class="layui-btn layui-bg-gray layui-btn-sm fr"><i class="layui-icon layui-icon-return"></i></a>
+基本信息
+</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>姓名</td>
+      <td>{$r.truename}</td>
+     </tr>
+     <tr>
+      <td>性别</td>
+      <td>{$r.sex}</td>
+     </tr>
+     <tr>
+      <td>生日</td>
+      <td>{$r.birthday}</td>
+     </tr>
+     <tr>
+      <td>政治面貌</td>
+      <td>{$r.mianmao.title}</td>
+    </tr>
+     <tr>
+      <td>手机号</td>
+      <td>{$r.mobile}</td>
+    </tr>
+     <tr>
+      <td>集团短号</td>
+      <td>{$r.duanhao}</td>
+    </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">个人信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>籍贯</td>
+      <td>{$r.place.titles}</td>
+     </tr>
+     <tr>
+      <td>身份证</td>
+      <td>{$r.sfz}</td>
+     </tr>
+     <tr>
+      <td>家庭住址</td>
+      <td>{$r.address}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">学习信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>学历</td>
+      <td>{$r.education.title}</td>
+     </tr>
+     <tr>
+      <td>毕业院校</td>
+      <td>{$r.from}</td>
+     </tr>
+     <tr>
+      <td>毕业时间</td>
+      <td>{$r.biyetime}</td>
+     </tr>
+     <tr>
+      <td>所学专业</td>
+      <td>{$r.zhuanye}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">工作信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="130">
+    <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>当前职务</td>
+      <td>{$r.zhiwu}</td>
+     </tr>
+     <tr>
+      <td>当前职称</td>
+      <td>{$r.zhicheng}</td>
+     </tr>
+     <tr>
+      <td>参加工作时间</td>
+      <td>{$r.worktime}</td>
+     </tr>
+     <tr>
+      <td>入职时间</td>
+      <td>{$r.jobtime}</td>
+     </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">工作经历</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="70">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>工作日期</th>
+      <th>单位</th>
+      <th>职务</th>
+      <th>工作内容</th>
+    </tr> 
+  </thead>
+  <tbody>
+  	{volist name="$r.jingli" id="vo"}
+    <tr>
+      <td>{$i}</td>
+      <td>{$vo.stime}~{$vo.etime}</td>
+      <td>{$vo.danwei}</td>
+      <td>{$vo.zhiwu}</td>
+      <td>{$vo.content|raw}</td>
+     </tr>
+    {/volist}
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">评价信息</blockquote>
+<table class="layui-table" lay-skin="row">
+  <colgroup>
+    <col width="100">
+    <col>
+  </colgroup>
+  <tbody>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>项目</th>
+      <th>描述</th>
+      <th>申请加分</th>
+      <th>状态</th>
+    </tr> 
+  </thead>
+{volist name="$r.score" id="vo"}
+    <tr>
+      <td>{$i}</td>
+      <td>{$vo.program.title}</td>
+      <td>{$vo.intro}</td>
+      <td>{$vo.fen}</td>
+      <td>
+
+        {$vo.status.tips|raw}
+        {if $vo.status.value==2}
+        <br>
+        {$vo.msg}
+        {/if}
+      </td>
+    </tr>
+{/volist}
+
+  </tbody>
+</table>
+{/block}
+{block name="script"}
+<script>
+	$(".addWorks").click(function(){
+		var index=layer.open({
+			type:2,
+			maxmin:true,
+			area: ['100%','100%'],
+			content:'{:url('admin/teacher/add')}',
+			cancel: function(index, layero){ 
+			 window.location.reload();
+			  return false; 
+			} 
+		});
+	});
+	$(".editworks").click(function(){
+		var url=$(this).attr('href');
+		layer.open({
+			type:2,
+			maxmin:true,
+			area: ['100%','100%'],
+			content:url,
+		});
+    return false;
+	});
+  $(".addScore").click(function(){
+    var index=layer.open({
+      type:2,
+      maxmin:true,
+      area: ['100%','100%'],
+      content:'{:url('admin/score/add')}',
+      cancel: function(index, layero){ 
+       window.location.reload();
+        return false; 
+      } 
+    });
+  });
+
+ 
+
+</script>
+{/block}

@@ -1,0 +1,46 @@
+{extend name="base" /}
+{block name="pageBody"}
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">角色</li>
+            <li class=""><a href="{:url('add')}">添加角色</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="80">
+                        <col>
+                        <col>
+                        <col width="800">
+                        <col width="220">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        <th>名称</th>
+                        <th>状态</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="dataList" item="vo"}
+                    <tr>
+                        <td title="ID:{$vo.id}">{$key+1}</td>
+                        <td>{$vo.title}</td>
+                        <td>{php}echo $vo['status']==1 ? '启用' : '禁用';{/php}</td>
+                        <td>{$vo.intro}</td>
+                        <td>
+                            <a href="{:url('auth',['id'=>$vo['id']])}" class="layui-btn layui-btn-sm">授权</a>
+                            <a href="{:url('edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-sm">编辑</a>
+                            <a href="{:url('delete',['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

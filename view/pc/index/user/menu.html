@@ -1,0 +1,36 @@
+<div class="userpic">
+    <a href="{:url('index/user/index')}"><img src="{$user.fileUserpic.filepath|default="/static/images/nouserpic.gif"}"></a>
+    <div class="text" id="upuserpic" data-id="{$user.userpic}">更换头像</div>
+</div>
+<div class="username">
+<p>{$user.nickname}</p>
+<p>ID：{$user.id}</p>
+</div>
+<div class="cert">
+    <div data-title="VIP会员" data-xy="1"{if $user.id_card} class="on"{/if}><i class="layui-icon">&#xe612;</i></div>
+    <div data-title="手机认证" data-xy="3"{if $user.mobile} class="on"{/if}><i class="layui-icon">&#xe63b;</i></div>
+    <div data-title="邮箱认证" data-xy="1"{if $user.email} class="on"{/if}><i class="layui-icon">&#xe618;</i></div>
+    <div data-title="关注公众号" data-xy="4"{if $user.epassword} class="on"{/if}><i class="layui-icon">&#xe673;</i></div>
+</div>
+<ul class="layui-nav layui-nav-tree" lay-filter="usermenu">
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="javascript:;">管理菜单</a>
+        <dl class="layui-nav-child">
+            <dd><a href="{:url('index/user/edit')}">修改资料</a></dd>
+            <dd><a href="{:url('index/user/changePass')}">修改密码</a></dd>
+            <dd><a href="{:url('index/user/setMobile')}">手机认证</a></dd>
+            <dd><a href="{:url('index/user/setEmail')}">邮箱认证</a></dd>
+            <dd><a href="{:url('index/user/favorites')}">收藏管理</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="javascript:;">财务中心</a>
+        <dl class="layui-nav-child">
+            <dd><a href="{:url('index/user/buygroup')}">购买会员组</a></dd>
+            <dd><a href="{:url('index/user/order')}">我的订单</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item">
+        <a href="{:url('index/login/loginout')}" class="ajax_url">安全退出</a>
+    </li>
+</ul>

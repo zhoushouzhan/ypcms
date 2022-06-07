@@ -1,0 +1,14 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index')}">幻灯片管理</a></li>
+        <li class="layui-this">添加</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            {$form|raw}
+        </div>
+    </div>
+</div>
+{/block}

@@ -1,0 +1,10 @@
+{extend name="base" /}
+{block name="pageBody"}
+{$form|raw}
+{/block}{block name="script"}<script>
+    $(function() {
+        CKEDITOR.replace('content',{
+            customConfig : '__STATIC__/src/ckeditor/ypconfig.js?v={:time()}'
+        });
+    });
+</script>{/block}

@@ -1,0 +1,77 @@
+{extend name="layout"}
+{block name="pagetitle"}设置手机号码{/block}
+{block name="main"}
+<div class="ad layui-main mt10"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+        {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">设置手机号码</li>
+            </ul>
+            <div class="layui-tab-content">
+                <form class="layui-form layui-form-pane" action="{:url('index/user/setmobile')}" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">当前手机号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" value="{$user.mobile|hidePhone}" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">验证方式</label>
+                        <div class="layui-input-block">
+                            {if $user.mobile}
+                            <input type="radio" name="checkType" value="mobile" title="手机短信">
+                            {/if}
+                            {if $user.email}
+                            <input type="radio" name="checkType" value="email" title="邮箱短信">
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">验证码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="checkCode" class="layui-input" lay-verify="number" maxlength="6">
+                        </div>
+                        <div class="layui-input-inline">
+                            <button type="button" class="layui-btn layui-bg-black changeCode" data-url="{:url('index/user/changeCode')}">免费获取验证码</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn layui-btn-danger" lay-submit lay-filter="*">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+//发送验证码
+$("body").on('click','.changeCode',function(event) {
+	/* Act on the event */
+	var that=$(this);
+	var url=$(this).data('url');
+	var checkType=$("input[name='checkType']:checked").val();
+	if(!checkType){
+		layer.msg('请选择验证方式',{icon:2});
+		return false;
+	}
+	$.post(url, {checkType:checkType}, function(data, textStatus, xhr) {
+		/*optional stuff to do after success */
+		if(data.code==1){
+			layer.msg(data.msg,{icon:1});
+			daojishi(that);
+		}else{
+			layer.msg(data.msg,{icon:2});
+		}
+
+	},'json');
+});
+</script>
+{/block}

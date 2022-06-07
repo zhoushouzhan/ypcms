@@ -1,0 +1,41 @@
+{extend name="base" /}
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class=""><a href="{:url('index',['category_id'=>\$category_id])}">{$category.title}列表</a></li>
+        <li class="layui-this">添加信息</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show"><form class="layui-form form-container" action="{:url('save')}" method="post"><div class="layui-form-item">
+				    <label class="layui-form-label">页面名称</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="title" required  lay-verify="required" onkeyup="" class="layui-input" value="{$r.title}">
+				    </div>
+				  </div><input type="hidden" name="category_id" value="{$r.category_id}"><div class="layui-form-item">
+					    <label class="layui-form-label">页面简介</label>
+					    <div class="layui-input-block">
+					    	<textarea name="description" required  lay-verify="required" placeholder="请输入内容" class="layui-textarea">{$r.description}</textarea>
+					    </div>
+					</div><div class="layui-form-item">
+				    <label class="layui-form-label">内容</label>
+				    <div class="layui-input-block">
+				    	<textarea name="content" required  lay-verify="required" placeholder="请输入内容" class="layui-textarea ypcms-editor">{$r.content}</textarea>
+				    </div>
+				  </div><div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="*" onclick="CKupdate();">保存</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div></form></div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $(function() {
+        CKEDITOR.replace('content',{
+            customConfig : '__STATIC__/src/ckeditor/ypconfig.js?v={:time()}'
+        });
+    });
+</script>
+{/block}

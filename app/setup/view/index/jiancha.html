@@ -1,0 +1,100 @@
+{extend name="base" /}
+{block name="content"}
+<div class="huanjing">
+<blockquote class="layui-elem-quote">检测运行环境</blockquote>
+<table class="layui-table">
+  <tbody>
+  	<tr class="layui-bg-cyan">
+  		<td width="100">项目</td>
+  		<td width="200">一品CMS所需配置</td>
+  		<td>当前服务器配置</td>
+  		<td width="100">检测结果</td>
+  	</tr>
+    <tr>
+      <td>操作系统</td>
+      <td>不限制</td>
+      <td>{$config.server_os}</td>
+      <td><span class="layui-badge layui-bg-green">通过</span></td>
+    </tr>
+    <tr>
+      <td>PHP版本</td>
+      <td>>=5.6</td>
+      <td>{$config.php_version}</td>
+      <td>{if condition="$config.php_version>=5.6"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+    <tr>
+      <td>MySql支持</td>
+      <td>必须</td>
+      <td>{$config.mysql}</td>
+      <td>{if condition="$config.mysql"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+
+    <tr>
+      <td>网站空间</td>
+      <td>>=100M</td>
+      <td>{$config.disk_size}M</td>
+      <td>{if condition="$config.disk_size>=100"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+
+    </tr>
+    <tr>
+      <td>附件上传</td>
+      <td>>=2M</td>
+      <td>{$config.max_upload_size}</td>
+      <td>{if condition="$config.max_upload_size>=2"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+    <tr>
+      <td>GD库</td>
+      <td>必须</td>
+      <td>{$config.gd}</td>
+      <td>{if condition="$config.gd"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">检测目录权限</blockquote>
+<table class="layui-table">
+  <tbody>
+  	<tr class="layui-bg-cyan">
+  		<td width="100">目录文件名称</td>
+  		<td width="200">说明</td>
+  		<td>所需状态</td>
+  		<td width="100">当前状态</td>
+  	</tr>
+  	{volist name="dirItems" id="v"}
+    <tr>
+      <td>{$v[3]}</td>
+      <td>{$v[4]}</td>
+      <td>可写</td>
+      <td>{if condition="$v[1]=='可写'"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+	{/volist}
+
+  </tbody>
+</table>
+<blockquote class="layui-elem-quote">依懒扩展组件</blockquote>
+<table class="layui-table">
+  <tbody>
+  	<tr class="layui-bg-cyan">
+  		<td width="100">名称</td>
+  		<td width="200">类型</td>
+  		<td>所需状态</td>
+  		<td width="100">当前状态</td>
+  	</tr>
+  	{volist name="needfuns" id="v"}
+    <tr>
+      <td>{$v[0]}</td>
+      <td>{$v[3]}</td>
+      <td>支持</td>
+      <td>{if condition="$v[1]=='支持'"}<span class="layui-badge layui-bg-green">通过</span>{else}<span class="layui-badge layui-bg-red">未通过</span>{/if}</td>
+    </tr>
+	{/volist}
+
+  </tbody>
+</table>
+
+</div>
+<div class="nextBtn">
+  <a href="/setup.php/index/setconfig.html" class="layui-btn">下一步</a>
+  <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary">返回上一步</a>
+</div>
+
+{/block}

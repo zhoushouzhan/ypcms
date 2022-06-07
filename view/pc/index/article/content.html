@@ -1,0 +1,112 @@
+{extend name="layout"}
+{block name="css"}
+<style>
+.hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    text-align: center;
+    color: #ccc;
+    vertical-align: top;
+    padding-right: 5px;
+
+    /* your custom style here */
+}
+
+/* for block of code */
+.hljs-ln-code {
+    padding-left: 1em;
+}
+
+
+</style>
+{/block}
+{block name="main"}
+<div class="ad layui-main mt10">
+	
+</div>
+<div class="path_info mt10 layui-main">
+	当前位置：
+	<span class="layui-breadcrumb">
+  	<a href="/">首页</a>
+	{volist name=":get_path_info($r.category_id)" id="vo"}
+	  <a href="{:url('index/category/index',['categoryId'=>$vo.id])}">{$vo.title}</a>
+	{/volist}
+	</span>
+</div>
+<div class="article_content layui-main">
+	<h1>{$r.title}</h1>
+	<div class="info">
+		<span>发布时间：{$r.create_time}</span>
+		<span>点击量：{$r.hits}</span>
+		<span>作者：{$r.author}</span>
+		<span>来源：{$r.source}</span>
+	</div>
+	<div class="content">
+		{$r.content|raw}
+		{if $r.price&&$r.havePrice==0}
+		 <p class="need_money">本内容需支付 {$r.price}元 查看</p>
+		 <button class="layui-btn layui-bg-red layui-btn-fluid add_order"><i class="layui-icon">&#xe65e;</i>  点此支付</button>
+		{/if}
+	</div>
+	<hr>
+	<div class="ctrl_btn">
+		<button type="button" class="layui-btn layui-bg-red addfav">
+			<i class="layui-icon">{if $r.isFav}&#xe68f;{else}&#xe68c;{/if}</i>
+		</button>
+	</div>
+</div>
+{/block}
+{block name="script"}
+	<script>
+		$(".addfav").click(function(event) {
+			$.ajax({
+				url: '{:url("index/user/addFavorites")}',
+				type: 'POST',
+				dataType: 'json',
+				data: {id: '{$r.id}',type:'Article'},
+			})
+			.done(function(res) {
+				if(res.code==1){
+					layer.msg(res.msg,{icon:1},function(){
+						window.location.reload();
+					});
+				}else{
+					layer.msg(res.msg,{icon:2},function(){
+						window.location.reload();
+					});
+				}
+			})
+			.fail(function() {
+				console.log("error");
+			});
+		});
+		//购买
+		$(".add_order").click(function(event) {
+			$.ajax({
+				url: '{:url("index/order/add")}',
+				type: 'POST',
+				dataType: 'json',
+				data: {category_id: '{$r.category_id}',id:'{$r.id}'},
+			})
+			.done(function(res) {
+				window.location.href=res.url;
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+		//代码高亮插件
+		hljs.initHighlightingOnLoad();
+		hljs.initLineNumbersOnLoad();
+
+
+	</script>
+{/block}

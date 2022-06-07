@@ -1,0 +1,192 @@
+{extend name="layout"}
+{block name="pagetitle"}充值{/block}
+{block name="css"}
+<style>
+	.layui-form-radio{padding: 0;margin:0;}
+	.qr_alipay{height: 40px;line-height: 40px;background: #11A7E4;color: white;}
+	.qr_wxpay{height: 40px;line-height: 40px;background: #56A549;color: white;}
+	.pay_time{height: 40px;line-height: 40px;background: #f20;color: white; text-align: center;}
+</style>
+{/block}
+{block name="main"}
+<div class="ad layui-main mt10"></div>
+<div class="userpage layui-main">
+    <div class="user-left">
+        {include file="user/menu" /}
+    </div>
+    <div class="user-main">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">购买会员组</li>
+            </ul>
+            <div class="layui-tab-content">
+            	<div class="layui-form">
+	               	<table class="layui-table">
+	               		<thead>
+	               			<tr>
+	               				<td width="50">选择</td>
+	               				<td>标题</td>
+	               				<td>会员组</td>
+	               				<td>价格</td>
+	               				<td>时长</td>
+	               			</tr>
+	               		</thead>
+	               		<tbody>
+							{volist name="dataList" id="vo"}
+	               			<tr>
+	               				<td align="center"><input type="radio" name="id" value="{$vo.id}" lay-filter="paytype"></td>
+	               				<td>{$vo.title}</td>
+	               				<td>{$vo.group.title}</td>
+	               				<td>{$vo.price} 元</td>
+	               				<td>{$vo.day} 天</td>
+	               			</tr>
+							{/volist}
+	               		</tbody>
+	               </table>
+               </div>
+               <div>
+					<blockquote class="layui-elem-quote">扫码支付</blockquote>
+					<div class="qrlist">
+						<div class="layui-row layui-col-space10">
+							<div class="layui-col-12 layui-hide">
+								<div class="pay_time" id="endtime" num="3600"></div>
+							</div>
+							<div class="layui-col-md6" align="center">
+								<img src="__STATIC__/images/mygzh.jpg" id="Alipay" width="220" height="220">
+								<div class="qr_alipay">支付宝扫码付款</div>
+							</div>
+							<div class="layui-col-md6" align="center">
+								<img src="__STATIC__/images/mygzh.jpg" id="Weixinpay" width="220" height="220">
+								<div class="qr_wxpay">微信扫码付款</div>
+							</div>
+						</div>
+					</div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script>
+$(document).ready(function() {
+	$("body").on("click","#dopay",function(event) {
+		var ajax=null;
+		var money=parseInt($("#money").val());
+		var paytype=$("#paytype").next().find('.layui-this').attr('lay-value');
+		if(paytype!='wxpay'&&paytype!='alipay'){
+			layer.msg('请选择支付方式');
+			return;
+		}
+
+		if(money<1||!money){
+			layer.msg('金额不能小于1');
+			$("#money").focus();
+			return;
+		}
+		$.ajax({
+			url: '{:url("index/pay/index")}',
+			type: 'post',
+			dataType: 'json',
+			data: $("#payform").serialize(),
+		})
+		.done(function(res) {
+			if(res){
+				setInterval("checksuccess('"+res.ordersn+"')",1000);
+			 	layer.open({
+			  		title:res.title,
+			    	type: 1,
+			    	content: "<img src='/api/ypqr/index/str/"+res.code_url+"' />"
+			 	});
+			}else{
+				layer.msg('系统错误');
+			}
+		})
+	});
+});
+function checksuccess(ordersn){
+	$.ajax({
+		url: '{:url("index/pay/paystatus")}',
+		type: 'GET',
+		dataType: 'json',
+		data: {ordersn:ordersn},
+	})
+	.done(function(res) {
+		if(res.code==1){
+			layer.msg('购买成功',{icon:1},function(){
+				window.location.href='{:url("index/User/index")}';
+			})
+		}
+	});
+}
+function CountDown() {
+	var maxtime=$("#endtime").attr('num');
+    if (maxtime >= 0) {
+    	$("#endtime").parent().removeClass('layui-hide');
+        hour = PrefixInteger(Math.floor(maxtime / 3600),2);
+        minutes = PrefixInteger(Math.floor(maxtime  / 60 % 60),2);
+        seconds = PrefixInteger(Math.floor(maxtime % 60),2);
+        msg = "请在 <span>" + hour + "："+ minutes + "：" + seconds + "</span> 秒内完成支付";
+        document.all["endtime"].innerHTML = msg;
+        --maxtime;
+        $("#endtime").attr('num',maxtime);
+    } else{
+    	$("#endtime").parent().addClass('layui-hide');
+        clearInterval(timer);
+        layer.msg("支付过期，请重新下单!",{icon:2});
+    }
+}
+function PrefixInteger(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+}
+//付款
+form.on('radio(paytype)', function(data){
+  console.log(data.elem); //得到radio原始DOM对象
+  console.log(data.value); //被点击的radio的value值
+  add_order(data.value);
+});  
+//创建订单
+function add_order(id){
+	$.ajax({
+		url: '{:url("buygroup")}',
+		type: 'POST',
+		dataType: 'json',
+		data: {id: id},
+	})
+	.done(function(res) {
+		if($("#endtime").attr('num')!=3600){
+			$("#endtime").attr('num',3600);
+		}else{
+			timer = setInterval("CountDown()", 1000);
+			checkPayStatus=setInterval("checksuccess('"+res.data.ordersn+"')",2000);
+		}
+		to_pay('Alipay',res.data.ordersn);
+		to_pay('Weixinpay',res.data.ordersn);
+		
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+	
+}
+//调用支付
+function to_pay(paytype,ordersn){
+	$.ajax({
+		url: '{:url("index/pay/index")}',
+		type: 'get',
+		dataType: 'json',
+		data:{'paytype':paytype,'ordersn':ordersn} ,
+	})
+	.done(function(res) {
+		if(res){
+		 	$("#"+paytype).attr('src','/api/ypqr?str='+res.data);
+		}else{
+			layer.msg('系统错误');
+		}
+	})
+}
+</script>
+{/block}

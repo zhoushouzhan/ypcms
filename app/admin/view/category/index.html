@@ -1,0 +1,164 @@
+{extend name="base" /}
+<!--tab标签-->
+{block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+    <li class="layui-this">栏目管理</li>
+    <li class=""><a href="{:url('admin/category/add')}">添加栏目</a></li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+      <form action="" class="layui-form" lay-filter="formCategory">
+        <table class="layui-table">
+          <colgroup>
+            <col width="40" />
+            <col width="40" />
+            <col />
+            <col />
+            <col />
+            <col width="100" />
+            <col width="100" />
+            <col width="100" />
+            <col width="280" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>选择</th>
+              <th>ID</th>
+              <th>排序</th>
+              <th>栏目名称</th>
+              <th>路由</th>
+              <th>终极栏目</th>
+              <th>导航显示</th>
+              <th>使用模型</th>
+              <th><div align="center">操作</div></th>
+            </tr>
+          </thead>
+          <tbody data-deltips="删除栏目会一并删除子栏目，确定？">
+            {foreach name="category_list" item="vo"}
+            <tr data-pid="{$vo.pid}">
+              <td class="selectId">
+                <input
+                  type="checkbox"
+                  name="id[]"
+                  value="{$vo.id}"
+                  lay-skin="primary"
+                />
+              </td>
+              <td>{$vo.id}</td>
+              <td>{$vo.sort}</td>
+              <td>
+                {neq name="vo.level"
+                value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo '
+                ----';}{/php}{/neq} {$vo.title}
+              </td>
+              <td>
+                {if $vo.url}
+                <a href="{$vo.url}" target="_blank"> {$vo.route}</a>
+                {/if}
+              </td>
+              <td>{$vo.last?"是":"否"}</td>
+              <td>
+                <input type="checkbox" name="status"
+                lay-skin="switch"{$vo.status?' checked':''} infoid="{$vo.id}"
+                lay-filter="status" " lay-text="显示|关闭" value="1"
+                pid="$vo.pid">
+              </td>
+              <td>{$vo.modinfo.alias}</td>
+              <td>
+                <a
+                  href="{:url('edit',['id'=>$vo['id']])}"
+                  class="layui-btn layui-btn-normal layui-btn-sm"
+                  >编辑</a
+                >
+                <a
+                  data-href="{:url('delete',['id'=>$vo['id']])}"
+                  class="layui-btn layui-btn-danger layui-btn-sm tr-delete"
+                  data-id="{$vo.id}"
+                  >删除</a
+                >
+                {eq name="vo.last" value="0"}
+                <a
+                  href="{:url('add',['pid'=>$vo['id']])}"
+                  class="layui-btn layui-btn-sm"
+                  >加子栏目</a
+                >
+                {/eq}
+              </td>
+            </tr>
+            {/foreach}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  lay-skin="primary"
+                  lay-filter="chooseAll"
+                />
+              </td>
+              <td colspan="100">
+                <div style="display: flex">
+                  <div>
+                    <select name="pid">
+                      <option value="0">移动所选栏目</option>
+                      {volist name="category_list" id="v"}
+                      <option value="{$v.id}">
+                        {neq name="v.level"
+                        value="1"}|{php}for($i=1;$i<$v['level'];$i++){echo '
+                        ----';}{/php}{/neq}{$v.title}
+                      </option>
+                      {/volist}
+                    </select>
+                  </div>
+                  <div style="padding: 0 5px">
+                    <button
+                      class="layui-btn"
+                      type="button"
+                      lay-submit
+                      lay-filter="moveCategory"
+                    >
+                      移动
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+{/block} {block name="script"}
+<script>
+  form.on("switch(status)", function (data) {
+    var status = data.elem.checked ? "1" : 0;
+    $.ajax({
+      url: '{:url("toggle")}',
+      type: "POST",
+      dataType: "json",
+      data: { id: $(data.elem).attr("infoid"), status: status },
+    }).done(function (res) {
+      //console.log("success");
+    });
+  });
+  form.on("submit(moveCategory)", function (data) {
+    console.log(form.val("formCategory"));
+    var data = form.val("formCategory");
+    $.ajax({
+      url: '{:url("moveCategory")}',
+      type: "POST",
+      dataType: "json",
+      data: data,
+    }).done(function (res) {
+      if (res.code == 1) {
+        layer.msg(res.msg, function () {
+          location.reload();
+        });
+      }
+    });
+    return;
+  });
+</script>
+{/block}

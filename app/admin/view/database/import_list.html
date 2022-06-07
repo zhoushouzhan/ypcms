@@ -1,0 +1,66 @@
+{extend name="base" /}
+{block name="style"}
+<style>
+    .biglabel .layui-form-label{width: 120px;}
+</style>
+{/block}
+{block name="pageBody"}
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title sideHref">
+            <li><a href="{:url('index',['type'=>'export'])}">备份数据库</a></li>
+            <li class="layui-this"><a href="{:url('index',['type'=>'import'])}">还原数据库</a></li>
+            <li><a href="{:url('dosql')}">执行SQL</a></li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="" method="post" class="ajax-form">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th style="width: 150px;">备份文件</th>
+                    <th style="width: 50px;">文件数</th>
+                    <th>压缩格式</th>
+                    <th>数据大小</th>
+                    <th>创建时间</th>
+                    <th style="width: 160px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach name="datalist" item="vo"}
+                <tr>
+                    <td>{$vo.name|date="Ymd-His"}</td>
+                    <td>{$vo.part}</td>
+                    <td>{$vo.compress}</td>
+                    <td>{$vo.size|formatSize}</td>
+                    <td>{$vo.time|date="Y-m-d H:i:s"}</td>
+                    <td>
+                        <a ajaxhref="{:url('import',['time'=>$vo['name']])}" class="layui-btn layui-btn-normal layui-btn-sm import">还原</a>
+                        <a href="{:url('delete',['tables'=>$vo['name']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete">删除</a>
+                    </td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </div>
+{/block}
+{block name="script"}
+<script>
+$(document).ready(function() {
+	$("a.import").click(function(event) {
+		/* Act on the event */
+		var url=$(this).attr('ajaxhref');
+		var index = layer.load(1);
+		$.get(url, function(data) {
+			layer.close(index);  
+			layer.alert(data.msg);
+		});
+		return;
+	});
+});
+function upperCase(x){
+    var y=document.getElementById(x).value
+    document.getElementById(x).value=y.toUpperCase()
+}
+</script>
+{/block}

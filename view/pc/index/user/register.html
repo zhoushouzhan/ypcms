@@ -1,0 +1,45 @@
+{extend name="layout"}
+{block name="pagetitle"}用户注册{/block}
+{block name="main"}
+<div class="register">
+	<div class="layui-main">
+		<div class="login-ad"></div>
+		<div class="login-form">
+			<div class="layui-tab layui-tab-brief regtab">
+			  <ul class="layui-tab-title">
+			    <li class="layui-this">注册</li>
+			    <li><a href="{:url('index/login/index')}">登录</a></li>
+			  </ul>
+			  <div class="layui-tab-content">
+			    <div class="layui-tab-item layui-show">
+			        <form action="{:url('index/register/index')}" method="post" class="layui-form">
+			            <div class="reg">
+			                <div class="mobile">
+			                    <input type="text" maxlength="60" name="sender" id="sender" lay-verify="required" placeholder="请输入手机号或邮箱">
+			                </div>
+			                <div class="checkcode">
+			                    <input type="text" maxlength="6" name="regkey" lay-verify="number" placeholder="验证码">
+			                    <button type="button" class="layui-btn layui-bg-red getPhoneCode" data-url="{:url('api/getCode')}">免费获取验证码</button>
+			                </div>
+			                <div class="pass">
+			                    <input type="text" maxlength="16" name="password" onfocus="this.type='password'" placeholder="密码 （6-16位字符，区分大小写）">
+			                </div>
+			                <div class="pass">
+			                    <input type="text" maxlength="16" name="repassword" onfocus="this.type='password'" placeholder="确认密码">
+			                </div>
+			                <div class="yinsi">
+			                    <input type="checkbox" name="xieyi" title="同意" lay-skin="primary" lay-filter="rengke" lay-verify="otherReq">
+			                    《<a href="javascript:;">笨鸟先飞注册协议</a>》和《<a href="javascript:;">隐私政策</a>》
+			                </div>
+			                <div class="regbtn">
+			                    <button type="button" lay-submit lay-filter="register" class="layui-btn layui-bg-gray layui-btn-fluid layui-btn-radius layui-btn-disabled">注册</button>
+			                </div>
+			            </div>
+			        </form>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

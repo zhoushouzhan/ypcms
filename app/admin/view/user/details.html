@@ -1,0 +1,47 @@
+{extend name="base" /}
+{block name="pageBody"}
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class=""><a href="{:url('admin/user/index')}">会员管理</a></li>
+            <li class="layui-this">会员详情</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+				  <colgroup>
+				    <col width="120">
+				    <col>
+				  </colgroup>
+
+
+                	<tbody>
+	                	<tr>
+	                		<td>用户名</td>
+	                		<td>{$user.username}</td>
+	                	</tr>
+	                	<tr>
+	                		<td>手机</td>
+	                		<td>{$user.mobile}</td>
+	                	</tr>
+	                	<tr>
+	                		<td>邮箱</td>
+	                		<td>{$user.email}</td>
+	                	</tr>
+	                	<tr>
+	                		<td>注册时间</td>
+	                		<td>{$user.create_time}</td>
+	                	</tr>
+	                	<tr>
+	                		<td>最后登录时间</td>
+	                		<td>{$user.update_time}</td>
+	                	</tr>
+	                	<tr>
+	                		<td>登录次数</td>
+	                		<td>{$user.loginnum}</td>
+	                	</tr>
+                	</tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

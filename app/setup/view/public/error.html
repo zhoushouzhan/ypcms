@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>系统提示</title>
+	<link rel="stylesheet" href="__STATIC__/src/layui/css/layui.css" media="all">
+	<style>
+.site-idea{margin: 50px 0; font-size: 0; text-align: center; font-weight: 300;}
+.site-idea li{display: inline-block; vertical-align: top; *display: inline; *zoom:1; font-size: 14px; }
+.site-idea li{width: 298px; height: 176px; padding: 30px; line-height: 24px; margin-left: 30px; border: 1px solid #d2d2d2; text-align: left;}
+.site-idea li:first-child{margin-left: 0}
+.site-idea .layui-field-title{border-color: #d2d2d2}
+.site-idea .layui-field-title legend{margin: 0 20px 20px 0; padding: 0 20px;}
+.jump{margin-top: 20px;}
+	</style>
+}
+</head>
+<body bgcolor="#EEEEEE">
+	<div class="layui-main">
+		<ul class="site-idea">
+		    <li>
+		        <fieldset class="layui-elem-field layui-field-title">
+		            <legend align="center">系统提示</legend>
+		            <p style="line-height: 33px;"><i class="layui-icon layui-icon-face-cry" style="font-size: 32px"></i>  {$msg}</p>
+		            <p class="jump">
+		                <b id="wait">{$wait}</b> 秒后页面将自动跳转
+		            </p>
+		            <hr>
+		            <p>
+		                <a href="{$url}" id="href" class="layui-btn layui-bg-red">立即跳转</a>
+		            </p>
+		        </fieldset>
+		    </li>
+		</ul> 
+	</div>
+	<script type="text/javascript">
+	(function(){
+	var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+	var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {location.href=href; clearInterval(interval); }; }, 1000); window.stop=function (){ console.log(111); clearInterval(interval); } })();
+	</script>
+</body>
+</html>

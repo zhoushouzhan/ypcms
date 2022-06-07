@@ -1,0 +1,97 @@
+{extend name="base" /} {block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+    <li class=""><a href="{:url('index')}">管理员</a></li>
+    <li class=""><a href="{:url('add')}">添加管理员</a></li>
+    <li class="layui-this">编辑管理员</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+      <form
+        class="layui-form form-container"
+        action="{:url('update')}"
+        method="post"
+      >
+        <div class="layui-form-item">
+          <label class="layui-form-label">账号</label>
+          <div class="layui-input-block">
+            <input
+              type="text"
+              name="username"
+              value="{$admin.username}"
+              required
+              lay-verify="required"
+              placeholder="请输入用户名"
+              class="layui-input"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">密码</label>
+          <div class="layui-input-block">
+            <input
+              type="password"
+              name="password"
+              value=""
+              placeholder="（选填）如不修改则留空"
+              class="layui-input"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">重复密码</label>
+          <div class="layui-input-block">
+            <input
+              type="password"
+              name="confirm_password"
+              value=""
+              placeholder="（选填）如不修改则留空"
+              class="layui-input"
+              readonly="readonly"
+            />
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">状态</label>
+          <div class="layui-input-block">
+            <input type="radio" name="status" value="1" title="启用" {if
+            condition="$admin.status==1"} checked="checked"{/if}> <input
+            type="radio" name="status" value="0" title="禁用" {if
+            condition="$admin.status==0"} checked="checked"{/if}>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">所属权限组</label>
+          <div class="layui-input-block">
+            {foreach name="roles" item="vo"} <input type="checkbox"
+            name="roles_id[]" title="{$vo.title}" lay-skin="primary"
+            value="{$vo.id}">
+            {/foreach}
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <input type="hidden" name="id" value="{$admin.id}" />
+            <button class="layui-btn" lay-submit lay-filter="*">更新</button>
+            <button type="reset" class="layui-btn layui-btn-primary">
+              重置
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{/block} {block name="script"}
+<script>
+  setTimeout(function removeReadonly() {
+    $(
+      "input[name=username],input[name=password],input[name=confirm_password]"
+    ).removeAttr("readonly");
+  }, 1000);
+</script>
+{/block}

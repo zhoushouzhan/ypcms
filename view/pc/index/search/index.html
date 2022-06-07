@@ -1,0 +1,45 @@
+{extend name="layout"}
+{block name="pagetitle"}{$pagetitle}{/block}
+{block name="css"}
+<style>
+.listSearch{}
+.listSearch li{line-height: 28px;}
+.listSearch li span{padding: 0 15px;}
+</style>
+{/block}
+{block name="main"}
+<div class="ad layui-main mt10">
+	ad
+</div>
+<div class="path_info mt10 layui-main">
+	当前位置：
+	<span class="layui-breadcrumb">
+  	<a href="/">首页</a>
+  	<a href="javascript:void(0);">搜索</a>
+	</span>
+</div>
+<div class="article">
+	<div class="layui-main">
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+  	{//输出模型}
+{volist name="modList" id="vo"}
+    <li{$key?'':' class="layui-this"'}>{$vo.alias}（共{$vo.total}条）</li>
+{/volist}
+
+  </ul>
+  <div class="layui-tab-content">
+{volist name="modList" id="vo"}
+    <div class="layui-tab-item{$key?'':' layui-show'}">
+    	<ul class="listSearch">
+    	{volist name="dataList[$vo['name']]" id="v"}
+    		<li><span>[{$v.category.title}]</span><a href="{:url('index/content/index',['categoryId'=>$v.category_id,'id'=>$v.id])}">{$v.title}</a></li>
+    	{/volist}
+    	</ul>
+    </div>
+{/volist}
+  </div>
+</div>
+	</div>
+</div>
+{/block}

@@ -1,0 +1,89 @@
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2021-11-08 08:30:37
+ * @LastEditTime: 2022-05-29 11:45:16
+ * @FilePath: \ypcms\app\admin\view\files\index.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="base" /}
+{block name="pageBody"}
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">附件管理</li>
+            <li class=""><a href="{:url('add')}">上传附件</a></li>
+        </ul>
+        <div class="layui-tab-content">
+
+            <form class="layui-form layui-form-pane" action="{:url('index')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">关键词</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" lay-submit lay-filter="search">搜索</button>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-danger" href="{:url('index',['isuse'=>0])}">清理未使用中的附件</a>
+                </div>
+
+            </form>
+            <hr>
+
+            <form action="" method="post" class="ajax-form">
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-small ajax-action" data-action="{:url('delete')}">删除</button>
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-table">
+                        <thead>
+                        <tr>
+                            <th style="width: 15px;"><input type="checkbox" class="check-all"></th>
+                            <th style="width: 30px;">ID</th>
+                            <th>标题</th>
+                            <th>尺寸</th>
+                            <th>是否使用</th>
+                            <th>信息</th>
+                            <th>模型</th>
+                            <th>字段</th>
+                            <th>上传时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="files_list" item="vo"}
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{$vo.id}"></td>
+                            <td class="{$vo.isq==1?"red":"blue"}">{$vo.id}</td>
+                            <td>
+                                <a href="{$vo.filepath}" target="_blank">{$vo.name}</a>
+                            </td>
+                            <td>{$vo.fsize|formatSize}</td>
+                            <td>{$vo.ypcms_id?'<span class="layui-badge layui-bg-blue">使用中</span>':'<span class="layui-badge layui-bg-orange">空闲中</span>'}</td>
+                            <td>{$vo['ypcms_id']}</td>
+                            <td>{$vo['ypcms_type']}</td>
+                            <td>{$vo['tag']|default="无"}</td>
+                            <td>{$vo.create_time}</td>
+                            <td>
+                                <a href="{:url('delete',['ids'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-sm ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {$files_list->render()|raw}
+
+                    <fieldset class="layui-elem-field layui-field-title">
+                      <legend>辅助说明</legend>
+                      <div class="layui-field-box">
+                        1、第一列ID颜色意义：<span class="red">红色</span>是后台上传，<span class="blue">蓝色</span>是前台上传<br>
+                        2、点击标题可以预览
+                      </div>
+                    </fieldset>
+
+                </div>
+            </form>
+        </div>
+    </div>
+{/block}

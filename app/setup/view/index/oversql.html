@@ -1,0 +1,23 @@
+{extend name="base" /}
+{block name="content"}
+<div class="huanjing">
+<div class="oversql">
+  <div class="icon">
+    <span><i class="layui-icon layui-icon-ok-circle"></i></span> 恭喜，安装完毕
+  </div>
+  <div class="tips">
+    YPCMS的发展离不开您的支持
+  </div>
+  <div class="info">
+    后台账号：{$adminuser}<br>
+    后台密码：{$adminpass} <br>
+    <hr>
+    后台必须用二级域名访问，默认绑定admin；
+    如admin.abc.com
+  </div>
+</div>
+</div>
+<div class="nextBtn">
+<a href="/index.html" class="layui-btn">查看前台</a>
+</div>
+{/block}
