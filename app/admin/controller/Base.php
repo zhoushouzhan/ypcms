@@ -145,9 +145,9 @@ abstract class Base
 			'admin/Index/welcome',
 			'admin/Tongji/index',
 		];
-		if (!$this->site = Session::get('system')) {
+		if (!$this->site = Cache::get('system')) {
 			$this->site = Db::name('system')->where('id', '1')->find();
-			Session::set('system', $this->site);
+			Cache::set('system', $this->site);
 		}
 
 		View::assign('site', $this->site);
