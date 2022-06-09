@@ -1,20 +1,28 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ 栏目显示程序代码 ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 08:31:12
+ * @FilePath: \ypcms\app\index\controller\Category.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
+declare(strict_types=1);
+
 namespace app\index\controller;
+
 use app\common\model\Category as CategoryMode;
 use think\facade\View;
 
-class Category extends Base {
-	protected function initialize() {
+class Category extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->categoryId = $this->request->param('categoryId/d');
+
 		//栏目信息
 		$this->category = CategoryMode::find($this->categoryId);
 
@@ -25,7 +33,9 @@ class Category extends Base {
 		View::assign('pagetitle', $this->category->name);
 	}
 
-	public function index($keywords = "", $page = 1, $limit = 20) {
+	public function index($keywords = "", $page = 1, $limit = 20)
+	{
+
 		$map = [];
 		//查询
 		$keyword = trim($keywords);
@@ -34,7 +44,7 @@ class Category extends Base {
 			$map[] = ['title', 'like', "%{$keywords}%"];
 		}
 		//子栏目判断
-		if (!$this->category->islast[0]) {
+		if ($this->category->last == 0) {
 			$sonids = CategoryMode::where('pid', $this->categoryId)->column('id');
 			$map[] = ['category_id', 'in', $sonids];
 			$tempname = 'index';
@@ -48,6 +58,5 @@ class Category extends Base {
 		//模板
 		$template = $this->category->modinfo->name . '/' . $tempname;
 		return View($template);
-
 	}
 }

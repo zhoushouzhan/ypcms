@@ -1,13 +1,9 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use think\facade\Cache;
 use think\facade\Config;
 use think\facade\Db;
@@ -17,8 +13,10 @@ use util\Database as DatabaseModel;
 /**
  * 数据库管理
  */
-class Database extends Base {
-	protected function initialize() {
+class Database extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->backupPath = realpath(Config::get('Database.backup_folder'));
 		if (!is_dir(Config::get('Database.backup_folder'))) {
@@ -32,14 +30,16 @@ class Database extends Base {
 		);
 	}
 	//数据表列表
-	public function index($type = 'export') {
+	public function index($type = 'export')
+	{
 		$tableList = Db::query("SHOW TABLE STATUS");
 		$tableList = array_map('array_change_key_case', $tableList);
 		View::assign('tableList', $tableList);
 		return view();
 	}
 	//备份数据表
-	public function export($tables = null, $start = 0) {
+	public function export($tables = null, $start = 0)
+	{
 		if ($this->request->isPost()) {
 			// 检查进程
 			$lock = $this->backupPath . DIRECTORY_SEPARATOR . "backup.lock";
@@ -72,11 +72,11 @@ class Database extends Base {
 			} else {
 				$this->error('初始化失败，备份文件创建失败！');
 			}
-
 		}
 	}
 	//备份数据列表
-	public function importList() {
+	public function importList()
+	{
 		$flag = \FilesystemIterator::KEY_AS_FILENAME;
 		$glob = new \FilesystemIterator($this->backupPath, $flag);
 		$data_list = [];
@@ -109,7 +109,8 @@ class Database extends Base {
 		return view();
 	}
 	//还原数据表
-	public function import($time = 0) {
+	public function import($time = 0)
+	{
 		if ($time === 0) {
 			$this->error('参数错误！');
 		}
@@ -153,7 +154,8 @@ class Database extends Base {
 		}
 	}
 	//数据列管理
-	public function column($tables) {
+	public function column($tables)
+	{
 		$db = Config::get('database.connections.mysql.database');
 		$colList = Db::query("select * from information_schema.columns where table_schema='$db' and table_name='$tables'");
 		$colList = array_map('array_change_key_case', $colList);
@@ -161,7 +163,8 @@ class Database extends Base {
 		return view();
 	}
 	//优化数据表
-	public function optimize($tables = null) {
+	public function optimize($tables = null)
+	{
 		if ($tables) {
 			if (is_array($tables)) {
 				$tables = implode('`,`', $tables);
@@ -185,7 +188,8 @@ class Database extends Base {
 		}
 	}
 	//修复数据表
-	public function repair($tables = null) {
+	public function repair($tables = null)
+	{
 		if ($tables) {
 			if (is_array($tables)) {
 				$tables = implode('`,`', $tables);
@@ -209,7 +213,8 @@ class Database extends Base {
 		}
 	}
 	//执行SQ	L
-	public function dosql() {
+	public function dosql()
+	{
 		if ($this->request->isPost()) {
 			$query = $this->request->param('query');
 			if (!empty($query)) {
@@ -222,10 +227,10 @@ class Database extends Base {
 		} else {
 			return view();
 		}
-
 	}
 	//删除备份文件
-	public function delete(int $tables = 0) {
+	public function delete(int $tables = 0)
+	{
 		if ($tables == 0) {
 			$this->error('参数错误！');
 		}

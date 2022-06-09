@@ -39,7 +39,7 @@ class Category extends Base
 	{
 		$data['pid'] = $pid;
 		$data['map'] = ['tb' => [['mt', '=', 2]]];
-		$form = app('form', ['9', $data]); //表单对象
+		$form = app('form', ['7', $data]); //表单对象
 		View::assign('form', $form->getForm());
 
 		return view();

@@ -1,0 +1,108 @@
+{extend name="base" /} {block name="pageBody"}
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+    <li class="layui-this">{$mod.alias}列表</li>
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-tab-item layui-show">
+      {if $searchCol}
+      <form action="{:url('index')}" action="get" class="layui-form">
+        <div class="demoTable">
+          关键词：
+          <div class="layui-inline">
+            <input class="layui-input" name="keyboard" id="keyboard" />
+          </div>
+          <div class="layui-inline">
+            <select name="colName" id="colName">
+              {volist name="searchCol" id="v"}
+              <option value="{$v.name}">{$v.comment}</option>
+              {/volist}
+              <option value="0">搜索全部</option>
+            </select>
+          </div>
+          <button class="layui-btn">搜索</button>
+        </div>
+      </form>
+      {/if}
+      <form action="" class="layui-form">
+        <table class="layui-table">
+          <colgroup>
+            <col width="35" />
+            <col width="100" />
+            {volist name="listv" id="vo"}
+            <col />
+            {/volist}
+            <col width="140" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>选择</th>
+              <th>ID</th>
+              {volist name="listv" id="vo"}
+              <th>{$vo.comment}</th>
+              {/volist}
+              <th><div align="center">操作</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            {foreach name="dataList" item="vo"}
+            <tr>
+              <td class="selectId">
+                <input
+                  type="checkbox"
+                  name="id[]"
+                  value="{$vo.id}"
+                  lay-skin="primary"
+                />
+              </td>
+              <td>{$vo.id}</td>
+              {volist name="listv" id="v"}
+              <td>{$vo[$v.name]}</td>
+              {/volist}
+              <td>
+                <div align="center">
+                  <a
+                    href="{:url('edit',['id'=>$vo['id']])}"
+                    class="layui-btn layui-btn-normal layui-btn-xs"
+                    title="编辑"
+                    ><i class="layui-icon layui-icon-edit"></i
+                  ></a>
+                  <a
+                    href="{:url('delete',['id'=>$vo['id']])}"
+                    class="layui-btn layui-btn-danger layui-btn-xs ajax-delete"
+                    title="移入回收站"
+                    ><i class="layui-icon layui-icon-delete"></i
+                  ></a>
+                </div>
+              </td>
+            </tr>
+            {/foreach}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  lay-skin="primary"
+                  lay-filter="chooseAll"
+                />
+              </td>
+              <td colspan="{$colspan}">
+                <button
+                  type="submit"
+                  class="layui-btn layui-btn-danger layui-btn-sm"
+                  lay-submit
+                  lay-filter="deleteAll"
+                >
+                  批量删除
+                </button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </form>
+      总数：{$count}{$dataList->render()|raw}
+    </div>
+  </div>
+</div>
+{/block}

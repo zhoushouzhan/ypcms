@@ -1,45 +1,46 @@
-{extend name="base" /}
-{block name="style"}
-    <style>
-        .htit{font-size: 26px;text-align: center;}
-        .tbox{display: flex;flex-direction: column; margin-top: 30px;flex-wrap: wrap;}
-        .tbox .item{flex:1;}
-        .radarBox{display: flex;flex-wrap: wrap;justify-content: space-between;}
-        .radarBox .item{width: 33.333%;}
-    </style>
-{/block}
-{block name="pageBody"}
-    <!--tab标签-->
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:22:33
+ * @FilePath: \ypcms\app\admin\view\index\welcome.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="base" /} {block name="style"}
+<style>
+  .htit {
+    font-size: 26px;
+    text-align: center;
+  }
+  .tbox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .tbox .item {
+    flex: 1;
+  }
+  .radarBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .radarBox .item {
+    width: 33.333%;
+  }
+</style>
+{/block} {block name="pageBody"}
+<!--tab标签-->
 <div class="layui-tab layui-tab-brief">
-                <div class="layui-main">
-                    
-                    您好，{$admin.truename}，您的系统角色为
-                    {volist name="admin.roles" id="vo"}
-                    <span class="layui-badge layui-bg-green">{$vo.title}</span>
-                    {/volist}
-                </div>
+  <div class="layui-main">
+    您好，{$admin.username}，您的系统角色为 {volist name="admin.roles" id="vo"}
+    <span class="layui-badge layui-bg-green">{$vo.title}</span>
+    {/volist}
+  </div>
+</div>
 
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/block}
-{block name="js"}
+{/block} {block name="js"}
 <script src="__STATIC__/src/echarts/echarts.js"></script>
 {/block}

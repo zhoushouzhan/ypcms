@@ -1,7 +1,7 @@
 <!--
  * @Author: 一品网络技术有限公司
  * @Date: 2021-11-08 08:30:37
- * @LastEditTime: 2022-06-07 11:41:55
+ * @LastEditTime: 2022-06-08 09:45:50
  * @FilePath: \ypcms\app\admin\view\layout.html
  * @Description:
  * 联系QQ:58055648
@@ -23,18 +23,15 @@
       href="__STATIC__/src/layui/css/layui.css"
       media="all"
     />
-    <link
-      rel="stylesheet"
-      href="__STATIC__/src/font-awesome/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="__STATIC__/admin/css/admin.css?v={:time()}" />
+    <link rel="stylesheet" href="__STATIC__/fonts/remixicon.css" />
+    <link rel="stylesheet" href="/admin/css/admin.css?v={:time()}" />
     {block name="style"}{/block}
   </head>
   <body oncontextmenu="self.event.returnValue=false" onselect="return false">
     <div class="layui-layout layui-layout-admin">
       <!--头部-->
       <div class="layui-header">
-        <a href=""
+        <a href="{:url('admin/index/index')}"
           ><img
             class="logo"
             src="__STATIC__/admin/images/admin_logo.png"
@@ -42,23 +39,18 @@
         /></a>
         <ul class="layui-nav otherItem">
           <li class="layui-nav-item">
-            <a href="{:url('admin/index/index')}" class="toPageBody defaultUrl"
-              ><i class="fa fa-laptop"></i> 后台首页</a
-            >
-          </li>
-          <li class="layui-nav-item">
             <a href="{$site.siteurl}" target="_blank"
-              ><i class="fa fa-home"></i> 前台首页</a
+              ><i class="ri-home-line"></i> 前台</a
             >
           </li>
           <li class="layui-nav-item">
             <a href="" data-url="{:url('admin/api/clear')}" id="clear-cache"
-              ><i class="fa fa-history"></i> 清除缓存</a
+              ><i class="ri-refresh-line"></i> 清缓存</a
             >
           </li>
           <li class="layui-nav-item">
             <a href="javascript:;"
-              ><i class="fa fa-user"></i> {$admin.username}</a
+              ><i class="ri-user-line"></i> {$admin.username}</a
             >
             <dl class="layui-nav-child">
               <dd>

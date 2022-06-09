@@ -1,23 +1,24 @@
-{extend name="base" /}
-{block name="pageBody"}
-{$form|raw}
-{/block}
-{block name="script"}
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-08 11:52:06
+ * @FilePath: \ypcms\app\admin\view\category\add.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="base" /} {block name="pageBody"} {$form|raw} {/block} {block
+name="script"}
 <script>
-    //栏目图标选择
-    $("#selectIcon").click(function(event) {
-        /* Act on the event */
-        var index = layer.open({
-            title: '选择图标',
-            type: 2,
-            content: ['/icon.php'],
-            area: ['100%', '100%']
-        })
+  //栏目图标选择
+  $("#selectIcon").click(function (event) {
+    /* Act on the event */
+    var index = layer.open({
+      title: "选择图标",
+      type: 2,
+      content: ["/icon.php"],
+      area: ["100%", "100%"],
     });
-    $(function() {
-        CKEDITOR.replace('content',{
-            customConfig : '__STATIC__/src/ckeditor/ypconfig.js?v={:time()}'
-        });
-    });
+  });
 </script>
 {/block}

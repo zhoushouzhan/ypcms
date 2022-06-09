@@ -1,65 +1,82 @@
-{extend name="base" /}
-{block name="pageBody"}
-    <!--tab标签-->
-    <div class="layui-tab layui-tab-brief">
-        <ul class="layui-tab-title">
-            <li class="layui-this">模型管理</li>
-            <li><a href="{:url('add')}">添加模型</a></li>
-        </ul>
-        <div class="layui-tab-content">
-            <form action="" method="post" class="ajax-form layui-form">
-                <div class="layui-tab-item layui-show">
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="50">
-                            <col>
-                            <col width="90">
-                            <col>
-                            <col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th><center>ID</center></th>
-                            <th>表名</th>
-                            <th><div align="center">属性</div></th>
-                            <th>注释</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {volist name="dataList" id="vo"}
-                        <tr>
-                            <td align="center" title="{$vo.id}">{$key+1}</td>
-                            <td>{$vo.name}</td>
-                            <td align="center">{$modclass[$vo.mt]['name']}</td>
-                            <td>{$vo.alias}</td>
-                            <td>
-                                <a href="{:url('edit',['id'=>$vo.id])}" class="layui-btn layui-btn-normal layui-btn-xs"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-                                <a href="{:url('mkform',['id'=>$vo.id])}" class="layui-btn layui-bg-cyan layui-btn-xs"><i class="layui-icon layui-icon-set"></i>配置</a>
-                                
-                                {notin name="vo.name" value="$sysmod"}
-                                <a href="{:url('delete',['id'=>$vo.id])}" class="layui-btn layui-btn-danger layui-btn-xs ajax-delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
-                                {/notin}
-                            </td>
-                        </tr>
-                        {/volist}
-                        </tbody>
-                    </table>
-                </div>
-            </form>
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-08 08:36:28
+ * @FilePath: \ypcms\app\admin\view\ypmod\index.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="base" /} {block name="pageBody"}
+<!--tab标签-->
+<div class="layui-tab layui-tab-brief">
+  <ul class="layui-tab-title">
+    <li class="layui-this">模型管理</li>
+    <li><a href="{:url('add')}">添加模型</a></li>
+  </ul>
+  <div class="layui-tab-content">
+    <form action="" method="post" class="ajax-form layui-form">
+      <div class="layui-tab-item layui-show">
+        <table class="layui-table">
+          <colgroup>
+            <col width="50" />
+            <col />
+            <col width="90" />
+            <col />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th><center>ID</center></th>
+              <th>表名</th>
+              <th><div align="center">属性</div></th>
+              <th>注释</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {volist name="dataList" id="vo"}
+            <tr>
+              <td align="center">{$vo.id}</td>
+              <td>{$vo.name}</td>
+              <td align="center">{$modclass[$vo.mt]['name']}</td>
+              <td>{$vo.alias}</td>
+              <td>
+                <a
+                  href="{:url('edit',['id'=>$vo.id])}"
+                  class="layui-btn layui-btn-normal layui-btn-xs"
+                  ><i class="layui-icon layui-icon-edit"></i>编辑</a
+                >
+                <a
+                  href="{:url('mkform',['id'=>$vo.id])}"
+                  class="layui-btn layui-bg-cyan layui-btn-xs"
+                  ><i class="layui-icon layui-icon-set"></i>配置</a
+                >
 
+                {notin name="vo.name" value="$sysmod"}
+                <a
+                  href="{:url('delete',['id'=>$vo.id])}"
+                  class="layui-btn layui-btn-danger layui-btn-xs ajax-delete"
+                  ><i class="layui-icon layui-icon-delete"></i>删除</a
+                >
+                {/notin}
+              </td>
+            </tr>
+            {/volist}
+          </tbody>
+        </table>
+      </div>
+    </form>
 
-<fieldset class="layui-elem-field">
-  <legend>模型相关说明</legend>
-  <div class="layui-field-box">
-   <p>模型总数：{$dataList->count()}个</p>
-   <p>A类模型：仅表单，无列表</p>
-   <p>B类模型：表单，列表，后台支持，前台支持</p>
-   <p>C类模型：表单，列表，后台支持</p>
+    <fieldset class="layui-elem-field">
+      <legend>模型相关说明</legend>
+      <div class="layui-field-box">
+        <p>模型总数：{$dataList->count()}个</p>
+        <p>A类模型：仅表单，无列表</p>
+        <p>B类模型：表单，列表，后台支持，前台支持</p>
+        <p>C类模型：表单，列表，后台支持</p>
+      </div>
+    </fieldset>
   </div>
-</fieldset>
-
-
-        </div>
-    </div>
+</div>
 {/block}

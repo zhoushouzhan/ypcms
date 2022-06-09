@@ -1,23 +1,22 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use app\common\model\Files as filesModel;
 use think\facade\View;
 
-class Files extends Base {
-	protected function initialize() {
+class Files extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->table = new filesModel();
 	}
 
-	public function index($cid = 0, $keyword = '', $page = 1, $isuse = 1) {
+	public function index($cid = 0, $keyword = '', $page = 1, $isuse = 1)
+	{
 		$map = [];
 		if (!empty($keyword)) {
 			$map[] = ['name', 'like', "%{$keyword}%"];
@@ -28,7 +27,8 @@ class Files extends Base {
 		$files_list = $this->table->where($map)->order(['id' => 'DESC'])->paginate(24, false, ['page' => $page]);
 		return view('index', ['files_list' => $files_list, 'keyword' => $keyword]);
 	}
-	public function add() {
+	public function add()
+	{
 		$allowType = $this->site['filetype'];
 		$arr = explode(",", $allowType);
 		foreach ($arr as $key => $value) {
@@ -40,12 +40,14 @@ class Files extends Base {
 		View::assign('allowSize', $this->site['uploadsize'] * 1024);
 		return view();
 	}
-	public function details($id) {
+	public function details($id)
+	{
 		View::assign('r', $this->table::find($id));
 		return view();
 	}
 	//获取文件列表
-	public function getjson($ftype = 0, $page = 1, $keyword = '') {
+	public function getjson($ftype = 0, $page = 1, $keyword = '')
+	{
 		$map = [];
 		if ($ftype) {
 			$map[] = ['ftype', 'like', "$ftype%"];
@@ -59,15 +61,18 @@ class Files extends Base {
 
 		return $files_list;
 	}
-	public function del($id, $bind = 0) {
+	public function del($id, $bind = 0)
+	{
 		if (!$id) {
 			return;
 		}
 		if ($bind == 1) {
-			$r = $this->table->save([
-				'ypcms_id' => '',
-				'ypcms_type' => '',
-			], ['id' => $id]
+			$r = $this->table->save(
+				[
+					'ypcms_id' => '',
+					'ypcms_type' => '',
+				],
+				['id' => $id]
 			);
 			$msg = "取消成功";
 		} else {
@@ -81,7 +86,8 @@ class Files extends Base {
 		}
 	}
 
-	public function delete($ids) {
+	public function delete($ids)
+	{
 		if (!$ids) {
 			return 0;
 		}

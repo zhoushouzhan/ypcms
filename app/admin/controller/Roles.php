@@ -1,6 +1,18 @@
 <?php
-declare (strict_types = 1);
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:16:07
+ * @FilePath: \ypcms\app\admin\controller\Roles.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use app\common\model\Roles as rolesModel;
 use app\common\model\Rule;
 use think\facade\View;
@@ -9,24 +21,28 @@ use think\facade\View;
  * 后台角色控制器
  * @package app\admin\controller
  */
-class Roles extends Base {
+class Roles extends Base
+{
 	/**
 	 * 角色
 	 */
-	public function index() {
+	public function index()
+	{
 		View::assign('dataList', rolesModel::order('sort', 'desc')->select());
 		return view();
 	}
 	/**
 	 * 增加角色
 	 */
-	public function add() {
+	public function add()
+	{
 		return view();
 	}
 	/**
 	 * 保存角色
 	 */
-	public function save() {
+	public function save()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			if (rolesModel::create($data) !== false) {
@@ -39,7 +55,8 @@ class Roles extends Base {
 	/**
 	 * 编辑角色
 	 */
-	public function edit($id) {
+	public function edit($id)
+	{
 		View::assign([
 			'auth_group' => rolesModel::find($id),
 			'roles' => rolesModel::where('id', 'notin', [1])->select(),
@@ -49,7 +66,8 @@ class Roles extends Base {
 	/**
 	 * 更新角色
 	 */
-	public function update() {
+	public function update()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			$id = $data['id'];
@@ -67,7 +85,8 @@ class Roles extends Base {
 	/**
 	 * 角色授权
 	 */
-	public function auth($id) {
+	public function auth($id)
+	{
 		$dataList = Rule::field('id,pid,title,sid')->select()->toArray();
 		$checkedData = rolesModel::find($id);
 		$checkedData = $checkedData->rules;
@@ -91,7 +110,8 @@ class Roles extends Base {
 	/**
 	 * 更新角色权限
 	 */
-	public function updateAuth() {
+	public function updateAuth()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 
@@ -105,7 +125,8 @@ class Roles extends Base {
 	/**
 	 * 删除角色
 	 */
-	public function delete($id) {
+	public function delete($id)
+	{
 		if ($id == 1) {
 			$this->error('超级管理组不可删除');
 		}
@@ -118,5 +139,4 @@ class Roles extends Base {
 			$this->error('删除失败');
 		}
 	}
-
 }

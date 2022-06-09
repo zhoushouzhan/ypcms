@@ -1,17 +1,22 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:21:06
+ * @FilePath: \ypcms\app\admin\validate\CheckMenu.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
+declare(strict_types=1);
+
 namespace app\admin\validate;
 
 use think\Validate;
 
-class CheckMenu extends Validate {
+class CheckMenu extends Validate
+{
 	protected $rule = [
 		'pid' => 'require',
 		'title' => 'require',

@@ -1,22 +1,28 @@
 <?php
 /*
  * @Author: 一品网络技术有限公司
- * @Date: 2021-11-08 08:30:36
- * @LastEditTime: 2022-05-29 12:00:43
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:16:46
  * @FilePath: \ypcms\app\admin\controller\System.php
  * @Description:
  * 联系QQ:58055648
  * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
  */
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use app\common\model\System as systemModel;
 use app\common\model\Tb;
 use think\facade\Db;
 use think\facade\Validate;
 use think\facade\View;
-class system extends Base {
-	protected function initialize() {
+
+class system extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->tb = Tb::where('name', 'system')->find();
 		$this->cols = $this->tb->cols;
@@ -27,16 +33,18 @@ class system extends Base {
 		View::assign('mod', $this->tb);
 	}
 
-	public function setsystem() {
+	public function setsystem()
+	{
 		$data = $this->table->find(1);
 		$form = app('form', ['2', $data]); //表单对象
 		View::assign('form', $form->getForm());
 		return view('form');
 	}
 
-	public function save() {
+	public function save()
+	{
 		if ($this->request->isPost()) {
-			$data=$this->request->param();
+			$data = $this->request->param();
 			$data = $this->tb->saveData($data); //组合字段内容
 			//验证规则
 			$colrule = array_column(Db::name('colrule')->select()->toArray(), null, 'id');
@@ -73,7 +81,8 @@ class system extends Base {
 		}
 	}
 
-	public function update() {
+	public function update()
+	{
 		$data = $this->tb->saveData($this->request->param()); //组合字段内容
 		//验证规则
 		$colrule = array_column(Db::name('colrule')->select()->toArray(), null, 'id');

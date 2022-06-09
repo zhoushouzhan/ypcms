@@ -1,25 +1,32 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:15:25
+ * @FilePath: \ypcms\app\admin\controller\ChangePassword.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
 
 use think\facade\Config;
 use think\facade\Db;
 use think\facade\Session;
 
-class ChangePassword extends Base {
+class ChangePassword extends Base
+{
 
-	public function index() {
+	public function index()
+	{
 		return view('system/change_password');
 	}
 
-	public function updatePassword() {
+	public function updatePassword()
+	{
 		if ($this->request->isPost()) {
 			$admin_id = Session::get('admin_id');
 			$data = $this->request->param();

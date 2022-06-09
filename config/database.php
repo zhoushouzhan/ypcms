@@ -58,7 +58,7 @@ return [
 
 		// 更多的数据库配置信息
 	],
-	'salt' => 'fknwCGHKN24(]<`;',
+	'salt' => 'ghjtDMQW58@#*(<+',
 	//备份文件夹
 	'backup_folder' => 'databasebackup',
 	//备份文件大小单位M
@@ -67,5 +67,4 @@ return [
 	'compress' => 1,
 	//压缩级别123
 	'level' => 3,
-
 ];

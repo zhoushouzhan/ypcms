@@ -1,36 +1,37 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use app\admin\validate\CheckMenu;
 use app\common\model\Rule;
 use think\exception\ValidateException;
 use think\facade\View;
 
-class Menu extends Base {
-	protected function initialize() {
+class Menu extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$menuList = Rule::order(['sort' => 'asc', 'id' => 'ASC'])->select();
 		$dataList = array2level($menuList);
 		View::assign('dataList', $dataList);
 	}
 
-	public function index() {
+	public function index()
+	{
 		return view();
 	}
 
-	public function add($pid = '') {
+	public function add($pid = '')
+	{
 		View::assign('pid', $pid);
 		return view();
 	}
 
-	public function save() {
+	public function save()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->post();
 			$data['type'] = 1;
@@ -47,12 +48,14 @@ class Menu extends Base {
 		}
 	}
 
-	public function edit($id) {
+	public function edit($id)
+	{
 		$admin_menu = Rule::find($id);
 		return view('edit', ['admin_menu' => $admin_menu]);
 	}
 
-	public function update($id) {
+	public function update($id)
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->post();
 			$data['type'] = 1;
@@ -70,7 +73,8 @@ class Menu extends Base {
 		}
 	}
 
-	public function delete($id) {
+	public function delete($id)
+	{
 		$sub_menu = Rule::find($id);
 		$sids = $sub_menu->sid . $id;
 		$arr = explode(',', $sids);

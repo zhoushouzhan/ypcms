@@ -1,25 +1,23 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
 //无限分类管理
 namespace app\admin\controller;
+
 use app\common\model\Mclass as MclassModel;
 use think\facade\View;
 
-class Mclass extends Base {
-	protected function initialize() {
+class Mclass extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->table = new MclassModel();
 		$this->data = $this->table::select();
 	}
-//列表
-	public function index($pid = 0, $limit = 20, $page = 1) {
+	//列表
+	public function index($pid = 0, $limit = 20, $page = 1)
+	{
 		$map[] = ['pid', '=', $pid];
 		$pathArr = [];
 		if ($pid) {
@@ -39,8 +37,9 @@ class Mclass extends Base {
 		View::assign('pid', $pid);
 		return view();
 	}
-//添加
-	public function add($pid = 0) {
+	//添加
+	public function add($pid = 0)
+	{
 		$pathArr = [];
 		if ($pid) {
 			$r = $this->table->where('id', $pid)->find();
@@ -52,8 +51,9 @@ class Mclass extends Base {
 		View::assign('pid', $pid);
 		return view('add');
 	}
-//保存
-	public function save() {
+	//保存
+	public function save()
+	{
 		if (input("?post.titles")) {
 			$titles = input('post.titles');
 			$pid = input('post.pid/d');
@@ -76,8 +76,9 @@ class Mclass extends Base {
 			$this->error('请输入正确的分类');
 		}
 	}
-//更新
-	public function update($id) {
+	//更新
+	public function update($id)
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			$update = [];
@@ -93,8 +94,9 @@ class Mclass extends Base {
 			}
 		}
 	}
-//删除时同时删除子类
-	public function delete($ids) {
+	//删除时同时删除子类
+	public function delete($ids)
+	{
 		$data = $this->table->select();
 		if (is_array($ids)) {
 			$ids = array_map('intval', $ids); //数值转为整型
@@ -108,8 +110,9 @@ class Mclass extends Base {
 			$this->error('删除失败');
 		}
 	}
-//模型中选择器
-	public function sclass($pid = 0, $limit = 20, $page = 1) {
+	//模型中选择器
+	public function sclass($pid = 0, $limit = 20, $page = 1)
+	{
 		$map[] = ['pid', '=', $pid];
 		$pathArr = $this->table->field('id,pid,title')->select();
 		$dataList = $this->table->where($map)->order('sort', 'asc')->paginate($limit, false, ['page' => $page]);
@@ -118,8 +121,9 @@ class Mclass extends Base {
 		View::assign('pid', $pid);
 		return view();
 	}
-//分类输出
-	public function getSon($pid) {
+	//分类输出
+	public function getSon($pid)
+	{
 		$arr['code'] = 0;
 		$arr['data'] = [];
 		foreach ($this->data as $key => $value) {
@@ -132,8 +136,9 @@ class Mclass extends Base {
 		}
 		return $arr;
 	}
-//分类关系输出
-	public function getSelected($id, $pid) {
+	//分类关系输出
+	public function getSelected($id, $pid)
+	{
 		$arr = [];
 		$pathArr = [];
 		if (!empty($id)) {
@@ -165,8 +170,15 @@ class Mclass extends Base {
 		} else {
 			//新增
 			foreach ($this->data as $key => $value) {
-				if ($value['pid'] ==
-					$pid) {$arr[] = $value;}}$selectNode[] = $arr;}
+				if (
+					$value['pid'] ==
+					$pid
+				) {
+					$arr[] = $value;
+				}
+			}
+			$selectNode[] = $arr;
+		}
 
 		return $selectNode;
 	}

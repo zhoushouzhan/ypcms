@@ -13,7 +13,7 @@ use think\Model;
 class Category extends Model
 {
 	protected $autoWriteTimestamp = true;
-	protected $modid = 9;
+	protected $modid = 7;
 
 
 	//数据查询后事件

@@ -1,10 +1,17 @@
 <?php
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:29:13
+ * @FilePath: \ypcms\app\provider.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
 
 use app\ExceptionHandle;
 use app\Request;
 use util\Auth;
-use util\Qrcode;
-use util\SendMsg;
 use yp\File;
 use yp\Form;
 use yp\Model;
@@ -16,6 +23,5 @@ return [
 	'form' => Form::class,
 	'model' => Model::class,
 	'file' => File::class,
-	'qrcode' => Qrcode::class,
-	'sendMsg' => SendMsg::class,
+
 ];

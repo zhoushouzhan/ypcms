@@ -1,13 +1,9 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\setup\controller;
+
 use think\App;
 use think\exception\HttpResponseException;
 use think\exception\ValidateException;
@@ -18,7 +14,8 @@ use think\Validate;
 /**
  * 控制器基础类
  */
-abstract class Base {
+abstract class Base
+{
 	/**
 	 * Request实例
 	 * @var \think\Request
@@ -48,15 +45,16 @@ abstract class Base {
 	 * @access public
 	 * @param  App  $app  应用对象
 	 */
-	public function __construct(App $app) {
+	public function __construct(App $app)
+	{
 		$this->app = $app;
 		$this->request = $this->app->request;
 		// 控制器初始化
 		$this->initialize();
 	}
 	// 初始化
-	protected function initialize() {
-
+	protected function initialize()
+	{
 	}
 	/**
 	 * 验证数据
@@ -68,7 +66,8 @@ abstract class Base {
 	 * @return array|string|true
 	 * @throws ValidateException
 	 */
-	protected function validate(array $data, $validate, array $message = [], bool $batch = false) {
+	protected function validate(array $data, $validate, array $message = [], bool $batch = false)
+	{
 		if (is_array($validate)) {
 			$v = new Validate();
 			$v->rule($validate);
@@ -104,7 +103,8 @@ abstract class Base {
 	 * @param  array     $header 发送的Header信息
 	 * @return void
 	 */
-	protected function success($msg = '', $url = null, $data = '', $wait = 3, array $header = []) {
+	protected function success($msg = '', $url = null, $data = '', $wait = 3, array $header = [])
+	{
 		if (is_null($url) && isset($_SERVER["HTTP_REFERER"])) {
 			$url = $_SERVER["HTTP_REFERER"];
 		}
@@ -134,7 +134,8 @@ abstract class Base {
 	 * @param  array     $header 发送的Header信息
 	 * @return void
 	 */
-	protected function error($msg = '', $url = null, $data = '', $wait = 3, array $header = []) {
+	protected function error($msg = '', $url = null, $data = '', $wait = 3, array $header = [])
+	{
 		if (is_null($url) && isset($_SERVER["HTTP_REFERER"])) {
 			$url = $_SERVER["HTTP_REFERER"];
 		}

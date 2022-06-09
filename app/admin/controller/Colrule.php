@@ -1,12 +1,7 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
 
 use app\admin\validate\CheckRule;
@@ -15,21 +10,25 @@ use think\facade\Db;
 use think\facade\View;
 use think\Validate;
 
-class Colrule extends Base {
+class Colrule extends Base
+{
 	protected $tableList;
 	protected $dbpre;
 	protected $dbname;
-	protected function initialize() {
+	protected function initialize()
+	{
 		parent::initialize();
 	}
 	//规则管理
-	public function index() {
+	public function index()
+	{
 		$dataList = DB::name('colrule')->select();
 		View::assign('dataList', $dataList);
 		return view();
 	}
 	//保存
-	public function save() {
+	public function save()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			try {
@@ -52,7 +51,8 @@ class Colrule extends Base {
 		}
 	}
 	//删除
-	public function delete($id = 0) {
+	public function delete($id = 0)
+	{
 		if ($id) {
 			if (Db::name('colrule')->delete($id)) {
 				$this->success('删除成功');

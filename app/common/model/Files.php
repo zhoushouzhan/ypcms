@@ -1,26 +1,34 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:25:38
+ * @FilePath: \ypcms\app\common\model\Files.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
+declare(strict_types=1);
+
 namespace app\common\model;
+
 use think\Model;
 
 //本模型为系统生成,具体功能需要您来配置
-class files extends Model {
+class files extends Model
+{
 	//模型事件-删除后
-	public static function onAfterDelete($files) {
+	public static function onAfterDelete($files)
+	{
 		//删除数据后删除附件
 		if (file_exists(YP_ROOT . $files['filepath'])) {
 			unlink(YP_ROOT . $files['filepath']);
 		}
 	}
 	//绑定信息
-	public static function bindInfo($ids, $id, $category_id = 0, $type, $tag) {
+	public static function bindInfo($ids, $id, $category_id = 0, $type, $tag)
+	{
 		//绑定信息前解除当前绑定的信息
 		self::where(['ypcms_id' => $id, 'ypcms_type' => $type, 'tag' => $tag])->update(['ypcms_id' => '', 'ypcms_type' => '', 'tag' => '']);
 		//绑定多条
@@ -34,7 +42,8 @@ class files extends Model {
 		}
 	}
 	//绑定内容中图片
-	public static function bindEditor($id, $category_id = 0, $type, $tag, $content) {
+	public static function bindEditor($id, $category_id = 0, $type, $tag, $content)
+	{
 		//内容图片绑定
 		self::where(['ypcms_id' => $id, 'ypcms_type' => $type, 'tag' => $tag])->update(['ypcms_id' => '', 'ypcms_type' => '', 'tag' => '']);
 		preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $content, $res);
@@ -42,7 +51,8 @@ class files extends Model {
 			self::where('filepath', $value)->update(['category_id' => $category_id, 'ypcms_id' => $id, 'ypcms_type' => $type, 'tag' => $tag]);
 		}
 	}
-	public function ypcms() {
+	public function ypcms()
+	{
 		return $this->morphTo('ypcms', [
 			'Download' => 'app\common\model\Download',
 			'Article' => 'app\common\model\Article',
@@ -50,4 +60,3 @@ class files extends Model {
 		]);
 	}
 }
-?>

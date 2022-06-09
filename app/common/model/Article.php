@@ -21,7 +21,7 @@ public static function onAfterWrite($data) {
 				if (isset($data['thumb'])) {
 					Files::bindInfo($data['thumb']['id'], $data['id'], $data['category_id'], 'article', 'thumb');
 				}
-			
+
 				if (isset($data['content'])) {
 					Files::bindEditor($data['id'], $data['category_id'], 'article', 'content',$data['content']);
 				}
@@ -82,27 +82,27 @@ if (class_exists('\user\Article')) {
 	public function category() {
 		return $this->belongsTo(\app\common\model\Category::class);
 	}
-			
+
 //关联管理员
 	public function admin() {
 		return $this->belongsTo(\app\common\model\Admin::class);
 	}
-			
+
 //关联会员
 	public function user() {
 		return $this->belongsTo(\app\common\model\User::class);
 	}
-			
+
 //关联图片单图片
 public function getThumbAttr($value, $data) {
 	return \app\common\model\Files::find($value);
 }
-			
+
 //关联审核单选
 	public function getEnabledAttr($value, $data) {
 		return \app\common\model\Mclass::where('id', $value)->find();
 	}
-			
+
 //关联推荐下拉
 	public function getRecommendAttr($value, $data) {
 		return \app\common\model\Mclass::where('id', $value)->find();
@@ -118,4 +118,3 @@ if (class_exists('\user\Article')) {
 			}
 }
 }
-?>

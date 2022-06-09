@@ -1,13 +1,9 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
+
 use app\admin\validate\CheckMod;
 use app\common\model\Rule;
 use app\common\model\Tb;
@@ -16,12 +12,14 @@ use think\facade\Db;
 use think\facade\View;
 use think\Validate;
 
-class Ypmod extends Base {
+class Ypmod extends Base
+{
 	protected $tableList;
 	protected $dbpre;
 	protected $dbname;
 	protected $model;
-	protected function initialize() {
+	protected function initialize()
+	{
 		parent::initialize();
 		$this->dbname = Config::get('database.connections.mysql.database');
 		$this->dbpre = Config::get('database.connections.mysql.prefix');
@@ -35,19 +33,21 @@ class Ypmod extends Base {
 		View::assign('menuNode', $menuNode);
 		View::assign('sysmod', $this->sysmod);
 		View::assign('modclass', Config::get('app.modclass'));
-
 	}
-	public function index() {
+	public function index()
+	{
 		$dataList = Tb::order('id', 'asc')->select();
 		View::assign('dataList', $dataList);
 		return view();
 	}
 	//增加模型
-	public function add() {
+	public function add()
+	{
 		return view();
 	}
 	//保存模型
-	public function save() {
+	public function save()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			$valCheck = validate(CheckMod::class)->check($data);
@@ -60,13 +60,15 @@ class Ypmod extends Base {
 		}
 	}
 	//编辑模型
-	public function edit($id) {
+	public function edit($id)
+	{
 		$r = Tb::find($id);
 		View::assign('r', $r);
 		return view();
 	}
 	//更新模型
-	public function update($id = 0) {
+	public function update($id = 0)
+	{
 		if (!$id) {
 			$this->error('ID不存在');
 		}
@@ -91,7 +93,8 @@ class Ypmod extends Base {
 		}
 	}
 	//表单
-	public function mkform($id) {
+	public function mkform($id)
+	{
 		$r = Tb::find($id);
 		$rules = Db::name('colrule')->select();
 		$cols = $r->cols;
@@ -106,7 +109,8 @@ class Ypmod extends Base {
 		return view();
 	}
 	//表单
-	public function rule($id) {
+	public function rule($id)
+	{
 		$r = Tb::find($id);
 		$rules = Db::name('colrule')->select();
 		$cols = $r->cols;
@@ -121,7 +125,8 @@ class Ypmod extends Base {
 	}
 
 	//字段规则
-	public function updateRule() {
+	public function updateRule()
+	{
 		if ($this->request->isPost()) {
 			$data = $this->request->param();
 			$id = $data['id'];
@@ -138,7 +143,8 @@ class Ypmod extends Base {
 	}
 
 	//删除模型
-	public function delete($id = 0) {
+	public function delete($id = 0)
+	{
 		if ($id) {
 			if (Tb::destroy($id)) {
 				$this->success('删除成功');

@@ -1,6 +1,46 @@
-{extend name="layout"}
-{block name="main"}
-<div class="ad layui-main mt10">
-	index
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:50
+ * @LastEditTime: 2022-06-09 08:50:59
+ * @FilePath: \ypcms\view\pc\index\index\index.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="layout"} {block name="main"}
+<div class="article">
+  <div class="layui-main">
+    <div class="h-box">
+      <div class="h-tit">最新文章</div>
+    </div>
+    <div class="h-con">
+      <ul class="clearfix">
+        {volist name=":model('article','',2)" id="vo"}
+        <li>
+          <div class="titlepic">
+            <a href="{$vo.url}">
+              <img
+                src="{$vo.thumb.filepath|default='/static/images/nopic.gif'}"
+              />
+            </a>
+          </div>
+          <div class="info">
+            <div class="tit">
+              <a href="{$vo.category.url}">{$vo.category.title}</a>-<a
+                href="{$vo.url}"
+                >{$vo.title}</a
+              >
+            </div>
+            <div class="smalltext">{$vo.intro|msubstr=0,75}</div>
+            <div class="info-foot">
+              <span>发布时间：{$vo.create_time}</span>
+              <span>浏览量：{$vo.hits}</span>
+            </div>
+          </div>
+        </li>
+        {/volist}
+      </ul>
+    </div>
+  </div>
 </div>
 {/block}

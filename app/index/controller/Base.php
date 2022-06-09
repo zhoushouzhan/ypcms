@@ -1,11 +1,5 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
+
 declare(strict_types=1);
 
 namespace app\index\controller;
@@ -46,7 +40,7 @@ abstract class Base
 	 * 控制器中间件
 	 * @var array
 	 */
-	protected $middleware = ['checkLogin'];
+	protected $middleware = [];
 
 	/**
 	 * 构造方法
@@ -57,7 +51,6 @@ abstract class Base
 	{
 		$this->app = $app;
 		$this->request = $this->app->request;
-		$this->sendMsg = app('sendMsg');
 		$this->categoryId = (int) $this->request->param('categoryId');
 		$this->modName = (string) $this->request->param('mod_name');
 		// 控制器初始化

@@ -1,4 +1,14 @@
 <?php
+/*
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:45
+ * @LastEditTime: 2022-06-09 07:18:20
+ * @FilePath: \ypcms\app\admin\config\session.php
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+ */
+
 return [
 	// session name
 	'name' => 'YPCMSADMINSESSIONID',

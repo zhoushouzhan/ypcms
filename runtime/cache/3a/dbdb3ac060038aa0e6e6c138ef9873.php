@@ -1,0 +1,4 @@
+<?php
+//000000003600
+ exit();?>
+a:2:{i:0;a:16:{s:2:"id";i:1;s:5:"title";s:6:"文章";s:5:"alias";s:0:"";s:8:"keywords";s:0:"";s:5:"intro";s:0:"";s:6:"status";i:1;s:5:"tb_id";i:11;s:3:"pid";i:0;s:4:"path";s:3:",0,";s:11:"create_time";i:0;s:11:"update_time";i:1654734489;s:4:"sort";i:0;s:5:"thumb";i:0;s:4:"last";i:0;s:5:"route";s:7:"article";s:3:"url";s:13:"/article.html";}i:1;a:16:{s:2:"id";i:2;s:5:"title";s:12:"经典散文";s:5:"alias";s:0:"";s:8:"keywords";s:0:"";s:5:"intro";s:0:"";s:6:"status";i:1;s:5:"tb_id";i:11;s:3:"pid";i:1;s:4:"path";s:5:",0,1,";s:11:"create_time";i:0;s:11:"update_time";i:1654734554;s:4:"sort";i:0;s:5:"thumb";i:0;s:4:"last";i:1;s:5:"route";s:6:"sanwen";s:3:"url";s:20:"/article/sanwen.html";}}

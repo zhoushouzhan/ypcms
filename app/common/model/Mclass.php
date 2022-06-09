@@ -1,20 +1,17 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\common\model;
 
 use think\facade\Db;
 use think\Model;
 
-class Mclass extends Model {
+class Mclass extends Model
+{
 	//写入后动作
-	public static function onAfterInsert($data) {
+	public static function onAfterInsert($data)
+	{
 		$pid = $data->pid;
 		if ($pid > 0) {
 			$parent = self::find($pid);
@@ -27,7 +24,8 @@ class Mclass extends Model {
 		$data->save();
 	}
 	//删除后动作
-	public static function onAfterDelete($res) {
+	public static function onAfterDelete($res)
+	{
 		$data = self::select();
 		$sonids = self::getSon($data, $res->id);
 		if ($sonids) {
@@ -39,7 +37,8 @@ class Mclass extends Model {
 		}
 	}
 	//获取所有子类
-	static private function getSon($data, $id) {
+	static private function getSon($data, $id)
+	{
 		static $ids = [];
 		foreach ($data as $k => $v) {
 			if ($v->pid == $id) {
@@ -50,7 +49,8 @@ class Mclass extends Model {
 		return $ids;
 	}
 	//下拉菜单
-	public static function getSelected($id, $pid) {
+	public static function getSelected($id, $pid)
+	{
 		$data = self::select();
 		$arr = [];
 		$pathArr = [];
@@ -94,7 +94,8 @@ class Mclass extends Model {
 		return $selectNode;
 	}
 	//复选框
-	public static function getCheckbox($ids, $pid) {
+	public static function getCheckbox($ids, $pid)
+	{
 		$item = self::where('pid', $pid)->select();
 		$checkbox = '';
 		$idsArr = [];
@@ -113,7 +114,8 @@ class Mclass extends Model {
 		return $newItem;
 	}
 	//单选框
-	public static function getRadio($id, $pid) {
+	public static function getRadio($id, $pid)
+	{
 		$item = self::where('pid', $pid)->select();
 		foreach ($item as $key => $value) {
 			$value->current = 0;
@@ -124,5 +126,4 @@ class Mclass extends Model {
 		}
 		return $newItem;
 	}
-
 }

@@ -1,0 +1,299 @@
+html,
+body {
+  height: 100%;
+}
+a {
+  cursor: pointer;
+}
+.layui-header {
+  border-bottom: 5px solid #666;
+  height: 55px;
+}
+.layui-field-box {
+  color: #777;
+}
+.loginbg {
+  height: 100%;
+  background: #333;
+  background-image: radial-gradient(#111 10%, transparent 0),
+    radial-gradient(#000 10%, transparent 0);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+}
+
+.cbtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 80px;
+  z-index: 9999;
+}
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.mr {
+  margin-right: 10px;
+}
+.login {
+  padding-top: 160px;
+}
+.login .logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.login .logo img {
+  height: 90px;
+}
+.login .login-title {
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+}
+
+.login .login-form {
+  width: 340px;
+  margin: 10px auto;
+  position: relative;
+  color: #fff;
+  background: #222;
+  padding: 15px;
+  box-shadow: 5px 5px 5px #000;
+}
+.login .login-form .layui-input-block {
+  margin: 0;
+}
+.login .login-form .captcha {
+  width: 140px;
+  height: 38px;
+  cursor: crosshair;
+}
+
+.login .login-form input {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.login .login-form button {
+  width: 100%;
+  background-color: #b30000;
+}
+.login .copy {
+  text-align: center;
+  padding-bottom: 15px;
+}
+.logo {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+.sysItem {
+  position: absolute;
+  top: 0;
+  left: 180px;
+  background: none;
+}
+.otherItem {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  background: none;
+}
+
+.yp-iframe {
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+}
+.footer {
+  line-height: 44px;
+}
+
+.layui-body {
+  left: 210px;
+}
+
+.layui-side {
+  top: 60px;
+}
+
+.layui-table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.layui-tab {
+  overflow: visible;
+}
+
+.layui-tab-title > li > a {
+  display: block;
+}
+
+.layui-nav-tree .layui-nav-child dd > dl > dd {
+  padding-left: 14px;
+}
+
+.form-container {
+  max-width: 90%;
+}
+
+.form-container .edui-editor {
+  margin-top: -7px;
+  margin-bottom: -7px;
+  margin-left: -11px;
+}
+
+/*分页*/
+.pagination {
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: -1px;
+  padding: 5px;
+  border: 1px solid #e2e2e2;
+  min-width: 20px;
+  text-align: center;
+}
+
+.pagination li.active {
+  background: #009688;
+  color: #fff;
+  border: 1px solid #009688;
+}
+
+.pagination li a {
+  display: block;
+  text-align: center;
+}
+
+.photo-list {
+  margin: 5px 0;
+}
+
+.filedata-list {
+  margin: 5px 0;
+}
+
+/*常用色彩*/
+.red {
+  color: #ff5722;
+}
+
+.blue {
+  color: #1e9fff;
+}
+
+.layui-upload-list {
+  position: relative;
+  height: 92px;
+  width: 92px;
+  overflow: hidden;
+}
+
+.layui-upload-list .layui-upload-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.layui-upload-list .thumblog {
+  position: absolute;
+  bottom: -3px;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.fileItem {
+  border: 1px solid #ddd;
+  height: 130px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.fileItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+}
+
+.fileItem .fileName {
+  position: absolute;
+  height: 30px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  top: -30px;
+  width: 100%;
+  color: white;
+  line-height: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileItem:hover .fileName {
+  animation: moveOne 0.5s 0s ease both;
+  -webkit-animation: moveOne 0.5s 0s ease both;
+  transition: all 0s 0s;
+  -webkit-transition: all 0s 0s;
+}
+
+.fileItem .fileDel {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+}
+
+.fileItem .fileSelect {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+}
+
+.fileItem .fa {
+  font-size: 7em;
+  color: #653664;
+  margin-top: 6px;
+}
+
+@keyframes moveOne {
+  from {
+    top: -30px;
+  }
+
+  to {
+    top: 0;
+  }
+}
+
+@-webkit-keyframes moveOne {
+  from {
+    top: -30px;
+  }
+
+  to {
+    top: 0;
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a1a3a9;
+  border-radius: 4px;
+}
+
+.layui-nav-item > a > i {
+  float: left;
+  padding: 0 3px;
+}

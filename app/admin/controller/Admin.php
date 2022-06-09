@@ -1,15 +1,6 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
 declare(strict_types=1);
-
 namespace app\admin\controller;
-
 use app\admin\validate\CheckAdmin;
 use app\common\model\Admin as AdminModel;
 use app\common\model\Roles;
@@ -46,11 +37,10 @@ class Admin extends Base
 	{
 		$map = [];
 		if ($keyboard) {
-			$map[] = ['a.username|a.mobile|a.truename', 'like', "%$keyboard%"];
+			$map[] = ['a.username', 'like', "%$keyboard%"];
 		}
 
 		$dataList = AdminModel::alias('a')->where($map)->order('id', 'asc')->paginate(['list_rows' => $limit, 'query' => $this->request->param()]);
-
 		View::assign('dataList', $dataList);
 		return view();
 	}
@@ -72,7 +62,6 @@ class Admin extends Base
 			if (isset($data['password']) && $data['password'] == '') {
 				unset($data['password']);
 			}
-
 			//验证规则
 			$colrule = array_column(Db::name('colrule')->select()->toArray(), null, 'id');
 			//获取单列

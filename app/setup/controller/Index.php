@@ -1,13 +1,9 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\setup\controller;
+
 use think\Controller;
 use think\facade\Config;
 use think\facade\Db;
@@ -18,8 +14,10 @@ use think\facade\View;
 /**
  *安装平台
  */
-class Index extends Base {
-	protected function initialize() {
+class Index extends Base
+{
+	protected function initialize()
+	{
 		parent::initialize();
 		$tmp = function_exists('gd_info') ? gd_info() : array();
 		$config = [
@@ -40,12 +38,14 @@ class Index extends Base {
 		View::assign('config', $config);
 	}
 	//阅读许可协议
-	public function index() {
+	public function index()
+	{
 		Session::set('setone', 1);
 		return view('', ['set' => 1]);
 	}
 	//环境检测
-	public function jiancha() {
+	public function jiancha()
+	{
 		$isok = 1;
 		if (!Session::has('setone')) {
 			$this->error('安装必须按顺序来');
@@ -96,14 +96,16 @@ class Index extends Base {
 		View::assign('needfuns', $needfuns);
 		return view('', ['set' => 2]);
 	}
-	public function setconfig() {
+	public function setconfig()
+	{
 		if (!Session::has('settwo')) {
 			$this->error('安装必须按顺序来');
 		}
 		Session('setthree', 1);
 		return view('', ['set' => 3]);
 	}
-	public function esql() {
+	public function esql()
+	{
 
 		if (!Session::has('setthree')) {
 			$this->error('安装必须按顺序来');
@@ -117,9 +119,10 @@ class Index extends Base {
 				}
 			}
 			//动态配置数据库链接
-			$setconfig = ['connections' => [
-				'mysql' => $data['mysql'],
-			],
+			$setconfig = [
+				'connections' => [
+					'mysql' => $data['mysql'],
+				],
 			];
 			$dbcon = Config::get('database');
 			Config::set($setconfig, 'database');
@@ -229,15 +232,16 @@ default_lang = zh-cn
 		} else {
 			return view('', ['set' => 4]);
 		}
-
 	}
-	public function oversql() {
+	public function oversql()
+	{
 		$data = Session::get('dbconfig');
 		View::assign("adminuser", $data['admin_user']);
 		View::assign("adminpass", $data['admin_pass']);
 		return view('', ['set' => 5]);
 	}
-	public function dosql($i = 0) {
+	public function dosql($i = 0)
+	{
 		if (!Session::has('setfour')) {
 			$this->error('安装必须按顺序来');
 		}

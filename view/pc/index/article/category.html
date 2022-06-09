@@ -1,51 +1,57 @@
-{extend name="layout"}
-{block name="pagetitle"}{$category.title}{/block}
-{block name="main"}
-<div class="ad layui-main mt10">
-	ad
-</div>
+<!--
+ * @Author: 一品网络技术有限公司
+ * @Date: 2022-06-08 07:55:50
+ * @LastEditTime: 2022-06-09 08:36:13
+ * @FilePath: \ypcms\view\pc\index\article\category.html
+ * @Description:
+ * 联系QQ:58055648
+ * Copyright (c) 2022 by 东海县一品网络技术有限公司, All Rights Reserved.
+-->
+{extend name="layout"} {block name="pagetitle"}{$category.title}{/block} {block
+name="main"}
+<div class="ad layui-main mt10">ad</div>
 <div class="path_info mt10 layui-main">
-	当前位置：
-	<span class="layui-breadcrumb">
-  	<a href="/">首页</a>
-{if isset($category)}
-	{volist name=":get_path_info($category->id)" id="vo"}
-	  <a href="{:url('index/category/index',['categoryId'=>$vo.id])}">{$vo.title}</a>
-	{/volist}
-{else}
-	<a href="">{$mod.alias}</a>
-{/if}
-	</span>
+  当前位置：
+  <span class="layui-breadcrumb">
+    <a href="/">首页</a>
+    {if isset($category)} {volist name=":get_path_info($category->id)" id="vo"}
+    <a href="{$vo.url}">{$vo.title}</a>
+    {/volist} {else}
+    <a href="">{$mod.alias}</a>
+    {/if}
+  </span>
 </div>
 <div class="article">
-	<div class="layui-main">
-		<div class="h-box">
-			<div class="h-tit">{$category.title}列表</div>
-		</div>
-		<div class="h-con">
-			<ul class="clearfix">
-				{volist name="dataList" id="vo"}
-				<li>
-					<div class="titlepic">
-						<a href="{:url('index/content/index',['categoryId'=>$vo.category_id,'id'=>$vo.id])}">
-							<img src="{$vo.thumbres.filepath|default='/static/images/nopic.gif'}">
-						</a>
-					</div>
-					<div class="info">
-						<div class="tit"><a href="{:url('index/content/index',['categoryId'=>$vo.category_id,'id'=>$vo.id])}">{$vo.title}</a></div>
-						<div class="smalltext">{$vo.intro|msubstr=0,75}</div>
-						<div class="info-foot">
-							<span>发布时间：{$vo.create_time}</span>
-							<span>浏览量：{$vo.hits}</span>
-						</div>
-					</div>
-				</li>
-				{/volist}
-			</ul>
-		</div>
-		<div class="pages">
-		{$dataList->render()|raw}
-		</div>
-	</div>
+  <div class="layui-main">
+    <div class="h-box">
+      <div class="h-tit">{$category.title}</div>
+    </div>
+    <div class="h-con">
+      <ul class="clearfix">
+        {volist name="dataList" id="vo"}
+        <li>
+          <div class="titlepic">
+            <a href="{$vo.url}">
+              <img
+                src="{$vo.thumb.filepath|default='/static/images/nopic.gif'}"
+              />
+            </a>
+          </div>
+          <div class="info">
+            <div class="tit">
+              <a href="{$vo.url}">{$vo.title}</a>
+            </div>
+            <div class="smalltext">{$vo.intro|msubstr=0,75}</div>
+            <div class="info-foot">
+              <span>发布时间：{$vo.create_time}</span>
+              <span>浏览量：{$vo.hits}</span>
+            </div>
+          </div>
+        </li>
+        {/volist}
+      </ul>
+    </div>
+    <div class="pages">{$dataList->render()|raw}</div>
+  </div>
 </div>
 {/block}

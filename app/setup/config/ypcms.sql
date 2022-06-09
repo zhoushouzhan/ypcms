@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： localhost
--- 生成日期： 2022-06-07 11:16:57
+-- 生成日期： 2022-06-09 08:58:25
 -- 服务器版本： 5.6.11
 -- PHP 版本： 7.2.26
 
@@ -48,30 +48,6 @@ INSERT INTO `yp_access` (`id`, `admin_id`, `roles_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yp_ad`
---
-
-CREATE TABLE `yp_ad` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
-  `delete_time` int(10) UNSIGNED NOT NULL COMMENT '删除时间',
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
-  `desc` text NOT NULL COMMENT '描述',
-  `thumb` int(10) NOT NULL COMMENT '图片',
-  `link` varchar(255) NOT NULL DEFAULT '' COMMENT '链接',
-  `sort` int(3) NOT NULL COMMENT '排序',
-  `create_time` int(10) NOT NULL COMMENT '发布日期'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='广告';
-
---
--- 转存表中的数据 `yp_ad`
---
-
-INSERT INTO `yp_ad` (`id`, `delete_time`, `title`, `desc`, `thumb`, `link`, `sort`, `create_time`) VALUES
-(7, 0, 'pre2222kkoo', '', 108, '333', 0, 1653794070);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yp_admin`
 --
 
@@ -91,7 +67,7 @@ CREATE TABLE `yp_admin` (
 --
 
 INSERT INTO `yp_admin` (`id`, `username`, `password`, `status`, `create_time`, `update_time`, `token`, `truename`) VALUES
-(1, 'admin', '5c4f3327bcb3d21bc8066702dff31775', 1, 1636349015, 1653965828, '', ''),
+(1, 'admin', '5c4f3327bcb3d21bc8066702dff31775', 1, 1636349015, 1654728124, '', ''),
 (2, 'editor', '72f224b11ff657972a16502f10b6d2d2', 1, 0, 1653296620, '', '王三');
 
 -- --------------------------------------------------------
@@ -116,18 +92,16 @@ CREATE TABLE `yp_article` (
   `update_time` int(10) NOT NULL COMMENT '更新时间',
   `author` varchar(30) NOT NULL DEFAULT '' COMMENT '作者',
   `source` varchar(200) NOT NULL DEFAULT '' COMMENT '来源',
-  `recommend` int(10) NOT NULL COMMENT '推荐',
-  `delete_time` int(10) NOT NULL COMMENT '删除时间'
+  `recommend` int(10) NOT NULL COMMENT '推荐'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章';
 
 --
 -- 转存表中的数据 `yp_article`
 --
 
-INSERT INTO `yp_article` (`id`, `category_id`, `admin_id`, `user_id`, `title`, `keyword`, `thumb`, `intro`, `content`, `hits`, `enabled`, `create_time`, `update_time`, `author`, `source`, `recommend`, `delete_time`) VALUES
-(38, 48, 1, 0, '23123', '123123', 0, '123', '<p>123123123</p>\r\n', 0, 125, 0, 1653796276, '123123', '12313', 128, 0),
-(39, 48, 1, 0, '234234', '234234', 0, '234234', '<p>234234</p>\r\n', 0, 125, 0, 1653796312, '234234', '234234', 128, 0),
-(40, 48, 1, 0, 'aaad', 'sdasa', 0, 'asdasd', '<p>asdasdasd</p>\r\n', 0, 0, 1653796370, 1653796370, 'asdad', 'asda', 0, 0);
+INSERT INTO `yp_article` (`id`, `category_id`, `admin_id`, `user_id`, `title`, `keyword`, `thumb`, `intro`, `content`, `hits`, `enabled`, `create_time`, `update_time`, `author`, `source`, `recommend`) VALUES
+(1, 2, 1, 0, '一个粗瓷大碗', '一个粗瓷大碗', 113, '中国人民革命军事博物馆里，有一个粗瓷大碗，是赵一曼用过的。她那时是东北抗日联军的团政委。这个碗，赵一曼仅仅用了一次，却有一段感人的故事。', '<p>中国人民革命军事博物馆里，有一个粗瓷大碗，是赵一曼用过的。她那时是东北抗日联军的团政委。这个碗，赵一曼仅仅用了一次，却有一段感人的故事。<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;有一回，一场激烈的战斗刚刚结束，小通讯员给赵一曼送来一个鼓鼓的挂包。打开一看，是个粗瓷大碗。赵一曼吃饭用的搪瓷缸子，早就送给一个新战士了。通讯员一直想给她找一个碗，好容易在这次战斗中找到了，就连忙给她送来。<br />\r\n赵一曼看着这个碗，对通讯员说：&ldquo;从哪里拿来的，请你还到哪里去！&rdquo;通讯员为难地说：&ldquo;这&hellip;&hellip;这&hellip;&hellip;敌人都消灭了，往哪儿还呀！&rdquo;<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;开饭了。通讯员用这个大碗，给赵一曼盛了满满一碗高粱米饭。他想：&ldquo;这回我们政委该吃顿饱饭了。&rdquo;赵一曼一看，就知道是从病号灶盛来的。那些日子非常艰苦，抗联部队几个月来都是靠野菜、草根、橡子面充饥，部队虽然还有一点点粗粮，但得留给伤病员吃。团长、政委和战士一样，嘴边有几个月没沾过粮食了。赵一曼端着这碗高粱米饭，望着面前的小通讯员，怎么忍心责备他呢？赵一曼趁人不防的时候，快步走进炊事棚，把饭倒在锅里，又从另一口锅里盛了半碗野菜粥。这些，炊事员老李在旁边看到了，他没有吭声，眼睛里却含着泪花。<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;第二天开饭的时候，赵一曼又没有碗了。小通讯员急得直叫：&ldquo;我说政委同志啊，给你一百个碗也架不住这么丢呀！&rdquo;赵一曼笑着说：&ldquo;是啊，什么时候才能不丢碗呢？&rdquo;<br />\r\n&nbsp;&nbsp;&nbsp;&nbsp;据后来&ldquo;侦察&rdquo;，这个粗瓷大碗已经成了七班的菜盆了。</p>\r\n', 9, 125, 1654734622, 1654736039, '网络', '网络', 128),
+(2, 2, 1, 0, '狼牙山五壮士', '狼牙山五壮士', 114, '1941年秋，日寇集中兵力，向我晋察冀根据地大举进犯。当时，七连奉命在狼牙山一带坚持游击战争。经过一个多月英勇奋战，七连决定向龙王庙转移，把掩护群众和连队转移的任务交给了六班。', '<p>1941年秋，日寇集中兵力，向我晋察冀根据地大举进犯。当时，七连奉命在狼牙山一带坚持游击战争。经过一个多月英勇奋战，七连决定向龙王庙转移，把掩护群众和连队转移的任务交给了六班。<br />\r\n　　为了拖住敌人，七连六班的五个战士一边痛击追上来的敌人，一边有计划地把大批敌人引上了狼牙山。他们利用险要的地形，把冲上来的敌人一次又一次地打了下去。班长马宝玉沉着地指挥战斗，让敌人走近了，才下命令狠狠地打。副班长葛振林打一枪就大吼一声，好像细小的枪口喷不完他的满腔怒火。战士宋学义扔手榴弹总要把胳膊抡一个圈，好使出浑身的力气。胡德林和胡福才这两个小战士把脸绷得紧紧的，全神贯注地瞄准敌人射击。敌人始终不能前进一步。在崎岖的山路上，横七竖八地躺着许多敌人的尸体。<br />\r\n　　五位战士胜利地完成了掩护任务，准备转移。面前有两条路：一条通往主力转移的方向，走这条路可以很快追上连队，可是敌人紧跟在身后；另一条是通向狼牙山的顶峰棋盘陀，那儿三面都是悬崖绝壁。走哪条路呢？为了不让敌人发现群众和连队主力，班长马宝玉斩钉截铁地说了一声：&ldquo;走！&rdquo;带头向棋盘陀走去。战士们热血沸腾，紧跟在班长后面。他们知道班长要把敌人引上绝路。<br />\r\n　　五位壮士一面向顶峰攀登，一面依托大树和岩石向敌人射击。山路上又留下了许多具敌人的尸体。到了狼牙山峰顶，五位壮士居高临下，继续向紧跟在身后的敌人射击。不少敌人坠落山涧，粉身碎骨。班长马宝玉负伤了，子弹都打完了，只有胡福才手里还剩下一颗手榴弹。他刚要拧开盖子，马宝玉抢前一步，夺过手榴弹插在腰间，猛地举起一块大石头，大声喊道：&ldquo;同志们！用石头砸！&rdquo;顿时，石头像雹子一样，带着五位壮士的决心，带着中国人民的仇恨，向敌人头上砸去。山坡上传来一阵叽里呱啦的叫声，敌人纷纷滚落深谷。<br />\r\n　　又一群敌人扑上来了。马宝玉嗖的一声拔出手榴弹，拧开盖子，用尽全身气力扔向敌人。随着一声巨响，手榴弹在敌群中开了花。<br />\r\n　　五位壮士屹立在狼牙山顶峰，眺望着群众和部队主力远去的方向。他们回头望望还在向上爬的敌人，脸上露出胜利的喜悦。班长马宝玉激动地说：&ldquo;同志们，我们的任务胜利完成了！&rdquo;说罢，他把那支从敌人手里夺来的枪砸碎了，然后走到悬崖边上，像每次发起冲锋一样，第一个纵身跳下深谷。战士们也昂首挺胸，相继从悬崖往下跳。狼牙山上响起了他们壮烈豪迈的口号声：<br />\r\n　　&ldquo;打倒日本帝国主义！&rdquo;<br />\r\n　　&ldquo;中国共产党万岁！&rdquo;<br />\r\n　　这是英雄的中国人民坚强不屈的声音！这声音惊天动地，气壮山河！</p>\r\n', 1, 125, 1654735053, 1654736133, '网络', '网络', 128);
 
 -- --------------------------------------------------------
 
@@ -154,7 +128,6 @@ CREATE TABLE `yp_category` (
   `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
   `intro` text NOT NULL COMMENT '描述',
   `status` int(1) NOT NULL COMMENT '显示',
-  `icon` varchar(255) NOT NULL DEFAULT '' COMMENT '图标',
   `tb_id` int(10) NOT NULL COMMENT '模型',
   `pid` int(10) NOT NULL COMMENT '父级',
   `path` text NOT NULL COMMENT '路径',
@@ -162,28 +135,18 @@ CREATE TABLE `yp_category` (
   `update_time` int(10) NOT NULL COMMENT '更新时间',
   `sort` int(10) NOT NULL COMMENT '排序',
   `thumb` int(10) NOT NULL COMMENT '栏目图片',
-  `content` mediumtext NOT NULL COMMENT '详细内容',
   `last` int(1) NOT NULL COMMENT '终极栏目',
-  `tempf` varchar(100) NOT NULL DEFAULT '' COMMENT '封面模板',
-  `templ` varchar(100) NOT NULL DEFAULT '' COMMENT '列表模板',
-  `tempc` varchar(100) NOT NULL DEFAULT '' COMMENT '内容模板',
   `route` varchar(100) NOT NULL DEFAULT '' COMMENT '路由',
-  `url` varchar(100) NOT NULL DEFAULT '' COMMENT '栏目URL'
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT 'url'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='栏目';
 
 --
 -- 转存表中的数据 `yp_category`
 --
 
-INSERT INTO `yp_category` (`id`, `title`, `alias`, `keywords`, `intro`, `status`, `icon`, `tb_id`, `pid`, `path`, `create_time`, `update_time`, `sort`, `thumb`, `content`, `last`, `tempf`, `templ`, `tempc`, `route`, `url`) VALUES
-(48, '新闻', '新闻', '', '', 1, '', 13, 53, '53', 0, 1653798508, 0, 0, '', 1, '', '', '', 'news', '/test/news.html'),
-(49, '公告', '公告', '', '', 1, '', 13, 0, ',0,', 0, 1653798489, 0, 0, '', 1, '', '', '', 'gonggao', '/gonggao.html'),
-(53, '测试栏目', '', '', '', 0, '', 13, 0, ',0,', 0, 1653798499, 0, 0, '', 0, '0', '0', '0', 'test', '/test.html'),
-(54, '223424', '', '', '', 1, '', 13, 0, ',0,', 0, 1653801742, 0, 0, '', 1, '', '', '', 'yyy', '/yyy.html'),
-(55, '24352345', '', '', '', 1, '', 13, 0, ',0,', 0, 1653801798, 0, 0, '', 1, '', '', '', '345345', '/345345.html'),
-(56, '一级栏目', '一级栏目', '', '', 1, '', 13, 0, ',0,', 0, 1653807738, 0, 0, '', 0, '', '', '', 'one', '/one.html'),
-(57, '二级栏目', '', '', '', 1, '', 13, 56, ',0,56,', 0, 1653807756, 0, 0, '', 0, '', '', '', 'two', '/one/two.html'),
-(58, '三级栏目', '', '', '', 1, '', 13, 57, ',0,56,57,', 0, 1653808629, 0, 0, '', 1, '1', '', '', 'three', '/one/two/three.html');
+INSERT INTO `yp_category` (`id`, `title`, `alias`, `keywords`, `intro`, `status`, `tb_id`, `pid`, `path`, `create_time`, `update_time`, `sort`, `thumb`, `last`, `route`, `url`) VALUES
+(1, '文章', '', '', '', 1, 11, 0, ',0,', 0, 1654734489, 0, 0, 0, 'article', '/article.html'),
+(2, '经典散文', '', '', '', 1, 11, 1, ',0,1,', 0, 1654734554, 0, 0, 1, 'sanwen', '/article/sanwen.html');
 
 -- --------------------------------------------------------
 
@@ -222,30 +185,6 @@ INSERT INTO `yp_colrule` (`id`, `name`, `rule`, `msg`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `yp_daka`
---
-
-CREATE TABLE `yp_daka` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
-  `delete_time` int(10) UNSIGNED NOT NULL COMMENT '删除时间',
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
-  `category_id` int(10) NOT NULL COMMENT '栏目',
-  `admin_id` int(10) NOT NULL COMMENT '用户',
-  `photo` int(10) NOT NULL COMMENT '相册',
-  `create_time` int(10) NOT NULL COMMENT '发布时间',
-  `upate_time` int(10) NOT NULL COMMENT '更新时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='打卡';
-
---
--- 转存表中的数据 `yp_daka`
---
-
-INSERT INTO `yp_daka` (`id`, `delete_time`, `title`, `category_id`, `admin_id`, `photo`, `create_time`, `upate_time`) VALUES
-(1, 0, '2342', 52, 1, 0, 0, 0);
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `yp_files`
 --
 
@@ -270,28 +209,8 @@ CREATE TABLE `yp_files` (
 --
 
 INSERT INTO `yp_files` (`id`, `name`, `filepath`, `user_id`, `category_id`, `admin_id`, `tag`, `ypcms_id`, `ypcms_type`, `create_time`, `update_time`, `ftype`, `fsize`) VALUES
-(101, 'QQ截图20211110164724.png', '/storage/images/20211112/0726ca1b51aab1d5ed957a30969de4f7.png', 0, 52, 0, 'photo', 1, 'daka', 1636685226, 1637053286, 'image/png', 324903),
-(102, 'QQ截图20211110165241.png', '/storage/images/20211116/6abf022adfa2dd99fb0f9a235168d44a.png', 0, 52, 0, 'photo', 1, 'daka', 1637053249, 1637053286, 'image/png', 115852),
-(103, 'QQ截图20211110165322.png', '/storage/images/20211116/f0060a37633ee8703e99e4e460dcec32.png', 0, 0, 0, 'thumb', 2, 'ad', 1637053249, 1652430729, 'image/png', 118433),
-(104, 'QQ截图20211110165431.png', '/storage/images/20211116/23232972970d348c0b7128813d49ce60.png', 0, 0, 0, 'footlogo', 1, 'system', 1637053249, 1653809036, 'image/png', 354170),
-(105, '111.png', '/storage/images/20220513/9ab5e3a0a1d6c4057b89fdcd5dbf9b70.png', 0, 0, 0, 'thumb', 3, 'ad', 1652431093, 1652431100, 'image/png', 12815296),
-(106, '202022222584664660.jpg', '/storage/images/20220522/4ec36bb32e9032de43bd7f16235119a0.jpg', 0, 0, 0, 'thumb', 4, 'ad', 1653214527, 1653214530, 'image/jpeg', 44364),
-(107, 'IMG_3811.JPG', '/storage/images/20220522/439a141939cfaeafd4de79e7072547c6.JPG', 0, 0, 0, 'thumb', 5, 'ad', 1653214594, 1653214599, 'image/jpeg', 2314932),
-(108, '202022222584664660.jpg', '/storage/images/20220529/89b6f3b79cb5534aab2c2e48950bbb81.jpg', 0, 0, 0, 'thumb', 7, 'ad', 1653794068, 1653794070, 'image/jpeg', 44364),
-(109, 'QQ截图20211110164724.png', '/storage/images/20220529/6ef5c7849159cb8761207462af8dfca9.png', 0, 0, 0, 'sitelogo', 1, 'system', 1653795820, 1653809036, 'image/png', 324903);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yp_group`
---
-
-CREATE TABLE `yp_group` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
-  `delete_time` int(10) UNSIGNED NOT NULL COMMENT '删除时间',
-  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '名称',
-  `status` int(11) NOT NULL COMMENT '开关'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员组';
+(114, 'QQ截图20220609085517.png', '/storage/images/20220609/de4d7c9d7547340abd9cbebb6043c96f.png', 0, 2, 0, 'thumb', 2, 'article', 1654736131, 1654736133, 'image/png', 444905),
+(113, '20131118135226-332322678.jpg', '/storage/images/20220609/fdc280867c99edca617719d7d80267ae.jpg', 0, 2, 0, 'thumb', 1, 'article', 1654736027, 1654736039, 'image/jpeg', 22988);
 
 -- --------------------------------------------------------
 
@@ -3607,22 +3526,22 @@ CREATE TABLE `yp_rule` (
 --
 
 INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `sort`, `sid`, `condition`, `tb_id`) VALUES
-(1, 'admin/System/default', '系统配置', 1, 1, 0, 'fa fa-gears', 0, '73,74,97,98,99,100,101,102,217,218,109,197,198,199,200,201,202,203,250,112,768,113,115,204,205,206,207,208,209,210,211,251,196,252,221,227,228,249,2055,2056,2057,2058,2059,2060,1465,', '', 0),
-(5, 'admin/Menu/default', '节点管理', 1, 1, 0, 'fa fa-bars', 0, '6,7,8,9,10,11,', '', 0),
-(6, 'admin/Menu/index', '后台节点', 1, 1, 5, 'fa fa-codepen', 1, '7,8,9,10,11,', '', 0),
+(1, 'admin/System/default', '系统配置', 1, 1, 0, 'ri-settings-3-line', 0, '73,74,97,98,99,100,101,102,217,218,109,197,198,199,200,201,202,203,250,112,768,113,115,204,205,206,207,208,209,210,211,251,196,252,221,227,228,249,1465,2067,2071,2070,2069,2068,2072,', '', 0),
+(5, 'admin/Menu/default', '节点管理', 1, 1, 0, 'fa ri-list-unordered', 0, '6,7,8,9,10,11,', '', 0),
+(6, 'admin/Menu/index', '后台节点', 1, 1, 5, 'ri-drag-move-line', 1, '7,8,9,10,11,', '', 0),
 (7, 'admin/Menu/add', '添加节点', 1, 0, 6, '', 0, '', '', 0),
 (8, 'admin/Menu/save', '保存节点', 1, 0, 6, '', 0, '', '', 0),
 (9, 'admin/Menu/edit', '编辑节点', 1, 0, 6, '', 0, '', '', 0),
 (10, 'admin/Menu/update', '更新节点', 1, 0, 6, '', 0, '', '', 0),
 (11, 'admin/Menu/delete', '删除节点', 1, 0, 6, '', 0, '', '', 0),
-(13, 'admin/Category/default', '栏目管理', 1, 1, 0, 'fa fa-sitemap', 5, '781,786,785,784,783,782,103,20,21,22,23,24,108,2047,142,225,144,145,146,143,147,226,', '', 0),
-(14, 'admin/Listinfo/default', '内容管理', 1, 1, 0, 'fa fa-file-text-o', 6, '157,158,156,155,154,212,349,', '', 0),
+(13, 'admin/Category/default', '栏目管理', 1, 1, 0, 'ri-table-alt-fill', 5, '781,786,785,784,783,782,103,20,21,22,23,24,108,2047,142,225,144,145,146,143,147,226,', '', 0),
+(14, 'admin/Listinfo/default', '内容管理', 1, 1, 0, 'ri-mark-pen-line', 6, '157,158,156,155,154,212,349,', '', 0),
 (157, 'admin/Listinfo/edit', '编辑', 1, 0, 14, '', 0, '', '', 0),
-(16, 'admin/User/default', '用户管理', 1, 1, 0, 'fa fa-users', 2, '18,49,50,51,52,53,1589,19,31,32,33,34,35,36,37,', '', 0),
-(781, 'admin/Tags/index', '标签列表', 1, 1, 13, '', 99, '786,785,784,783,782,', '', 63),
+(16, 'admin/User/default', '用户管理', 1, 1, 0, 'ri-user-3-fill', 2, '18,49,50,51,52,53,1589,19,31,32,33,34,35,36,37,', '', 0),
+(781, 'admin/Tags/index', '标签列表', 1, 1, 13, 'ri-link-m', 99, '786,785,784,783,782,', '', 63),
 (768, 'admin/Ypmod/setmod', '配置模型', 1, 0, 112, '', 0, '', '', 0),
-(18, 'admin/Admin/index', '管理员', 1, 1, 16, 'fa fa-user-secret', 1, '49,50,51,52,53,1589,', '', 0),
-(19, 'admin/roles/index', '角色权限', 1, 1, 16, 'fa fa-group', 0, '31,32,33,34,35,36,37,', '', 0),
+(18, 'admin/Admin/index', '管理员', 1, 1, 16, 'ri-user-2-fill', 1, '49,50,51,52,53,1589,', '', 0),
+(19, 'admin/roles/index', '角色权限', 1, 1, 16, 'ri-group-line', 0, '31,32,33,34,35,36,37,', '', 0),
 (20, 'admin/Category/add', '添加栏目', 1, 0, 103, '', 0, '', '', 0),
 (21, 'admin/Category/save', '保存栏目', 1, 0, 103, '', 0, '', '', 0),
 (22, 'admin/Category/edit', '编辑栏目', 1, 0, 103, '', 0, '', '', 0),
@@ -3642,28 +3561,24 @@ INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `
 (51, 'admin/Admin/edit', '编辑用户', 1, 0, 18, '', 0, '', '', 0),
 (52, 'admin/Admin/update', '更新用户', 1, 0, 18, '', 0, '', '', 0),
 (53, 'admin/Admin/delete', '删除用户', 1, 0, 18, '', 0, '', '', 0),
-(54, 'admin/extend/default', '扩展管理', 1, 1, 0, 'fa fa-wrench', 1, '2041,2043,2044,2045,2046,2042,', '', 0),
-(2043, 'admin/Ad/save', '保存', 1, 0, 2041, '', 0, '', '', 88),
-(2044, 'admin/Ad/edit', '编辑', 1, 0, 2041, '', 0, '', '', 88),
-(2045, 'admin/Ad/update', '更新', 1, 0, 2041, '', 0, '', '', 88),
-(2046, 'admin/Ad/delete', '删除', 1, 0, 2041, '', 0, '', '', 88),
+(54, 'admin/extend/default', '扩展管理', 1, 1, 0, 'ri-lifebuoy-line', 1, '2176,2178,2179,2180,2181,2177,', '', 0),
 (784, 'admin/Tags/edit', '编辑', 1, 0, 781, '', 0, '', '', 63),
 (783, 'admin/Tags/save', '保存', 1, 0, 781, '', 0, '', '', 63),
 (782, 'admin/Tags/add', '增加', 1, 0, 781, '', 0, '', '', 63),
-(73, 'admin/ChangePassword/index', '修改密码', 1, 1, 1, 'fa fa-key', 99, '', '', 0),
+(73, 'admin/ChangePassword/index', '修改密码', 1, 1, 1, 'ri-key-2-fill', 99, '', '', 0),
 (74, 'admin/ChangePassword/updatePassword', '更新密码', 1, 0, 1, '', 0, '', '', 0),
 (113, 'admin/Ypmod/index', '管理模型', 1, 1, 112, 'fa fa-life-ring', 0, '', '', 0),
 (225, 'admin/mclass/sclass', '模型选择', 1, 0, 142, '', 0, '', '', 0),
-(97, 'admin/files/default', '附件中心', 1, 1, 1, 'fa fa-folder', 1000, '98,99,100,101,102,217,218,', '', 0),
+(97, 'admin/files/default', '附件中心', 1, 1, 1, 'ri-upload-cloud-2-line', 1000, '98,99,100,101,102,217,218,', '', 0),
 (98, 'admin/files/index', '附件管理', 1, 1, 97, '', 0, '99,100,101,102,217,218,', '', 0),
 (99, 'admin/files/add', '上传附件', 1, 0, 98, 'fa fa-subscript', 0, '', '', 0),
 (100, 'admin/files/save', '保存附件', 1, 0, 98, '', 0, '', '', 0),
 (101, 'admin/files/update', '更新附件', 1, 0, 98, '', 0, '', '', 0),
 (102, 'admin/files/delete', '删除附件', 1, 0, 98, '', 0, '', '', 0),
-(103, 'admin/Category/index', '栏目列表', 1, 1, 13, 'fa fa-navicon', 0, '20,21,22,23,24,108,2047,', '', 0),
+(103, 'admin/Category/index', '栏目列表', 1, 1, 13, 'ri-list-check', 0, '20,21,22,23,24,108,2047,', '', 0),
 (108, 'admin/Category/toggle', '栏目开关', 1, 0, 103, '', 0, '', '', 0),
-(109, 'admin/Database/index', '数据库管理', 1, 1, 1, 'fa fa-database', 98, '197,198,199,200,201,202,203,250,', '', 0),
-(112, 'admin/Ypmod/default', '模型管理', 1, 1, 1, 'fa fa-gears', 999, '768,113,115,204,205,206,207,208,209,210,211,251,', '', 0),
+(109, 'admin/Database/index', '数据库管理', 1, 1, 1, 'ri-database-2-line', 98, '197,198,199,200,201,202,203,250,', '', 0),
+(112, 'admin/Ypmod/default', '模型管理', 1, 1, 1, 'ri-virus-fill', 999, '768,113,115,204,205,206,207,208,209,210,211,251,', '', 0),
 (115, 'admin/Colrule/index', '验证规则', 1, 1, 112, 'fa fa-empire', 0, '', '', 0),
 (158, 'admin/Listinfo/update', '更新', 1, 0, 14, '', 0, '', '', 0),
 (156, 'admin/Listinfo/save', '保存', 1, 0, 14, '', 0, '', '', 0),
@@ -3671,7 +3586,7 @@ INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `
 (145, 'admin/Mclass/edit', '编辑分类', 1, 0, 142, '', 0, '', '', 0),
 (146, 'admin/Mclass/update', '更新分类', 1, 0, 142, '', 0, '', '', 0),
 (143, 'admin/Mclass/add', '添加分类', 1, 0, 142, '', 0, '', '', 0),
-(142, 'admin/Mclass/index', '无限分类', 1, 1, 13, 'fa fa-th', 0, '225,144,145,146,143,147,226,', '', 0),
+(142, 'admin/Mclass/index', '无限分类', 1, 1, 13, 'ri-line-height', 0, '225,144,145,146,143,147,226,', '', 0),
 (147, 'admin/Mclass/delete', '删除分类', 1, 0, 142, '', 0, '', '', 0),
 (155, 'admin/Listinfo/add', '增加', 1, 0, 14, '', 0, '', '', 0),
 (154, 'admin/Listinfo/index', '信息列表', 1, 0, 14, '', 0, '', '', 0),
@@ -3698,8 +3613,8 @@ INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `
 (216, 'admin/Api/upload', '上传附件', 1, 0, 213, '', 0, '', '', 0),
 (217, 'admin/Files/getjson', '获取文件列表', 1, 0, 98, '', 0, '', '', 0),
 (218, 'admin/Files/del', 'AJAX删除附件', 1, 0, 98, '', 0, '', '', 0),
-(2056, 'admin/System/add', '增加', 1, 0, 2055, '', 0, '', '', 2),
-(221, 'admin/System/clear', '清除缓存', 1, 0, 1, '', 0, '', '', 0),
+(2071, 'admin/System/update', '更新', 1, 0, 2067, '', 0, '', '', 2),
+(221, 'admin/api/clear', '清除缓存', 1, 0, 1, '', 0, '', '', 0),
 (226, 'admin/mclass/getson', '获取子分类', 1, 0, 142, '', 0, '', '', 0),
 (227, 'admin/Colrule/save', '保存规则', 1, 0, 1, '', 0, '', '', 0),
 (228, 'admin/Colrule/delete', '删除规则', 1, 0, 1, '', 0, '', '', 0),
@@ -3707,7 +3622,6 @@ INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `
 (250, 'admin/database/import', '还原', 1, 0, 109, '', 0, '', '', 0),
 (251, 'admin/Ypmod/rule', '规则', 1, 0, 112, '', 0, '', '', 0),
 (252, 'admin/index/welcome', '后台欢迎面', 1, 0, 196, '', 0, '', '', 0),
-(2055, 'admin/System/setSystem', '系统参数列表', 1, 1, 1, 'fa fa-gears', 0, '2056,2057,2058,2059,2060,', '', 2),
 (349, 'admin/Listinfo/checkInfo', '审核', 1, 0, 14, '', 0, '', '', 0),
 (1269, 'admin/Score/checkInfo', '审核', 1, 0, 1263, '', 0, '', '', 0),
 (1184, 'admin/Student/view', '查看', 1, 0, 1118, '', 0, '', '', 0),
@@ -3723,19 +3637,12 @@ INSERT INTO `yp_rule` (`id`, `name`, `title`, `type`, `status`, `pid`, `icon`, `
 (2002, 'admin/Xfen/view', '查看', 1, 0, 1996, '', 0, '', '', 0),
 (2003, 'admin/Xfen/checkInfo', '审核', 1, 0, 1996, '', 0, '', '', 0),
 (2047, 'admin/category/movecategory', '移动栏目', 1, 0, 103, '', 0, '', '', 0),
-(2042, 'admin/Ad/add', '增加', 1, 0, 2041, '', 0, '', '', 88),
-(2041, 'admin/Ad/index', '广告列表', 1, 1, 54, '', 0, '2043,2044,2045,2046,2042,', '', 88),
-(2048, 'admin/user/default', '会员管理', 1, 1, 0, 'fa fa-user', 0, '2049,2050,2051,2052,2053,2054,', '', 0),
-(2049, 'admin/user/index', '会员列表', 1, 1, 2048, 'fa fa-sort-amount-desc', 0, '2050,2051,2052,2053,2054,', '', 0),
-(2050, 'admin/user/add', '增加', 1, 0, 2049, '', 0, '', '', 0),
-(2051, 'admin/user/save', '保存', 1, 0, 2049, '', 0, '', '', 0),
-(2052, 'admin/user/edit', '编辑', 1, 0, 2049, '', 0, '', '', 0),
-(2053, 'admin/user/update', '更新', 1, 0, 2049, '', 0, '', '', 0),
-(2054, 'admin/user/delete', '删除', 1, 0, 2049, '', 0, '', '', 0),
-(2057, 'admin/System/save', '保存', 1, 0, 2055, '', 0, '', '', 2),
-(2058, 'admin/System/edit', '编辑', 1, 0, 2055, '', 0, '', '', 2),
-(2059, 'admin/System/update', '更新', 1, 0, 2055, '', 0, '', '', 2),
-(2060, 'admin/System/delete', '删除', 1, 0, 2055, '', 0, '', '', 2);
+(2070, 'admin/System/edit', '编辑', 1, 0, 2067, '', 0, '', '', 2),
+(2069, 'admin/System/save', '保存', 1, 0, 2067, '', 0, '', '', 2),
+(2068, 'admin/System/add', '增加', 1, 0, 2067, '', 0, '', '', 2),
+(2067, 'admin/System/setSystem', '系统参数列表', 1, 1, 1, 'ri-settings-4-fill', 0, '2071,2070,2069,2068,2072,', '', 2),
+(2072, 'admin/System/delete', '删除', 1, 0, 2067, '', 0, '', '', 2),
+(2175, 'admin/Pay/toggle', '开关', 1, 0, 2169, '', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -3749,7 +3656,7 @@ CREATE TABLE `yp_system` (
   `backupdir` varchar(255) NOT NULL DEFAULT '' COMMENT '数据备份文件夹',
   `keyword` varchar(255) NOT NULL DEFAULT '' COMMENT '网站关键词',
   `description` text NOT NULL COMMENT '网站描述',
-  `icpnumber` varchar(100) NOT NULL DEFAULT '' COMMENT '备案号',
+  `icpnumber` varchar(255) NOT NULL DEFAULT '' COMMENT '网站备案号',
   `uploadsize` int(10) NOT NULL COMMENT '附件最大尺寸',
   `filetype` varchar(255) NOT NULL DEFAULT '' COMMENT '允许上传的文件后缀',
   `backupsize` int(10) NOT NULL COMMENT '备份文件单个大小',
@@ -3764,23 +3671,7 @@ CREATE TABLE `yp_system` (
 --
 
 INSERT INTO `yp_system` (`id`, `sitename`, `backupdir`, `keyword`, `description`, `icpnumber`, `uploadsize`, `filetype`, `backupsize`, `seoname`, `siteurl`, `sitelogo`, `footlogo`) VALUES
-(1, '一品内容管理系统', 'databaseBackup', '一品内容管理系统', '一品内容管理系统', '7777', 200, 'png,jpg,zip', 2, '一品内容管理系统', 'http://www.ypcms.com', 109, 104);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yp_tags`
---
-
-CREATE TABLE `yp_tags` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
-  `delete_time` int(10) UNSIGNED NOT NULL COMMENT '删除时间',
-  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '名称',
-  `alias` varchar(50) NOT NULL DEFAULT '' COMMENT '别名',
-  `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '图标',
-  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键词',
-  `intro` text NOT NULL COMMENT '描述'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='标签';
+(1, '一品内容管理系统', 'databaseBackup', '一品内容管理系统', '一品内容管理系统', '网站备案号', 200, 'png,jpg,zip', 2, '一品内容管理系统', 'http://www.ypcms.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -3796,9 +3687,7 @@ CREATE TABLE `yp_tb` (
   `alias` varchar(255) NOT NULL DEFAULT '' COMMENT '别名',
   `col_groups` text NOT NULL COMMENT '分组',
   `node_id` int(10) NOT NULL COMMENT '节点',
-  `createmodel` int(1) NOT NULL COMMENT '创建模型',
-  `createcontroller` int(1) NOT NULL COMMENT '创建控制器',
-  `createview` int(1) NOT NULL COMMENT '创建模板',
+  `menu` int(1) NOT NULL COMMENT '菜单',
   `mt` int(1) NOT NULL COMMENT '模型等级',
   `nodesort` int(10) NOT NULL COMMENT '节点序号',
   `relation` text NOT NULL COMMENT '关联关系'
@@ -3808,56 +3697,18 @@ CREATE TABLE `yp_tb` (
 -- 转存表中的数据 `yp_tb`
 --
 
-INSERT INTO `yp_tb` (`id`, `name`, `cols`, `colrule`, `alias`, `col_groups`, `node_id`, `createmodel`, `createcontroller`, `createview`, `mt`, `nodesort`, `relation`) VALUES
-(1, 'tb', '{\"0\":{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"listv\":\"1\"},\"1\":{\"name\":\"alias\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u522b\\u540d\",\"index\":\"0\"},\"3\":{\"name\":\"createmodel\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u6a21\\u578b\",\"index\":\"0\"},\"4\":{\"name\":\"createcontroller\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u63a7\\u5236\\u5668\",\"index\":\"0\"},\"5\":{\"name\":\"createview\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u6a21\\u677f\",\"index\":\"0\"},\"6\":{\"name\":\"node_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8282\\u70b9\",\"index\":\"0\"},\"7\":{\"name\":\"nodesort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8282\\u70b9\\u5e8f\\u53f7\",\"index\":\"0\"},\"8\":{\"name\":\"cols\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5b57\\u6bb5\",\"index\":\"0\"},\"9\":{\"name\":\"colrule\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u89c4\\u5219\",\"index\":\"0\"},\"10\":{\"name\":\"col_groups\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5206\\u7ec4\",\"index\":\"0\"},\"11\":{\"name\":\"mt\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"2\",\"comment\":\"\\u6a21\\u578b\\u7b49\\u7ea7\",\"index\":\"0\"},\"12\":{\"name\":\"relation\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5173\\u8054\\u5173\\u7cfb\",\"index\":\"0\"}}', '', '模型', '', 1, 0, 0, 0, 1, 999, ''),
-(2, 'system', '[{\"name\":\"sitename\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sitelogo\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7f51\\u7ad9LOGO\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"footlogo\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5e95\\u90e8LOGO\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"backupsize\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5907\\u4efd\\u6587\\u4ef6\\u5355\\u4e2a\\u5927\\u5c0f\",\"index\":\"0\",\"group\":\"2\"},{\"name\":\"seoname\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"SEO\\u6807\\u9898\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"backupdir\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6570\\u636e\\u5907\\u4efd\\u6587\\u4ef6\\u5939\",\"index\":\"0\",\"group\":\"2\"},{\"name\":\"siteurl\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u57df\\u540d\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keyword\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"description\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"icpnumber\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u5907\\u6848\\u53f7\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"uploadsize\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u9644\\u4ef6\\u6700\\u5927\\u5c3a\\u5bf8\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"filetype\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5141\\u8bb8\\u4e0a\\u4f20\\u7684\\u6587\\u4ef6\\u540e\\u7f00\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"icpnumber\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5907\\u6848\\u53f7\",\"index\":\"0\",\"group\":\"0\"}]', '{\"sitename\":[\"1\"]}', '系统参数', '[\"\\u57fa\\u672c\\u5c5e\\u6027\",\"\\u4e0a\\u4f20\\u8bbe\\u7f6e\",\"\\u6570\\u636e\\u5907\\u4efd\"]', 1, 1, 1, 1, 1, 0, ''),
-(87, 'daka', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6807\\u9898\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"category_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"admin_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7528\\u6237\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"photo\",\"formItem\":\"photo\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u76f8\\u518c\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"create_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53d1\\u5e03\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"upate_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"}]', '{\"title\":[\"1\"],\"photo\":[\"1\"]}', '打卡', '[\"\\u57fa\\u7840\\u5c5e\\u6027\"]', 14, 0, 0, 0, 2, 1, ''),
-(3, 'admin', '[{\"name\":\"username\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8d26\\u53f7\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"truename\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u59d3\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"password\",\"formItem\":\"password\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5bc6\\u7801\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"status\",\"formItem\":\"switch\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u72b6\\u6001\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"update_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '{\"username\":[\"14\"],\"truename\":[\"1\"],\"password\":[\"13\"],\"status\":[\"1\"]}', '管理员', '[\"\\u57fa\\u672c\\u4fe1\\u606f\"]', 16, 0, 0, 0, 3, 0, ''),
-(89, 'group', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"status\",\"formItem\":\"switch\",\"type\":\"INT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5f00\\u5173\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '会员组', '[\"\\u57fa\\u7840\\u5c5e\\u6027\"]', 2048, 0, 0, 0, 3, 1, ''),
-(4, 'roles', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7ec4\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"enabled\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5f00\\u5173\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"rules\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6743\\u9650\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"roles_id\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53ef\\u6388\\u6743\",\"index\":\"0\",\"group\":\"0\"}]', '', '角色', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 0, 0, 1, 0, ''),
-(5, 'access', '[{\"name\":\"admin_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"roles_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u89d2\\u8272\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '权限', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 0, 0, 1, 0, ''),
-(6, 'rule', '[{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u8def\\u7531\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"tb_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"type\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u7c7b\\u578b\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"status\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u663e\\u793a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"pid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7236ID\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"icon\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u56fe\\u6807\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sid\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u5b50\\u5143\\u7d20\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"condition\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u6761\\u4ef6\",\"index\":\"0\",\"group\":\"0\"}]', '', '节点', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 1, 0, 0, 0, 1, 0, ''),
-(7, 'user', '[{\"name\":\"username\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u8d26\\u53f7\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"password\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u5bc6\\u7801\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"group_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u5458\\u7ec4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"group_date\",\"formItem\":\"datetime\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u5458\\u7ec4\\u6709\\u6548\\u671f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"mobile\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"11\",\"sval\":\"0\",\"comment\":\"\\u624b\\u673a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"email\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u90ae\\u7bb1\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"status\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u72b6\\u6001\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"create_time\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"update_time\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ip\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u767b\\u5f55IP\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"nickname\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u6635\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"userpic\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u5458\\u5934\\u50cf\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"salt\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u76d0\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"rnd\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u8bdd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"num\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u767b\\u5f55\\u6b21\\u6570\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"xiaoqu\",\"formItem\":\"select\",\"type\":\"0\",\"size\":\"10\",\"sval\":\"154\",\"comment\":\"\\u6240\\u5c5e\\u6821\\u533a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '会员', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 0, 0, 3, 0, ''),
-(9, 'category', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"alias\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u522b\\u540d\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keywords\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"content\",\"formItem\":\"editor\",\"type\":\"MEDIUMTEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u8be6\\u7ec6\\u5185\\u5bb9\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"status\",\"formItem\":\"switch\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"1\",\"comment\":\"\\u663e\\u793a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"last\",\"formItem\":\"yesno\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"1\",\"comment\":\"\\u7ec8\\u6781\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"icon\",\"formItem\":\"icon\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u56fe\\u6807\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"tb_id\",\"formItem\":\"ypmod\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"13\",\"comment\":\"\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\\u56fe\\u7247\",\"index\":\"0\",\"group\":\"1\",\"listv\":\"1\"},{\"name\":\"pid\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7236\\u7ea7\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"path\",\"formItem\":\"hidden\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"route\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u8def\\u7531\",\"index\":\"0\",\"group\":\"1\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u521b\\u5efa\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"update_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"tempf\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5c01\\u9762\\u6a21\\u677f\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"templ\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5217\\u8868\\u6a21\\u677f\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"tempc\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5185\\u5bb9\\u6a21\\u677f\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"url\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76eeURL\",\"index\":\"0\",\"group\":\"0\"}]', '', '栏目', '[\"\\u57fa\\u672c\\u5c5e\\u6027\",\"\\u5176\\u4ed6\\u9009\\u9879\"]', 0, 0, 0, 0, 3, 0, ''),
-(10, 'mclass', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"pid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7236\\u7ea7\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"path\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"havesid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u5b50\\u7c7b\",\"index\":\"0\",\"group\":\"0\"}]', '', '无限分类', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 13, 0, 0, 0, 3, 0, ''),
-(11, 'colrule', '[{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u89c4\\u5219\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"rule\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u6821\\u9a8c\\u89c4\\u5219\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"msg\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u63d0\\u793a\\u4fe1\\u606f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '字段规则', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 1, 0, 0, 0, 3, 33, ''),
-(12, 'files', '[{\"name\":\"name\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"filepath\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ftype\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u7c7b\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"fsize\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u5c3a\\u5bf8\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"user_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"category_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"admin_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"tag\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u6807\\u7b7e\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ypcms_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u591a\\u6001ID\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ypcms_type\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u591a\\u6001\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"datetime\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4e0a\\u4f20\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"update_time\",\"formItem\":\"datetime\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '附件', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 0, 0, 3, 0, ''),
-(13, 'article', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"300\",\"sval\":\"\",\"comment\":\"\\u6807\\u9898\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"category_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"author\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"30\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u4f5c\\u8005\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"source\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"200\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6765\\u6e90\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"admin_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"user_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u4f1a\\u5458\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keyword\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u56fe\\u7247\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"300\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7b80\\u4ecb\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"content\",\"formItem\":\"editor\",\"type\":\"MEDIUMTEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5185\\u5bb9\",\"index\":\"fulltext\",\"group\":\"0\"},{\"name\":\"hits\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u70b9\\u51fb\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"enabled\",\"formItem\":\"radio\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"124\",\"comment\":\"\\u5ba1\\u6838\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"recommend\",\"formItem\":\"select\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"127\",\"comment\":\"\\u63a8\\u8350\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53d1\\u5e03\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"update_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"delete_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5220\\u9664\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"}]', '{\"title\":[\"1\"],\"category_id\":[\"1\"],\"author\":[\"1\"],\"source\":[\"1\"],\"keyword\":[\"1\"]}', '文章', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 14, 1, 0, 1, 2, 99, '{\"id\":\"13\",\"hasa\":\"id\",\"relation\":\"3\",\"totid\":\"63\",\"hasb\":\"id\"}'),
-(63, 'tags', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"50\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"alias\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"50\",\"sval\":\"0\",\"comment\":\"\\u522b\\u540d\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u56fe\\u6807\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keywords\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"0\"}]', '{\"title\":[\"1\"]}', '标签', '[\"\\u57fa\\u7840\\u5c5e\\u6027\"]', 13, 0, 0, 0, 3, 99, '{\"id\":\"63\",\"hasa\":\"id\",\"relation\":\"1\",\"totid\":\"9\",\"hasb\":\"id\"}'),
-(88, 'ad', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6807\\u9898\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"desc\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u56fe\\u7247\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"link\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u94fe\\u63a5\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"3\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53d1\\u5e03\\u65e5\\u671f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '{\"title\":[\"1\"]}', '广告', '[\"\\u57fa\\u7840\\u5c5e\\u6027\",\"\\u5176\\u4ed6\"]', 54, 0, 0, 0, 2, 0, '');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `yp_user`
---
-
-CREATE TABLE `yp_user` (
-  `id` int(10) UNSIGNED NOT NULL COMMENT '自增ID',
-  `username` varchar(255) NOT NULL DEFAULT '' COMMENT '账号',
-  `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
-  `mobile` varchar(11) NOT NULL DEFAULT '' COMMENT '手机',
-  `email` varchar(255) NOT NULL DEFAULT '' COMMENT '邮箱',
-  `status` int(1) NOT NULL COMMENT '状态',
-  `create_time` int(10) NOT NULL COMMENT '创建时间',
-  `update_time` int(10) NOT NULL COMMENT '更新时间',
-  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT '登录IP',
-  `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '昵称',
-  `salt` varchar(255) NOT NULL DEFAULT '' COMMENT '盐',
-  `rnd` varchar(255) NOT NULL DEFAULT '' COMMENT '会话',
-  `num` int(10) NOT NULL COMMENT '登录次数',
-  `group_id` int(10) NOT NULL COMMENT '会员组',
-  `group_date` int(10) NOT NULL COMMENT '会员组有效期',
-  `userpic` int(10) NOT NULL COMMENT '会员头像',
-  `xiaoqu` int(4) NOT NULL COMMENT '校区'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员';
-
---
--- 转存表中的数据 `yp_user`
---
-
-INSERT INTO `yp_user` (`id`, `username`, `password`, `mobile`, `email`, `status`, `create_time`, `update_time`, `ip`, `nickname`, `salt`, `rnd`, `num`, `group_id`, `group_date`, `userpic`, `xiaoqu`) VALUES
-(1, 'bnxf', '3b86c0574795c8f3e7762e0b3d55ac8f', '18000161069', '58798354@qq.com', 1, 1591455234, 1626079261, '127.0.0.1', '逆流的鱼', 'nsEV}>', 'fklmnrvGJLOP9^({}<>+', 0, 2, 0, 16, 0);
+INSERT INTO `yp_tb` (`id`, `name`, `cols`, `colrule`, `alias`, `col_groups`, `node_id`, `menu`, `mt`, `nodesort`, `relation`) VALUES
+(1, 'tb', '[{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"listv\":\"1\"},{\"name\":\"alias\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u522b\\u540d\",\"index\":\"0\"},{\"name\":\"menu\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u83dc\\u5355\",\"index\":\"0\"},{\"name\":\"node_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8282\\u70b9\",\"index\":\"0\"},{\"name\":\"nodesort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8282\\u70b9\\u5e8f\\u53f7\",\"index\":\"0\"},{\"name\":\"cols\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5b57\\u6bb5\",\"index\":\"0\"},{\"name\":\"colrule\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u89c4\\u5219\",\"index\":\"0\"},{\"name\":\"col_groups\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5206\\u7ec4\",\"index\":\"0\"},{\"name\":\"mt\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"2\",\"comment\":\"\\u6a21\\u578b\\u7b49\\u7ea7\",\"index\":\"0\"},{\"name\":\"relation\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5173\\u8054\\u5173\\u7cfb\",\"index\":\"0\"}]', '', '模型', '', 1, 0, 1, 999, ''),
+(10, 'system', '[{\"name\":\"sitename\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sitelogo\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7f51\\u7ad9LOGO\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"footlogo\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5e95\\u90e8LOGO\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"backupsize\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5907\\u4efd\\u6587\\u4ef6\\u5355\\u4e2a\\u5927\\u5c0f\",\"index\":\"0\",\"group\":\"2\"},{\"name\":\"seoname\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"SEO\\u6807\\u9898\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"backupdir\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6570\\u636e\\u5907\\u4efd\\u6587\\u4ef6\\u5939\",\"index\":\"0\",\"group\":\"2\"},{\"name\":\"siteurl\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u57df\\u540d\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keyword\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"description\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"icpnumber\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7f51\\u7ad9\\u5907\\u6848\\u53f7\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"uploadsize\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u9644\\u4ef6\\u6700\\u5927\\u5c3a\\u5bf8\",\"index\":\"0\",\"group\":\"1\"},{\"name\":\"filetype\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5141\\u8bb8\\u4e0a\\u4f20\\u7684\\u6587\\u4ef6\\u540e\\u7f00\",\"index\":\"0\",\"group\":\"1\"}]', '{\"sitename\":[\"1\"]}', '系统参数', '[\"\\u57fa\\u672c\\u5c5e\\u6027\",\"\\u4e0a\\u4f20\\u8bbe\\u7f6e\",\"\\u6570\\u636e\\u5907\\u4efd\"]', 1, 1, 1, 0, ''),
+(3, 'admin', '[{\"name\":\"username\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u8d26\\u53f7\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"truename\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u59d3\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"password\",\"formItem\":\"password\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5bc6\\u7801\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"status\",\"formItem\":\"switch\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u72b6\\u6001\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u521b\\u5efa\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"update_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '{\"username\":[\"14\"],\"truename\":[\"1\"],\"password\":[\"13\"],\"status\":[\"1\"]}', '管理员', '[\"\\u57fa\\u672c\\u4fe1\\u606f\"]', 16, 0, 3, 0, ''),
+(4, 'roles', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u7ec4\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"enabled\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u5f00\\u5173\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"rules\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6743\\u9650\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"roles_id\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53ef\\u6388\\u6743\",\"index\":\"0\",\"group\":\"0\"}]', '', '角色', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 1, 0, ''),
+(5, 'access', '[{\"name\":\"admin_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"roles_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u89d2\\u8272\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '权限', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 1, 0, ''),
+(6, 'rule', '[{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u8def\\u7531\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"tb_id\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"type\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u7c7b\\u578b\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"status\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u663e\\u793a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"pid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7236ID\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"icon\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u56fe\\u6807\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"sid\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u5b50\\u5143\\u7d20\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"condition\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u6761\\u4ef6\",\"index\":\"0\",\"group\":\"0\"}]', '', '节点', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 1, 0, 1, 0, ''),
+(7, 'category', '{\"0\":{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\\u540d\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},\"1\":{\"name\":\"alias\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u522b\\u540d\",\"index\":\"0\",\"group\":\"0\"},\"2\":{\"name\":\"keywords\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"1\"},\"3\":{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u63cf\\u8ff0\",\"index\":\"0\",\"group\":\"1\"},\"4\":{\"name\":\"status\",\"formItem\":\"switch\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"1\",\"comment\":\"\\u663e\\u793a\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},\"5\":{\"name\":\"last\",\"formItem\":\"yesno\",\"type\":\"INT\",\"size\":\"1\",\"colw\":\"\",\"sval\":\"1\",\"comment\":\"\\u7ec8\\u6781\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},\"6\":{\"name\":\"tb_id\",\"formItem\":\"ypmod\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"13\",\"comment\":\"\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},\"7\":{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"1\"},\"8\":{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\\u56fe\\u7247\",\"index\":\"0\",\"group\":\"1\",\"listv\":\"1\"},\"9\":{\"name\":\"pid\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7236\\u7ea7\",\"index\":\"0\",\"group\":\"0\"},\"10\":{\"name\":\"path\",\"formItem\":\"hidden\",\"type\":\"TEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\"},\"11\":{\"name\":\"route\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"100\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u8def\\u7531\",\"index\":\"0\",\"group\":\"1\",\"listv\":\"1\"},\"12\":{\"name\":\"create_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u521b\\u5efa\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},\"13\":{\"name\":\"update_time\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"},\"17\":{\"name\":\"url\",\"formItem\":\"none\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"url\",\"index\":\"0\",\"group\":\"0\"}}', '', '栏目', '[\"\\u57fa\\u672c\\u5c5e\\u6027\",\"\\u5176\\u4ed6\\u9009\\u9879\"]', 0, 0, 3, 0, ''),
+(8, 'mclass', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"sort\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u6392\\u5e8f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"pid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7236\\u7ea7\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"path\",\"formItem\":\"input\",\"type\":\"TEXT\",\"size\":\"0\",\"sval\":\"0\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"havesid\",\"formItem\":\"input\",\"type\":\"INT\",\"size\":\"1\",\"sval\":\"0\",\"comment\":\"\\u5b50\\u7c7b\",\"index\":\"0\",\"group\":\"0\"}]', '', '无限分类', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 13, 0, 3, 0, ''),
+(2, 'colrule', '[{\"name\":\"name\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u89c4\\u5219\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"rule\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u6821\\u9a8c\\u89c4\\u5219\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"msg\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u63d0\\u793a\\u4fe1\\u606f\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '字段规则', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 1, 0, 3, 33, ''),
+(9, 'files', '[{\"name\":\"name\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u540d\\u79f0\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"filepath\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u8def\\u5f84\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ftype\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u7c7b\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"fsize\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u5c3a\\u5bf8\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"user_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4f1a\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"category_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"admin_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"tag\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u6807\\u7b7e\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ypcms_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u591a\\u6001ID\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"ypcms_type\",\"formItem\":\"hidden\",\"type\":\"VARCHAR\",\"size\":\"255\",\"sval\":\"0\",\"comment\":\"\\u591a\\u6001\\u6a21\\u578b\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"datetime\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u4e0a\\u4f20\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"update_time\",\"formItem\":\"datetime\",\"type\":\"INT\",\"size\":\"10\",\"sval\":\"0\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"}]', '', '附件', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 0, 0, 3, 0, ''),
+(11, 'article', '[{\"name\":\"title\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"300\",\"sval\":\"\",\"comment\":\"\\u6807\\u9898\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"category_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u680f\\u76ee\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"author\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"30\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u4f5c\\u8005\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"source\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"200\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u6765\\u6e90\",\"index\":\"index\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"admin_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7ba1\\u7406\\u5458\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"user_id\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u4f1a\\u5458\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"keyword\",\"formItem\":\"input\",\"type\":\"VARCHAR\",\"size\":\"255\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5173\\u952e\\u8bcd\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"thumb\",\"formItem\":\"thumb\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u56fe\\u7247\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"intro\",\"formItem\":\"textarea\",\"type\":\"TEXT\",\"size\":\"300\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u7b80\\u4ecb\",\"index\":\"0\",\"group\":\"0\"},{\"name\":\"content\",\"formItem\":\"editor\",\"type\":\"MEDIUMTEXT\",\"size\":\"0\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u5185\\u5bb9\",\"index\":\"fulltext\",\"group\":\"0\"},{\"name\":\"hits\",\"formItem\":\"hidden\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u70b9\\u51fb\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"enabled\",\"formItem\":\"radio\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"124\",\"comment\":\"\\u5ba1\\u6838\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"recommend\",\"formItem\":\"select\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"127\",\"comment\":\"\\u63a8\\u8350\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"create_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u53d1\\u5e03\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\",\"listv\":\"1\"},{\"name\":\"update_time\",\"formItem\":\"none\",\"type\":\"INT\",\"size\":\"10\",\"colw\":\"\",\"sval\":\"\",\"comment\":\"\\u66f4\\u65b0\\u65f6\\u95f4\",\"index\":\"0\",\"group\":\"0\"}]', '{\"title\":[\"1\"],\"category_id\":[\"1\"],\"author\":[\"1\"],\"source\":[\"1\"],\"keyword\":[\"1\"]}', '文章', '[\"\\u57fa\\u672c\\u5c5e\\u6027\"]', 14, 1, 2, 99, '{\"id\":\"13\",\"hasa\":\"id\",\"relation\":\"3\",\"totid\":\"63\",\"hasb\":\"id\"}');
 
 --
 -- 转储表的索引
@@ -3867,12 +3718,6 @@ INSERT INTO `yp_user` (`id`, `username`, `password`, `mobile`, `email`, `status`
 -- 表的索引 `yp_access`
 --
 ALTER TABLE `yp_access`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `yp_ad`
---
-ALTER TABLE `yp_ad`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3909,21 +3754,9 @@ ALTER TABLE `yp_colrule`
   ADD PRIMARY KEY (`id`);
 
 --
--- 表的索引 `yp_daka`
---
-ALTER TABLE `yp_daka`
-  ADD PRIMARY KEY (`id`);
-
---
 -- 表的索引 `yp_files`
 --
 ALTER TABLE `yp_files`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `yp_group`
---
-ALTER TABLE `yp_group`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3951,23 +3784,9 @@ ALTER TABLE `yp_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- 表的索引 `yp_tags`
---
-ALTER TABLE `yp_tags`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `title` (`title`),
-  ADD KEY `alias` (`alias`);
-
---
 -- 表的索引 `yp_tb`
 --
 ALTER TABLE `yp_tb`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `yp_user`
---
-ALTER TABLE `yp_user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3981,12 +3800,6 @@ ALTER TABLE `yp_access`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=7025;
 
 --
--- 使用表AUTO_INCREMENT `yp_ad`
---
-ALTER TABLE `yp_ad`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=8;
-
---
 -- 使用表AUTO_INCREMENT `yp_admin`
 --
 ALTER TABLE `yp_admin`
@@ -3996,7 +3809,7 @@ ALTER TABLE `yp_admin`
 -- 使用表AUTO_INCREMENT `yp_article`
 --
 ALTER TABLE `yp_article`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `yp_article_tags`
@@ -4008,7 +3821,7 @@ ALTER TABLE `yp_article_tags`
 -- 使用表AUTO_INCREMENT `yp_category`
 --
 ALTER TABLE `yp_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `yp_colrule`
@@ -4017,22 +3830,10 @@ ALTER TABLE `yp_colrule`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=17;
 
 --
--- 使用表AUTO_INCREMENT `yp_daka`
---
-ALTER TABLE `yp_daka`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=2;
-
---
 -- 使用表AUTO_INCREMENT `yp_files`
 --
 ALTER TABLE `yp_files`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=110;
-
---
--- 使用表AUTO_INCREMENT `yp_group`
---
-ALTER TABLE `yp_group`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID';
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=115;
 
 --
 -- 使用表AUTO_INCREMENT `yp_mclass`
@@ -4050,7 +3851,7 @@ ALTER TABLE `yp_roles`
 -- 使用表AUTO_INCREMENT `yp_rule`
 --
 ALTER TABLE `yp_rule`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=2061;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=2182;
 
 --
 -- 使用表AUTO_INCREMENT `yp_system`
@@ -4059,22 +3860,10 @@ ALTER TABLE `yp_system`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=2;
 
 --
--- 使用表AUTO_INCREMENT `yp_tags`
---
-ALTER TABLE `yp_tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=10;
-
---
 -- 使用表AUTO_INCREMENT `yp_tb`
 --
 ALTER TABLE `yp_tb`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=90;
-
---
--- 使用表AUTO_INCREMENT `yp_user`
---
-ALTER TABLE `yp_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增ID', AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,12 +1,7 @@
 <?php
-// +----------------------------------------------------------------------
-// | 一品内容管理系统 [ YPCMS ]
-// +----------------------------------------------------------------------
-// | 版权所有 2016~2019 东海县一品网络技术有限公司
-// +----------------------------------------------------------------------
-// | 官方网站: http://www.yipinjishu.com
-// +----------------------------------------------------------------------
-declare (strict_types = 1);
+
+declare(strict_types=1);
+
 namespace app\admin\controller;
 
 use think\facade\Config;
@@ -14,15 +9,18 @@ use think\facade\Db;
 use think\facade\Session;
 use think\facade\View;
 
-class Profile extends Base {
+class Profile extends Base
+{
 
-	public function index() {
+	public function index()
+	{
 		$score = \app\common\model\Score::where('teacher_id', $this->admin->id)->select();
 		View::assign('score', $score);
 		return view('');
 	}
 
-	public function updatePassword() {
+	public function updatePassword()
+	{
 		if ($this->request->isPost()) {
 			$admin_id = Session::get('admin_id');
 			$data = $this->request->param();
@@ -44,5 +42,4 @@ class Profile extends Base {
 			}
 		}
 	}
-
 }

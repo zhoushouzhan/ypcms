@@ -36,6 +36,14 @@
                         </select>
                     </div>
                 </div>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <select name="menu" id="menu">
+                            <option value="0" {$r.menu==0?'selected':''}>后台不能录入</option>
+                            <option value="1" {$r.menu==1?'selected':''}>后台可录入</option>
+                          </select>
+                    </div>
+                  </div>
             </div>
             <div class="layui-form-pane">
                 <div class="layui-inline">
@@ -57,7 +65,7 @@
                 </div>
                 <div class="layui-inline {if !$r.node_id}layui-hide{/if}" id="nodeSort">
                     <div class="layui-input-inline">
-                        <input type="number" name="nodesort" value="{$r.nodesort}" class="layui-input" placeholder="节点序号">
+                        <input type="number" name="nodesort" value="{$r.nodesort}" class="layui-input" placeholder="序号">
                     </div>
                 </div>
 
@@ -104,7 +112,7 @@
                         <th>注释</th>
                         <th>索引</th>
                         <th>分组</th>
-                        <th>列表显示</th>
+                        <th>列表</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -294,6 +302,19 @@ $("#col_groups").on('click', '.rmbtn', function(event) {
     $(this).parent().remove();
     updataColGroup();
 });
+//选择图标
+jQuery(document).ready(function($) {
+    $("#selectIcon").click(function(event) {
+        /* Act on the event */
+        var index = layer.open({
+            title: '选择图标',
+            type: 2,
+            content: ['/icon.php'],
+            area: ['100%', '100%']
+        })
+    });
+});
+
 //更新字段分组
 function updataColGroup(){
     var option='';
