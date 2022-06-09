@@ -14,7 +14,10 @@
 
 
 ## 安装
+git
 
+git clone -b master git@github.com:zhoushouzhan/ypcms.git
+git 拉取后，需要执行composer update 安装依赖
 ~~~
 详细教程请参考www.bnxf.net
 ~~~
